@@ -340,20 +340,27 @@ function api(action,payload){
   });
 }
 
-function applyInit(r){
-  if(r&&r.banner){var b=$('bannerImg');b.src=r.banner;b.style.display='block'}
-  if(r&&r.flyer){var f=$('flyerImg');f.src=r.flyer;f.style.display='block'}
+/* ---------- banner and flyer: tries each file name on this site, then the back end ---------- */
+var initP=null;
+function initApi(){
+  if(!initP){initP=api('init')}
+  return initP;
 }
-function loadInit(){
-  var cached=null;
-  try{var raw=localStorage.getItem('md_init_v1');if(raw){var o=JSON.parse(raw);if(o&&o.t&&(Date.now()-o.t)<21600000){cached=o.r}}}catch(e){}
-  if(cached){applyInit(cached);return}
-  api('init').then(function(r){
-    applyInit(r);
-    try{localStorage.setItem('md_init_v1',JSON.stringify({t:Date.now(),r:r}))}catch(e){}
-  },function(){});
+function loadImg(id,files,key){
+  var el=$(id),i=0;
+  el.onload=function(){el.style.display='block'};
+  el.onerror=function(){
+    i++;
+    if(i<files.length){el.src=files[i];return}
+    el.onerror=null;
+    initApi().then(function(r){
+      if(r&&r[key]){el.onload=function(){el.style.display='block'};el.src=r[key]}
+    },function(){});
+  };
+  el.src=files[0];
 }
-loadInit();
+loadImg('flyerImg',['MD_Flyer_What_We_Do.png.png','MD_Flyer_What_We_Do.png'],'flyer');
+loadImg('bannerImg',['MD_Header_Web.png.png','MD_Header_Web.png'],'banner');
 
 function isNamed(){return subType==='Named submission'}
 function go3(){show(isNamed()?4:5)}
