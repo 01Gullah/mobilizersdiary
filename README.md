@@ -1,1 +1,619 @@
-# mobilizersdiary
+# <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mobilizer's Diary | Student Reporting and Feedback Portal</title>
+<meta name="description" content="The official platform for non-partisan student engagement. Amplifying student voices.">
+<meta property="og:title" content="The Mobilizer's Diary">
+<meta property="og:description" content="The official platform for non-partisan student engagement. Amplifying student voices.">
+<meta name="theme-color" content="#123F3B">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ed:#163D39;--neutral:#607D8B;--alert:#C62828;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ivory);color:var(--ed);font:17px/1.6 'Source Serif 4','Source Serif Pro',Georgia,serif}
+.wrap{max-width:640px;margin:0 auto;padding-bottom:40px;background:var(--ivory)}
+.top img,.flyer{display:block;width:100%;height:auto}
+.bar{height:5px;background:#e3dccb}.bar i{display:block;height:5px;width:0;background:var(--gold);transition:width .3s}
+.step{display:none;padding:22px 18px}.step.on{display:block}
+h1,h2{font-family:'Playfair Display',Georgia,serif;color:var(--green);line-height:1.2;margin:0 0 8px}
+h1{font-size:28px}h2{font-size:24px}
+.kick{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 6px}
+.rule{width:56px;height:4px;background:var(--gold);margin:8px 0 16px}
+.doc{background:#fff;border:1px solid #d9d1bd;border-left:5px solid var(--gold);padding:4px 14px 10px;max-height:300px;overflow-y:auto;font-size:15px;margin:12px 0}
+.doc h3{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.1em;color:var(--green);margin:14px 0 4px;text-transform:uppercase}
+.doc p{margin:0 0 8px}
+label{display:block;font:800 13px Montserrat,Arial,sans-serif;color:var(--green);margin:16px 0 4px}
+small{display:block;color:var(--neutral);font-size:14px;margin-bottom:4px}
+input[type=text],input[type=email],select,textarea{width:100%;padding:12px;border:1.5px solid #bfb79f;border-radius:6px;background:#fff;font:16px 'Source Serif 4',Georgia,serif;color:var(--ed)}
+textarea{min-height:120px}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);border-color:var(--gold)}
+.chk,.card{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--gold);border-radius:6px;padding:14px;margin:12px 0;font:400 15px/1.5 'Source Serif 4',Georgia,serif;color:var(--ed)}
+.card b{font:800 14px Montserrat,Arial,sans-serif;color:var(--green);display:block;margin-bottom:2px}
+.chk input,.card input{width:22px;height:22px;margin-top:2px;accent-color:var(--green);flex:none}
+.note{border-left:5px solid var(--gold);background:#fff;padding:10px 14px;font-size:14px;margin:12px 0}
+.btn{display:block;width:100%;margin-top:18px;padding:15px;border:0;border-bottom:4px solid var(--gold);border-radius:6px;background:var(--green);color:#fff;font:800 14px Montserrat,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none}
+.btn:disabled{opacity:.4}
+.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);margin-top:10px}
+.err{color:var(--alert);font:600 14px Arial,sans-serif;margin:10px 0 0;min-height:18px}
+.refbox{background:var(--ed);border-left:6px solid var(--gold);color:#fff;padding:18px;margin:16px 0}
+.refbox span{display:block;font:800 26px Montserrat,Arial,sans-serif;color:#E0BB62;letter-spacing:.06em}
+.foot{padding:0 18px;color:var(--neutral);font:12px Arial,sans-serif;text-align:center}
+.hp{position:absolute;left:-9999px}
+.hubnav{display:grid;gap:10px;margin-top:14px}
+.hubnav .btn{margin-top:0}
+.hh{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.12em;color:var(--green);text-transform:uppercase;margin:22px 0 8px}
+.muted{color:var(--neutral)}
+.vals{margin:6px 0 0;padding-left:20px}
+.pcard{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ddd5c2;border-left:5px solid var(--gold);padding:14px;margin:10px 0}
+.pcard img{width:84px;height:84px;object-fit:cover;border-radius:6px;border:2px solid var(--gold);flex:none}
+.pcard .pn{font:700 18px/1.3 'Playfair Display',Georgia,serif;color:var(--green)}
+.pcard .pr{font:600 13px Arial,sans-serif;color:var(--neutral);margin:2px 0 6px}
+.pcard .pbio{font-size:15px;line-height:1.5}
+.pcard a{color:var(--green);font-weight:700}
+.acct{background:var(--ed);color:#fff;border-left:6px solid var(--gold);padding:16px;margin:14px 0}
+.acct .k{font:800 11px Montserrat,Arial,sans-serif;letter-spacing:.14em;color:#E0BB62;text-transform:uppercase;margin-top:10px}
+.acct .n{font:800 22px Montserrat,Arial,sans-serif;letter-spacing:.06em}
+.acct button{margin-top:12px;padding:10px 14px;border:1.5px solid #E0BB62;background:transparent;color:#fff;border-radius:6px;font:800 12px Arial,sans-serif}
+.okmsg{display:none;background:#DCEFDD;color:#1B5E20;border-left:5px solid #2E7D32;padding:12px;margin:12px 0;font:600 14px Arial,sans-serif}
+.ivwrap{background:#fff;border:1.5px solid var(--gold);border-radius:6px;padding:14px;margin:16px 0}
+.ivwrap .chk{border:0;padding:0;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{padding:11px 14px;border:1.5px solid var(--green);border-radius:6px;background:#fff;color:var(--green);font:800 14px Montserrat,Arial,sans-serif}
+.chip.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.givebox{display:none;background:#fff;border:1.5px solid var(--gold);border-top:6px solid var(--gold);border-radius:6px;padding:4px 14px 16px;margin:18px 0}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,40,37,.72);z-index:50;align-items:center;justify-content:center;padding:16px}
+.mbox{position:relative;background:var(--ivory);border-top:6px solid var(--gold);max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:22px 18px 18px;border-radius:6px}
+.mx{position:absolute;top:6px;right:8px;border:0;background:transparent;font-size:30px;line-height:1;color:var(--green);padding:6px 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top" id="top" style="display:none">
+  <img id="bannerImg" alt="The Mobilizer's Diary" style="display:none">
+  <div class="bar"><i id="pb"></i></div>
+</div>
+
+<!-- 1 WELCOME -->
+<div class="step on" id="s1" style="padding-top:0">
+  <img class="flyer" id="flyerImg" alt="What The Mobilizer's Diary does" style="display:none">
+  <div style="padding-top:20px">
+    <p class="kick">Student Reporting and Feedback Portal</p>
+    <h1>Your voice is part of the record.</h1>
+    <div class="rule"></div>
+    <p>This is not a complaints board. It is a civic participation tool. Tell us the challenge, why it matters, and what you suggest. You can also nominate a student, project or event for Campus Spotlight.</p>
+    <p>Reports are reviewed and verified before any publication or action. Please read the privacy notice and terms on the next page.</p>
+    <button class="btn" onclick="show(2)">Begin</button>
+    <div class="hubnav">
+      <button class="btn ghost" onclick="hubOpen('about')">About Us</button>
+      <button class="btn ghost" onclick="hubOpen('support')">Support Our Work</button>
+      <button class="btn ghost" onclick="hubOpen('advertise')">Advertise and Partner</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2 LEGAL -->
+<div class="step" id="s2">
+  <p class="kick">Step 1</p><h2>Privacy, Terms and Consent</h2><div class="rule"></div>
+  <p>Please read this page fully. You cannot continue without your consent.</p>
+  <div class="doc">
+    <h3>Privacy Notice</h3>
+    <p><b>Who we are:</b> The Mobilizer's Diary, an independent civic and student engagement platform founded by Comr. (Engr.) Lukman Aminu Gullah.</p>
+    <p><b>What we collect:</b> only what you enter here. For named submissions: your name, email, optional contact details and your report. For anonymous submissions we do not ask for your name. If you choose a virtual interview, we also keep the contact and times you give.</p>
+    <p><b>Gifts:</b> if you choose to give online, the payment is processed by Paystack on its own secure page. We receive your optional name, your email, the amount and a payment reference. We never see or store your card details. Gifts are kept separate from reports and are not linked to them.</p>
+    <p><b>Why:</b> to review and verify your report, to respond where possible, to issue receipts, and, only with editorial approval, to inform our publications and advocacy.</p>
+    <p><b>Who sees it:</b> authorised members of the editorial team only. We never publish your name unless you give permission.</p>
+    <p><b>How long:</b> kept while needed for review, records and the archive. You may ask us to correct or delete your information by replying to your acknowledgement email and quoting your Reference Number.</p>
+    <p>We handle personal data with regard to applicable Nigerian data protection law, including the Nigeria Data Protection Act 2023.</p>
+    <h3>Terms of Use</h3>
+    <p>1. Submit only information you honestly believe to be true. Include evidence or sources where possible.</p>
+    <p>2. Be constructive and respectful. No hate speech, threats, harassment, defamation or unlawful content.</p>
+    <p>3. Do not name private individuals, or share phone numbers, addresses, ID numbers or confidential documents, without a clear public-interest reason and the right to share them.</p>
+    <p>4. Submission does not guarantee publication. We may verify, edit for clarity and length, decline, or withhold any report.</p>
+    <p>5. This portal is not an emergency, legal or medical service. In danger, contact emergency services (112 in Nigeria).</p>
+    <p>6. You keep ownership of your content. You allow us to review it and, if approved, publish it in edited form with the attribution you choose.</p>
+    <p>7. We may disclose information if the law requires it or to prevent serious harm.</p>
+    <p>8. Gifts are voluntary. They are not payment for any service, they never affect how any report is handled or published, and they never buy editorial influence.</p>
+  </div>
+  <label class="chk"><input type="checkbox" id="consent"><span>I have read and understood the Privacy Notice and Terms of Use, and I agree to proceed.</span></label>
+  <button class="btn" id="b2" disabled onclick="show(3)">Continue</button>
+  <button class="btn ghost" onclick="show(1)">Back</button>
+</div>
+
+<!-- 3 SUBMISSION TYPE -->
+<div class="step" id="s3">
+  <p class="kick">Step 2</p><h2>How would you like to submit?</h2><div class="rule"></div>
+  <label class="card"><input type="radio" name="ptype" value="Named submission"><span><b>Named submission</b>You are identified to the editorial team only. We can follow up with you.</span></label>
+  <label class="card"><input type="radio" name="ptype" value="Anonymous submission"><span><b>Anonymous submission</b>No name is requested. There are limitations, explained next.</span></label>
+  <button class="btn" id="b3" disabled onclick="go3()">Continue</button>
+  <button class="btn ghost" onclick="show(2)">Back</button>
+</div>
+
+<!-- 4 NAMED -->
+<div class="step" id="s4">
+  <p class="kick">Step 3</p><h2>Your Details</h2><div class="rule"></div>
+  <small>Visible to the editorial team only.</small>
+  <label>Full Name *</label><input type="text" id="name" autocomplete="name">
+  <label>Email Address *</label><small>Your acknowledgement and Reference Number will be sent here.</small><input type="email" id="email" autocomplete="email">
+  <label>Phone or WhatsApp (optional)</label><input type="text" id="phone" autocomplete="tel">
+  <label>Your Role *</label>
+  <select id="role"><option value="">Select</option><option>Student</option><option>Student union executive or member</option><option>Alumnus or alumna</option><option>Staff</option><option>Other</option></select>
+  <label>May We Publish Your Name? *</label>
+  <select id="publish"><option value="">Select</option><option>Yes, you may publish my name</option><option>No, keep my name confidential</option></select>
+  <p class="err" id="e4"></p>
+  <button class="btn" onclick="next4()">Continue</button>
+  <button class="btn ghost" onclick="show(3)">Back</button>
+</div>
+
+<!-- 5 ANONYMOUS -->
+<div class="step" id="s5">
+  <p class="kick">Step 3</p><h2>Anonymous Submission</h2><div class="rule"></div>
+  <p>Please understand the limits before you continue.</p>
+  <div class="doc">
+    <p>1. Anonymous reports require verification before publication or action. Reports that cannot be verified may be set aside.</p>
+    <p>2. We cannot ask follow-up questions or send private updates unless you give an optional email below.</p>
+    <p>3. Do not include details that could identify you (name, matric number, phone number or unique circumstances).</p>
+    <p>4. We cannot guarantee action on any report.</p>
+  </div>
+  <label>Email for Acknowledgement Only (optional)</label>
+  <small>Used only to send your Reference Number. Kept in the restricted submission log and never published. Leave blank for no email; your Reference Number will still appear on screen.</small>
+  <input type="email" id="aemail">
+  <label class="chk"><input type="checkbox" id="aconsent"><span>I consent to my anonymous report being reviewed, verified and, if approved, published in edited form without my name.</span></label>
+  <label class="chk"><input type="checkbox" id="ack"><span>I acknowledge that anonymous reports require verification before publication or action, and that the team may be unable to follow up with me.</span></label>
+  <p class="err" id="e5"></p>
+  <button class="btn" onclick="next5()">Continue</button>
+  <button class="btn ghost" onclick="show(3)">Back</button>
+</div>
+
+<!-- 6 REPORT -->
+<div class="step" id="s6">
+  <p class="kick">Step 4</p><h2>Your Report</h2><div class="rule"></div>
+  <small>Good reports state the challenge, explain why it matters, and offer practical solutions.</small>
+  <label>Category *</label>
+  <select id="category" onchange="catChange()"><option value="">Select</option><option>Academic and Welfare</option><option>Student Union Governance and Accountability</option><option>Fees, Funding and NELFUND</option><option>Campus Infrastructure and Security</option><option>Accommodation and Facilities</option><option>Health and Wellbeing</option><option>Elections and Civic Participation</option><option>History and Leadership Archive</option><option>Podcast or Opportunity Suggestion</option><option>Campus Spotlight Nomination</option><option>Other</option></select>
+  <div class="note" id="nombox" style="display:none">
+    <b>Campus Spotlight nomination.</b> Use <b>The Challenge</b> to describe what the student, project or event achieved, <b>Why It Matters</b> for its impact, and <b>Suggested Solutions</b> for how others can support or learn from it. Add a proof link below (result, award, demo or announcement).
+    <label class="chk"><input type="checkbox" id="nomc"><span>The person, project or organisers I am nominating have agreed to be featured, or I will obtain their consent before publication.</span></label>
+  </div>
+  <label>Institution or Campus</label><small>Optional for anonymous submissions.</small><input type="text" id="institution">
+  <label>Report Title *</label><input type="text" id="title" maxlength="150">
+  <label>1. The Challenge *</label><small>What is happening? Be specific and factual.</small><textarea id="challenge"></textarea>
+  <label>2. Why It Matters *</label><small>Who is affected and what is the impact?</small><textarea id="why"></textarea>
+  <label>3. Suggested Solutions *</label><small>What practical steps would you recommend, and who should act?</small><textarea id="solutions"></textarea>
+  <label>Evidence or Source Link (optional)</label><input type="text" id="evidence" placeholder="https://">
+
+  <div class="ivwrap">
+    <h3 class="hh" style="margin-top:0">Virtual Interview (Optional)</h3>
+    <label class="chk"><input type="checkbox" id="iv" onchange="ivToggle()"><span>I am willing to be contacted for a virtual interview about this report. It is voluntary, I can decline at any time, and nothing will be recorded or published without my separate consent.</span></label>
+    <div id="ivbox" style="display:none">
+      <div class="note" id="ivanon" style="display:none">You are submitting anonymously. An interview would reveal your identity to the editorial team only, and you may still decline.</div>
+      <label>Preferred Contact (email or WhatsApp number) *</label><input type="text" id="ivcontact">
+      <label>Preferred Platform</label>
+      <select id="ivplat"><option>Google Meet</option><option>Zoom</option><option>WhatsApp call</option><option>Phone call</option></select>
+      <label>Days and Times That Suit You (optional)</label><input type="text" id="ivtime" placeholder="e.g. weekday evenings">
+    </div>
+  </div>
+
+  <input type="text" id="hp" class="hp" tabindex="-1" autocomplete="off">
+  <label class="chk"><input type="checkbox" id="decl"><span>I confirm that this report is truthful to the best of my knowledge and is submitted in good faith.</span></label>
+  <p class="err" id="e6"></p>
+  <button class="btn" id="b6" onclick="send()">Submit Report</button>
+  <button class="btn ghost" onclick="back6()">Back</button>
+</div>
+
+<!-- 7 DONE -->
+<div class="step" id="s7">
+  <p class="kick">Received</p><h2>Thank you.</h2><div class="rule"></div>
+  <p>Your submission has been received and will undergo review. Anonymous reports require verification before publication or action.</p>
+  <div class="refbox">Reference Number<span id="ref"></span></div>
+  <p id="note"></p>
+  <button class="btn ghost" onclick="hubOpen('support')">Support Our Work</button>
+  <button class="btn" onclick="location.reload()">Submit Another Report</button>
+</div>
+
+<!-- 8 ABOUT -->
+<div class="step" id="s8">
+  <p class="kick">About</p><h2>The Mobilizer's Diary</h2><div class="rule"></div>
+  <div id="ab-body"><p class="muted">Loading...</p></div>
+  <button class="btn ghost" onclick="show(1)">Back to Home</button>
+</div>
+
+<!-- 9 SUPPORT -->
+<div class="step" id="s9">
+  <p class="kick">Support Our Work</p><h2>Help Keep This Platform Free</h2><div class="rule"></div>
+  <div id="su-body"><p class="muted">Loading...</p></div>
+
+  <div class="givebox" id="giveBox">
+    <h3 class="hh">Give Online</h3>
+    <small>Choose an amount in naira. You will pay on Paystack's secure page. We never see your card details.</small>
+    <div class="chips" id="g-chips"></div>
+    <label>Amount (naira) *</label><input type="text" id="g-amt" inputmode="numeric" placeholder="e.g. 5,000" autocomplete="off">
+    <label>Name (optional)</label><input type="text" id="g-name" autocomplete="name">
+    <label>Email for Your Receipt *</label><input type="email" id="g-email" autocomplete="email">
+    <input type="text" id="g-hp" class="hp" tabindex="-1" autocomplete="off">
+    <label class="chk"><input type="checkbox" id="g-anon"><span>Please do not list my name in any supporter acknowledgement.</span></label>
+    <label class="chk"><input type="checkbox" id="g-upd"><span>Send me an update on how resources are used (optional).</span></label>
+    <label class="chk"><input type="checkbox" id="g-consent"><span>I understand this gift is voluntary and not payment for any service. I agree that my name (if given), email and amount are used to process this gift and send my receipt.</span></label>
+    <p class="err" id="e-g"></p><div class="okmsg" id="ok-g"></div>
+    <button class="btn" id="g-btn" onclick="giveGo()">Give Securely</button>
+    <a class="btn" id="g-go" style="display:none" rel="noopener">Continue to Secure Payment</a>
+  </div>
+
+  <h3 class="hh">Receive Updates (Optional)</h3>
+  <small>Want proof of how resources are used? Leave your email and we will send you an update. You do not have to.</small>
+  <label>Name (optional)</label><input type="text" id="d-name" autocomplete="name">
+  <label>Email *</label><input type="email" id="d-email" autocomplete="email">
+  <label>Amount Given (optional)</label><input type="text" id="d-amt">
+  <label>Date Given (optional)</label><input type="text" id="d-date" placeholder="e.g. 12 October 2026">
+  <input type="text" id="d-hp" class="hp" tabindex="-1" autocomplete="off">
+  <label class="chk"><input type="checkbox" id="d-consent"><span>I would like to receive updates on how resources are used, and I agree to be contacted at this email.</span></label>
+  <p class="err" id="e-d"></p><div class="okmsg" id="ok-d"></div>
+  <button class="btn" id="d-btn" data-l="Send" onclick="hubSend('donor')">Send</button>
+  <button class="btn ghost" onclick="show(1)">Back to Home</button>
+</div>
+
+<!-- 10 ADVERTISE -->
+<div class="step" id="s10">
+  <p class="kick">Advertise and Partner</p><h2>Partner With Us</h2><div class="rule"></div>
+  <div id="ad-body"><p class="muted">Loading...</p></div>
+  <h3 class="hh">Send an Enquiry</h3>
+  <small>We use your details only to respond to this enquiry.</small>
+  <label>Enquiry Type *</label>
+  <select id="a-type"><option>Advertise</option><option>Sponsor or Partner</option><option>General</option></select>
+  <label>Your Name *</label><input type="text" id="a-name" autocomplete="name">
+  <label>Organisation</label><input type="text" id="a-org" autocomplete="organization">
+  <label>Email *</label><input type="email" id="a-email" autocomplete="email">
+  <label>Phone or WhatsApp (optional)</label><input type="text" id="a-phone" autocomplete="tel">
+  <label>Message *</label><textarea id="a-msg"></textarea>
+  <input type="text" id="a-hp" class="hp" tabindex="-1" autocomplete="off">
+  <label class="chk"><input type="checkbox" id="a-consent"><span>I agree to be contacted about this enquiry.</span></label>
+  <p class="err" id="e-a"></p><div class="okmsg" id="ok-a"></div>
+  <button class="btn" id="a-btn" data-l="Send Enquiry" onclick="hubSend('advert')">Send Enquiry</button>
+  <button class="btn ghost" onclick="show(1)">Back to Home</button>
+</div>
+
+<!-- 11 PAYMENT RESULT -->
+<div class="step" id="s11">
+  <p class="kick">Support Our Work</p><h2 id="pr-t">Confirming your payment.</h2><div class="rule"></div>
+  <p id="pr-m">Please wait a moment...</p>
+  <div class="refbox" id="pr-ref" style="display:none">Reference Number<span id="pr-r"></span></div>
+  <button class="btn" onclick="payHome()">Back to Home</button>
+</div>
+
+<p class="foot">THE MOBILIZER'S DIARY. Amplifying student voices, preserving institutional memory, promoting accountability.</p>
+</div>
+
+<!-- GIFT POP-UP (shown after a report is submitted) -->
+<div class="modal" id="gift" role="dialog" aria-modal="true" aria-labelledby="gift-t" onclick="if(event.target===this){closeGift()}">
+  <div class="mbox">
+    <button class="mx" type="button" onclick="closeGift()" aria-label="Close">&times;</button>
+    <p class="kick">Optional</p>
+    <h2 id="gift-t">Help Keep This Platform Free</h2>
+    <div class="rule"></div>
+    <p>Thank you. Your report is complete and will be reviewed in exactly the same way whether or not you give.</p>
+    <p>The Mobilizer's Diary is free for every student and runs on voluntary support. If you are able, a gift of any size helps us keep reviewing reports, publishing and supporting students.</p>
+    <div class="note">Giving is entirely optional. It never affects how any report is handled or published. We do not link gifts to reports or to the people who submit them, and a gift is not payment for any service.</div>
+    <button class="btn" type="button" onclick="giftYes()">Give Now</button>
+    <button class="btn ghost" type="button" onclick="closeGift()">Maybe Later</button>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+var subType='';
+var NOM='Campus Spotlight Nomination';
+var prog={1:0,2:1,3:2,4:3,5:3,6:4,7:5,8:0,9:0,10:0,11:0};
+function $(i){return document.getElementById(i)}
+function v(i){return $(i).value.replace(/^\s+|\s+$/g,'')}
+function mail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+function err(n,m){$('e'+n).textContent=m||''}
+function show(n){
+  var s=document.querySelectorAll('.step');
+  for(var i=0;i<s.length;i++){s[i].classList.remove('on')}
+  $('s'+n).classList.add('on');
+  $('top').style.display=(n===1)?'none':'block';
+  $('pb').style.width=((prog[n]||0)/5*100)+'%';
+  window.scrollTo(0,0);
+}
+
+/* ---------- connection to the Apps Script back end ---------- */
+function api(action,payload){
+  return new Promise(function(resolve,reject){
+    var url=(typeof API_URL==='string')?API_URL:'';
+    if(url.indexOf('https://script.google.com/')!==0){reject(new Error('This site is not connected yet. Please try again later.'));return}
+    var ctl=('AbortController' in window)?new AbortController():null;
+    var timer=setTimeout(function(){if(ctl){ctl.abort()}},60000);
+    fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:payload||{}}),redirect:'follow',signal:ctl?ctl.signal:undefined})
+    .then(function(r){return r.text()})
+    .then(function(t){
+      clearTimeout(timer);
+      var j;try{j=JSON.parse(t)}catch(e){throw new Error('The server did not respond correctly. Please try again.')}
+      if(!j.ok){throw new Error(j.error||'Something went wrong. Please try again.')}
+      resolve(j.result);
+    })
+    .catch(function(e){
+      clearTimeout(timer);
+      reject(new Error(e&&e.name==='AbortError'?'The connection timed out. Please check your connection and try again.':(e&&e.message?e.message:'Something went wrong. Please try again.')));
+    });
+  });
+}
+
+/* ---------- banner and flyer: tries each file name on this site, then the back end ---------- */
+var initP=null;
+function initApi(){
+  if(!initP){initP=api('init')}
+  return initP;
+}
+function loadImg(id,files,key){
+  var el=$(id),i=0;
+  el.onload=function(){el.style.display='block'};
+  el.onerror=function(){
+    i++;
+    if(i<files.length){el.src=files[i];return}
+    el.onerror=null;
+    initApi().then(function(r){
+      if(r&&r[key]){el.onload=function(){el.style.display='block'};el.src=r[key]}
+    },function(){});
+  };
+  el.src=files[0];
+}
+loadImg('flyerImg',['MD_Flyer_What_We_Do.png.png','MD_Flyer_What_We_Do.png'],'flyer');
+loadImg('bannerImg',['MD_Header_Web.png.png','MD_Header_Web.png'],'banner');
+
+function isNamed(){return subType==='Named submission'}
+function go3(){show(isNamed()?4:5)}
+function back6(){show(isNamed()?4:5)}
+function catChange(){$('nombox').style.display=($('category').value===NOM)?'block':'none'}
+function ivToggle(){
+  var on=$('iv').checked;
+  $('ivbox').style.display=on?'block':'none';
+  $('ivanon').style.display=(on&&subType==='Anonymous submission')?'block':'none';
+  if(on&&isNamed()&&!v('ivcontact')){$('ivcontact').value=v('email')}
+}
+$('consent').onchange=function(){$('b2').disabled=!this.checked};
+var radios=document.getElementsByName('ptype');
+for(var i=0;i<radios.length;i++){radios[i].onchange=function(){subType=this.value;$('b3').disabled=false}}
+function next4(){
+  err(4,'');
+  if(!v('name')||!mail(v('email'))||!v('role')||!v('publish')){err(4,'Please complete all required fields with a valid email.');return}
+  show(6);
+}
+function next5(){
+  err(5,'');
+  if(!$('aconsent').checked||!$('ack').checked){err(5,'Please tick both boxes to continue.');return}
+  if(v('aemail')&&!mail(v('aemail'))){err(5,'Please enter a valid email or leave it blank.');return}
+  show(6);
+}
+
+/* ---------- gift pop-up ---------- */
+function openGift(){
+  if(!$('s7').classList.contains('on'))return;
+  $('gift').style.display='flex';
+  var b=$('gift').querySelector('.btn');if(b){b.focus()}
+}
+function closeGift(){$('gift').style.display='none'}
+function giftYes(){closeGift();hubOpen('support',true)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeGift()}});
+
+function send(){
+  err(6,'');
+  var need=['category','title','challenge','why','solutions'];
+  for(var i=0;i<need.length;i++){if(!v(need[i])){err(6,'Please complete all required fields.');return}}
+  if(v('evidence')&&!/^https?:\/\/\S+$/i.test(v('evidence'))){err(6,'The evidence link must start with http:// or https://');return}
+  var nom=($('category').value===NOM);
+  if(nom&&!$('nomc').checked){err(6,'Please confirm the nominee has agreed to be featured.');return}
+  var ivOn=$('iv').checked;
+  if(ivOn&&!v('ivcontact')){err(6,'Please add a contact for the interview, or untick the interview box.');return}
+  if(!$('decl').checked){err(6,'Please tick the declaration to submit.');return}
+  var anon=(subType==='Anonymous submission');
+  var d={type:subType,name:anon?'':v('name'),email:anon?v('aemail'):v('email'),phone:v('phone'),role:v('role'),publish:v('publish'),
+    institution:v('institution'),category:v('category'),title:v('title'),challenge:v('challenge'),why:v('why'),
+    solutions:v('solutions'),evidence:v('evidence'),consent:$('consent').checked&&(!anon||$('aconsent').checked),
+    ack:anon?$('ack').checked:false,nomConsent:nom?$('nomc').checked:false,declaration:true,hp:v('hp'),
+    iv:ivOn?{consent:true,contact:v('ivcontact'),platform:$('ivplat').value,availability:v('ivtime')}:null};
+  $('b6').disabled=true;$('b6').textContent='Submitting...';
+  api('report',d).then(function(res){
+    $('ref').textContent=res.ref||'';
+    var t=res.emailed?'An acknowledgement has been sent to your email.':'Please keep your Reference Number. No email was sent.';
+    if(res.interview){t+=' Your interview request has been recorded and we will be in touch.'}
+    $('note').textContent=t;
+    show(7);
+    setTimeout(openGift,900);
+  },function(e){
+    $('b6').disabled=false;$('b6').textContent='Submit Report';
+    err(6,(e&&e.message)?e.message:'Something went wrong. Please try again.');
+  });
+}
+
+/* ---------- payment return (Paystack sends donors back here) ---------- */
+var PAYMSG={
+  success:['Thank you.','Your gift has been confirmed. A payment confirmation is on its way to your email.'],
+  pending:['Confirming your payment.','We are still waiting for confirmation from the payment provider. Please check your email shortly, or refresh this page in a minute.'],
+  abandoned:['Payment not completed.','The payment was not completed. You are welcome to try again.'],
+  failed:['We could not confirm this payment.','If money left your account, please contact us and quote the reference below. We will resolve it.'],
+  unknown:['Reference not found.','We could not find this payment reference.']
+};
+function payHome(){try{history.replaceState(null,'',location.pathname)}catch(e){}show(1)}
+function payShow(st,ref){
+  var m=PAYMSG[st]||PAYMSG.unknown;
+  $('pr-t').textContent=m[0];$('pr-m').textContent=m[1];
+  if(ref){$('pr-r').textContent=ref;$('pr-ref').style.display='block'}
+}
+function payCheck(ref,n){
+  api('verify',{ref:ref}).then(function(r){
+    var st=(r&&r.status)||'unknown';
+    if(st==='pending'&&n<4){setTimeout(function(){payCheck(ref,n+1)},4000);return}
+    payShow(st,ref);
+  },function(){payShow('pending',ref)});
+}
+(function(){
+  var m=/[?&](?:reference|trxref)=([^&#]+)/.exec(location.search);
+  if(!m)return;
+  var ref=decodeURIComponent(m[1]);
+  show(11);
+  if(!/^DON-\d{4}-\d{4}$/.test(ref)){payShow('unknown','');return}
+  $('pr-ref').style.display='block';$('pr-r').textContent=ref;
+  payCheck(ref,0);
+})();
+
+/* ---------- About / Support / Advertise / Give ---------- */
+(function(){
+var data=null,loading=false,queue=[];
+function mk(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function lines(t){return String(t||'').split(/\n+/).filter(function(x){return x.replace(/\s/g,'')})}
+function paras(box,t){lines(t).forEach(function(l){box.appendChild(mk('p',null,l))})}
+function noteBox(t){return mk('div','note',t)}
+function fmt(n){return String(Math.round(Number(n)||0)).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+
+function load(cb){
+  if(data){cb();return}
+  queue.push(cb);if(loading)return;loading=true;
+  api('hub').then(function(d){
+    data=d;loading=false;var q=queue;queue=[];q.forEach(function(f){f()});
+  },function(){
+    loading=false;queue=[];
+    ['ab-body','su-body','ad-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
+  });
+}
+
+function pcard(p){
+  var c=mk('div','pcard');
+  if(p.image){var im=mk('img');im.src=p.image;im.alt=p.name;c.appendChild(im)}
+  var t=mk('div');
+  t.appendChild(mk('div','pn',p.name));
+  if(p.role)t.appendChild(mk('div','pr',p.role));
+  if(p.bio)t.appendChild(mk('div','pbio',p.bio));
+  if(p.link){var a=mk('a',null,'Visit website');a.href=p.link;a.target='_blank';a.rel='noopener';t.appendChild(a)}
+  c.appendChild(t);return c;
+}
+
+function renderAbout(){
+  var s=data.s,b=$('ab-body');b.innerHTML='';
+  if(s.ABOUT_MISSION)paras(b,s.ABOUT_MISSION);
+  var vs=lines(s.ABOUT_VALUES);
+  if(vs.length){b.appendChild(mk('h3','hh','What We Stand For'));var ul=mk('ul','vals');vs.forEach(function(x){ul.appendChild(mk('li',null,x))});b.appendChild(ul)}
+  [['Founder','Our Founder'],['Advisor','Advisors'],['Dignitary','Dignitaries'],['Sponsor','Sponsors'],['Partner','Partners']].forEach(function(gr){
+    var list=data.p.filter(function(p){return p.category===gr[0]});
+    if(!list.length)return;
+    b.appendChild(mk('h3','hh',gr[1]));
+    list.forEach(function(p){b.appendChild(pcard(p))});
+  });
+  if(s.CONTACT_EMAIL){
+    b.appendChild(mk('h3','hh','Contact'));
+    var p=mk('p',null,'Email: ');var a=mk('a',null,s.CONTACT_EMAIL);a.href='mailto:'+s.CONTACT_EMAIL;p.appendChild(a);b.appendChild(p);
+  }
+}
+
+function copyText(t,btn){
+  function done(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1500)}
+  function fb(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(ta)}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fb);return}}catch(e){}
+  fb();
+}
+
+function setupGive(){
+  var box=$('giveBox'),pay=data.pay;
+  if(!pay||!pay.ready){box.style.display='none';return}
+  box.style.display='block';
+  var chips=$('g-chips');chips.innerHTML='';
+  (pay.presets||[]).forEach(function(n){
+    var c=mk('button','chip','\u20A6'+fmt(n));c.type='button';
+    c.onclick=function(){
+      $('g-amt').value=fmt(n);
+      var all=chips.querySelectorAll('.chip');for(var i=0;i<all.length;i++){all[i].classList.remove('sel')}
+      c.classList.add('sel');
+    };
+    chips.appendChild(c);
+  });
+}
+
+function renderSupport(){
+  var s=data.s,b=$('su-body');b.innerHTML='';
+  paras(b,s.DONATE_WHY);
+  if(s.DONATE_TRANSPARENCY)b.appendChild(noteBox(s.DONATE_TRANSPARENCY));
+  var has=!!(data.pay&&data.pay.ready);
+  if(s.DONATE_ACCOUNT_NUMBER||s.DONATE_LINK){
+    b.appendChild(mk('h3','hh','Give by Bank Transfer'));
+  }
+  if(s.DONATE_ACCOUNT_NUMBER){
+    has=true;var a=mk('div','acct');
+    if(s.DONATE_ACCOUNT_NAME){a.appendChild(mk('div','k','Account Name'));a.appendChild(mk('div',null,s.DONATE_ACCOUNT_NAME))}
+    if(s.DONATE_BANK){a.appendChild(mk('div','k','Bank'));a.appendChild(mk('div',null,s.DONATE_BANK))}
+    a.appendChild(mk('div','k','Account Number'));a.appendChild(mk('div','n',s.DONATE_ACCOUNT_NUMBER));
+    var cb=mk('button',null,'Copy Account Number');cb.type='button';cb.onclick=function(){copyText(s.DONATE_ACCOUNT_NUMBER,cb)};
+    a.appendChild(cb);b.appendChild(a);
+  }
+  if(s.DONATE_LINK){
+    has=true;var l=mk('a','btn','Give Through Our Link');l.href=s.DONATE_LINK;l.target='_blank';l.rel='noopener';b.appendChild(l);
+  }
+  if(!has)b.appendChild(mk('p','muted','Giving details will be available shortly. Please use the form below, or the Advertise and Partner page, to get in touch.'));
+  if(s.DONATE_SAFETY)b.appendChild(noteBox(s.DONATE_SAFETY));
+  setupGive();
+}
+
+function renderAd(){
+  var s=data.s,b=$('ad-body');b.innerHTML='';
+  paras(b,s.AD_AUDIENCE);
+  var os=lines(s.AD_OPTIONS);
+  if(os.length){b.appendChild(mk('h3','hh','Ways to Partner'));var ul=mk('ul','vals');os.forEach(function(o){ul.appendChild(mk('li',null,o))});b.appendChild(ul)}
+  if(s.AD_POLICY){b.appendChild(mk('h3','hh','Our Editorial Independence'));b.appendChild(noteBox(s.AD_POLICY))}
+}
+
+window.hubOpen=function(which,toGive){
+  show(which==='about'?8:(which==='support'?9:10));
+  load(function(){
+    if(which==='about')renderAbout();else if(which==='support')renderSupport();else renderAd();
+    if(which==='support'&&toGive){
+      setTimeout(function(){var g=$('giveBox');if(g&&g.style.display!=='none'){g.scrollIntoView()}},60);
+    }
+  });
+};
+
+window.giveGo=function(){
+  var errEl=$('e-g'),okEl=$('ok-g'),btn=$('g-btn');
+  errEl.textContent='';okEl.style.display='none';
+  var pay=data&&data.pay;
+  if(!pay||!pay.ready){errEl.textContent='Online giving is not available yet.';return}
+  var amt=parseInt(($('g-amt').value||'').replace(/[^\d]/g,''),10);
+  if(!amt||amt<pay.min||amt>pay.max){errEl.textContent='Please enter an amount between '+fmt(pay.min)+' and '+fmt(pay.max)+' naira.';return}
+  var email=$('g-email').value.replace(/^\s+|\s+$/g,'');
+  if(!mail(email)){errEl.textContent='Please enter a valid email address for your receipt.';return}
+  if(!$('g-consent').checked){errEl.textContent='Please tick the consent box to continue.';return}
+  btn.disabled=true;btn.textContent='Preparing secure payment...';
+  api('donate',{amount:amt,name:$('g-name').value,email:email,anonymous:$('g-anon').checked,updates:$('g-upd').checked,consent:$('g-consent').checked,hp:$('g-hp').value}).then(function(r){
+    var url=(r&&r.url)?String(r.url):'';
+    if(url.indexOf('https://')!==0){btn.disabled=false;btn.textContent='Give Securely';errEl.textContent='We could not start the payment. Please try again.';return}
+    btn.style.display='none';
+    okEl.textContent='Your secure payment page is ready. Reference: '+r.ref+'.';okEl.style.display='block';
+    var go=$('g-go');go.href=url;go.style.display='block';
+    window.location.href=url;
+  },function(e){
+    btn.disabled=false;btn.textContent='Give Securely';
+    errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
+  });
+};
+
+window.hubSend=function(kind){
+  var donor=(kind==='donor'),pre=donor?'d':'a';
+  var errEl=$('e-'+pre),okEl=$('ok-'+pre),btn=$(pre+'-btn');
+  var p=donor?{type:'Donor Update Request',name:$('d-name').value,org:'',email:$('d-email').value,phone:'',message:'',amount:$('d-amt').value,date:$('d-date').value,consent:$('d-consent').checked,hp:$('d-hp').value}
+             :{type:$('a-type').value,name:$('a-name').value,org:$('a-org').value,email:$('a-email').value,phone:$('a-phone').value,message:$('a-msg').value,amount:'',date:'',consent:$('a-consent').checked,hp:$('a-hp').value};
+  errEl.textContent='';okEl.style.display='none';
+  if(!mail(p.email.replace(/^\s+|\s+$/g,''))){errEl.textContent='Please enter a valid email address.';return}
+  if(!donor&&(!p.name.replace(/\s/g,'')||!p.message.replace(/\s/g,''))){errEl.textContent='Please enter your name and a short message.';return}
+  if(!p.consent){errEl.textContent='Please tick the box to agree to be contacted.';return}
+  btn.disabled=true;btn.textContent='Sending...';
+  api('support',p).then(function(r){
+    okEl.textContent='Thank you. Your reference is '+r.ref+'.'+(r.emailed?' A confirmation has been sent to your email.':'');
+    okEl.style.display='block';btn.textContent='Sent';
+  },function(e){
+    btn.disabled=false;btn.textContent=btn.getAttribute('data-l');
+    errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
+  });
+};
+})();
+</script>
+</body>
+</html>
