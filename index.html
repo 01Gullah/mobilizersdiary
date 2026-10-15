@@ -40,6 +40,16 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 .refbox{background:var(--ed);border-left:6px solid var(--gold);color:#fff;padding:18px;margin:16px 0}
 .refbox span{display:block;font:800 26px Montserrat,Arial,sans-serif;color:#E0BB62;letter-spacing:.06em}
 .foot{padding:0 18px;color:var(--neutral);font:12px Arial,sans-serif;text-align:center}
+.md-ad-slot{width:100%;max-width:640px;margin:10px auto 16px;padding:10px;border:1px solid rgba(18,63,59,.2);border-radius:8px;background:#fff;color:var(--green)}
+.md-ad-slot[hidden]{display:none!important}
+.md-ad-label{display:block;margin:0 0 7px;color:var(--neutral);font:700 10px/1.4 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.md-ad-link{display:block;overflow:hidden;border-radius:6px;color:var(--green);text-decoration:none}
+.md-ad-image{display:block;width:100%;height:auto;max-height:280px;object-fit:cover;background:var(--green)}
+.md-ad-sponsor{display:block;padding:7px 2px 0;color:var(--green);font:600 12px/1.4 Arial,sans-serif}
+.md-footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin:10px 0}
+.md-footer-links button{border:0;background:none;color:var(--green);font:700 12px Arial,sans-serif;text-decoration:underline;text-underline-offset:2px;padding:8px}
+.md-sponsor-ack{margin:6px 0 0;color:var(--neutral);font:11px/1.5 Arial,sans-serif}
+
 .hp{position:absolute;left:-9999px}
 .hubnav{display:grid;gap:10px;margin-top:14px}
 .hubnav .btn{margin-top:0}
@@ -75,6 +85,12 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
   <img id="bannerImg" alt="The Mobilizer's Diary" style="display:none">
   <div class="bar"><i id="pb"></i></div>
 </div>
+
+<!-- Optional sponsored banner, loaded from the Apps Script API. -->
+<aside id="ad-banner-slot" class="md-ad-slot" aria-label="Sponsored content" hidden>
+  <span class="md-ad-label">Sponsored</span>
+  <div id="ad-banner-content"></div>
+</aside>
 
 <!-- 1 WELCOME -->
 <div class="step on" id="s1" style="padding-top:0">
@@ -308,7 +324,14 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
   <button class="btn" id="u-home" onclick="payHome()" style="display:none">Back to Home</button>
 </div>
 
-<p class="foot">THE MOBILIZER'S DIARY. Amplifying student voices, preserving institutional memory, promoting accountability.</p>
+<footer class="foot">
+  <div>THE MOBILIZER'S DIARY. Amplifying student voices, preserving institutional memory, promoting accountability.</div>
+  <nav class="md-footer-links" aria-label="Project links">
+    <button type="button" onclick="hubOpen('support')">Support Our Work</button>
+    <a href="https://01gullah.github.io/mobilizersdiary/?v=4" target="_blank" rel="noopener">Visit The Mobilizer's Diary</a>
+  </nav>
+  <p class="md-sponsor-ack">Sponsored placements will be clearly labelled. Sponsor acknowledgements appear only for approved partners.</p>
+</footer>
 </div>
 
 <!-- GIFT POP-UP (shown after a report is submitted) -->
@@ -727,5 +750,59 @@ window.hubSend=function(){
 };
 })();
 </script>
+
+<script>
+/* Sponsored banner: request public banner data through the existing API helper. */
+(function () {
+  function isSafeHttpsUrl(value) {
+    return typeof value === 'string' && /^https:\/\/[A-Za-z0-9.-]+(?::\d{1,5})?(?:[/?#][^\s]*)?$/i.test(value.trim());
+  }
+
+  function loadSponsoredBanner() {
+    var slot = document.getElementById('ad-banner-slot');
+    var content = document.getElementById('ad-banner-content');
+    if (!slot || !content || typeof api !== 'function') return;
+
+    api('sponsoredBanner').then(function (banner) {
+      if (!banner || !isSafeHttpsUrl(banner.imageUrl) || !isSafeHttpsUrl(banner.targetUrl)) {
+        slot.hidden = true;
+        return;
+      }
+
+      var link = document.createElement('a');
+      link.className = 'md-ad-link';
+      link.href = banner.targetUrl;
+      link.target = '_blank';
+      link.rel = 'sponsored noopener noreferrer';
+      link.setAttribute('aria-label', banner.altText || 'Open sponsored content');
+
+      var image = document.createElement('img');
+      image.className = 'md-ad-image';
+      image.src = banner.imageUrl;
+      image.alt = banner.altText || 'Sponsored message';
+      image.loading = 'lazy';
+      image.onerror = function () { slot.hidden = true; };
+      link.appendChild(image);
+      content.appendChild(link);
+
+      if (banner.sponsorName) {
+        var sponsor = document.createElement('span');
+        sponsor.className = 'md-ad-sponsor';
+        sponsor.textContent = 'Presented with support from ' + banner.sponsorName;
+        content.appendChild(sponsor);
+      }
+      slot.hidden = false;
+    }).catch(function (error) {
+      // Keep a banner error from disrupting reporting or other portal features.
+      slot.hidden = true;
+      if (window.console && console.warn) console.warn('Sponsored banner unavailable.', error);
+    });
+  }
+
+  // This script sits after the existing API script at the end of the document.
+  loadSponsoredBanner();
+})();
+</script>
+
 </body>
 </html>
