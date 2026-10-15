@@ -1,1 +1,1 @@
-var API_URL = 'https://script.google.com/macros/s/AKfycby44svNcHlTCZPfnjE5dJOOKUt0gulK3avc0LsNxtk8mCoTQRjvHTb25rGaAd3DL_tN/exec?utm_source=ig&utm_medium=social&utm_content=link_in_bio';
+var API_URL = 'https://script.google.com/macros/s/AKfycbwIGcm8CeByWLJEMx4JiTPoWIyeC7q8tonMb4aZVhT_ornku5Gh-e0JyRxs70wcEGRu/exec';
