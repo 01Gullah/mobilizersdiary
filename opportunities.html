@@ -8,39 +8,36 @@
   <title>Student Opportunities | The Mobilizer's Diary</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#163D39;--muted:#607D78;--line:#DED8C7;--white:#fff}
+    :root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#163D39;--muted:#607D78;--line:#DED8C7;--white:#fff;--alert:#B3261E}
     *{box-sizing:border-box}
     body{margin:0;background:var(--ivory );color:var(--ink);font:17px/1.65:'Source Serif 4',Georgia,serif}
     .shell{max-width:820px;margin:0 auto;padding:20px 16px 40px}
     .brand{padding:24px 22px;background:var(--green);border-bottom:5px solid var(--gold);color:var(--white)}
-    .wordmark{margin:0;font:800 20px/1.25 Montserrat,Arial,sans-serif;letter-spacing:.06em}
-    .wordmark span{color:#E2BF63}
+    .wordmark{margin:0;font:800 20px/1.25 Montserrat,Arial,sans-serif;letter-spacing:.06em}.wordmark span{color:#E2BF63}
     .strap{margin:8px 0 0;color:#E2BF63;font:700 10px/1.5 Montserrat,Arial,sans-serif;letter-spacing:.16em}
     .brandline{margin:12px 0 0;color:#F3F5F2;font:600 13px/1.5 Montserrat,Arial,sans-serif}
     main{padding:28px 24px;background:var(--white);border:1px solid var(--line);border-top:0}
     .eyebrow{margin:0 0 8px;color:#9A741B;font:800 12px/1.4 Montserrat,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
-    h1,h2{margin:0;color:var(--green);font-family:'Playfair Display',Georgia,serif;line-height:1.2}
-    h1{font-size:36px}h2{font-size:23px}
+    h1,h2{margin:0;color:var(--green);font-family:'Playfair Display',Georgia,serif;line-height:1.2}h1{font-size:36px}h2{font-size:23px}
     .rule{width:58px;height:4px;margin:14px 0 20px;background:var(--gold)}
     .intro{max-width:680px;margin:0 0 22px;font-size:18px}
-    .notice{padding:18px 18px 17px;border-left:5px solid var(--gold);background:#F7F4EE}
-    .notice h2{font-size:21px}
-    .notice p{margin:8px 0 0}
+    .notice{padding:18px;border-left:5px solid var(--gold);background:var(--ivory)}.notice h2{font-size:21px}.notice p{margin:8px 0 0}
     .groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}
-    .group{padding:15px;border:1px solid var(--line);border-top:3px solid var(--gold);background:#fff}
-    .group h2{font-size:18px}
-    .group p{margin:6px 0 0;color:#455C57;font-size:15px}
-    .empty{margin:24px 0;padding:22px 18px;border:1px dashed #AFA58D;text-align:center;background:#FFFEFB}
-    .empty strong{display:block;color:var(--green);font:700 16px/1.5 Montserrat,Arial,sans-serif}
-    .empty p{max-width:540px;margin:8px auto 0;color:#52635F}
-    .btn{display:inline-block;margin-top:18px;padding:13px 18px;border:0;border-bottom:4px solid #A77F20;border-radius:4px;background:var(--green);color:#fff;text-decoration:none;text-align:center;font:800 12px/1.4 Montserrat,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
-    .btn:focus,.back:focus{outline:3px solid rgba(197,155,53,.55);outline-offset:3px}
-    .guidance{margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line)}
-    .guidance p{margin:8px 0}
-    .back{display:inline-block;margin-top:16px;color:var(--green);font:700 13px/1.5 Montserrat,Arial,sans-serif;text-underline-offset:3px}
-    footer{padding:18px 16px;background:var(--green);color:#E7ECE8;text-align:center;font:12px/1.6 Arial,sans-serif}
-    footer p{margin:0}footer a{color:#E2BF63}
-    @media(max-width:560px){.shell{padding:12px 10px 28px}.brand{padding:20px 17px}main{padding:24px 17px}h1{font-size:30px}.intro{font-size:16px}.groups{grid-template-columns:1fr;gap:10px}}
+    .group{padding:15px;border:1px solid var(--line);border-top:3px solid var(--gold);background:#fff}.group h2{font-size:18px}.group p{margin:6px 0 0;color:#455C57;font-size:15px}
+    .empty{margin:24px 0;padding:22px 18px;border:1px dashed #AFA58D;text-align:center;background:#FFFEFB}.empty strong{display:block;color:var(--green);font:700 16px/1.5 Montserrat,Arial,sans-serif}.empty p{max-width:540px;margin:8px auto 0;color:#52635F}
+    .form-panel{margin-top:28px;padding:20px;border:1px solid var(--line);border-top:5px solid var(--gold);background:#FFFEFB}
+    .form-panel>p{margin:8px 0 16px;color:#52635F}
+    label{display:block;margin:15px 0 5px;color:var(--green);font:700 13px/1.45 Montserrat,Arial,sans-serif}
+    .hint{display:block;margin:0 0 5px;color:var(--muted);font:13px/1.5 Arial,sans-serif}
+    input,select,textarea{display:block;width:100%;padding:12px;border:1.5px solid #BFB79F;border-radius:5px;background:#fff;color:var(--ink);font:16px 'Source Serif 4',Georgia,serif}
+    textarea{min-height:110px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.35);border-color:var(--gold)}
+    .check{display:flex;gap:11px;align-items:flex-start;margin:17px 0;color:#344D48;font:14px/1.5 Arial,sans-serif}.check input{width:21px;height:21px;flex:none;margin:0;accent-color:var(--green)}
+    .btn{display:inline-block;margin-top:14px;padding:13px 18px;border:0;border-bottom:4px solid #A77F20;border-radius:4px;background:var(--green);color:#fff;text-decoration:none;text-align:center;font:800 12px/1.4 Montserrat,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .btn:disabled{opacity:.55;cursor:wait}.status{min-height:24px;margin:12px 0 0;font:600 14px/1.5 Arial,sans-serif}.status.error{color:var(--alert)}.status.success{color:#1B5E20}
+    .hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    .back{display:inline-block;margin-top:20px;color:var(--green);font:700 13px/1.5 Montserrat,Arial,sans-serif;text-underline-offset:3px}
+    footer{padding:18px 16px;background:var(--green);color:#E7ECE8;text-align:center;font:12px/1.6 Arial,sans-serif}footer p{margin:0}
+    @media(max-width:560px){.shell{padding:12px 10px 28px}.brand{padding:20px 17px}main{padding:24px 17px}h1{font-size:30px}.intro{font-size:16px}.groups{grid-template-columns:1fr;gap:10px}.form-panel{padding:16px}}
   </style>
 </head>
 <body>
@@ -59,7 +56,7 @@
 
       <section class="notice" aria-labelledby="review-heading">
         <h2 id="review-heading">Shared with care</h2>
-        <p>We aim to check each listing’s source, eligibility details and deadline before featuring it. Always confirm the current requirements and closing date with the organisation offering the opportunity. The Mobilizer’s Diary does not guarantee selection or award decisions.</p>
+        <p>We aim to check each listing’s source, eligibility details and deadline before featuring it. Always confirm current requirements and closing dates with the organisation offering the opportunity. A recommendation is not an endorsement, and The Mobilizer’s Diary cannot guarantee selection or award decisions.</p>
       </section>
 
       <section class="groups" aria-label="Types of opportunities we may feature">
@@ -71,17 +68,63 @@
 
       <section class="empty" aria-live="polite">
         <strong>No verified listings have been published yet.</strong>
-        <p>Please check back. We will add opportunities here after the editorial team has reviewed the details. We have not added sample listings or unverified deadlines.</p>
+        <p>Please check back. Opportunities will appear here after editorial review. We have not added sample listings or unverified deadlines.</p>
       </section>
 
-      <section class="guidance" aria-labelledby="suggest-heading">
-        <h2 id="suggest-heading">Know of an opportunity?</h2>
-        <p>Help us find useful opportunities for students. Open the portal and choose <strong>“Podcast or Opportunity Suggestion”</strong> in the report category. Include the organisation’s official link and any deadline or eligibility details you can verify.</p>
-        <a class="btn" href="https://01gullah.github.io/mobilizersdiary/?v=4" target="_blank" rel="noopener noreferrer">Suggest an Opportunity</a>
-          
+      <section class="form-panel" aria-labelledby="suggest-heading">
+        <p class="eyebrow">Help us find useful opportunities</p>
+        <h2 id="suggest-heading">Recommend an Opportunity</h2>
+        <p>Send us the official source and details. Your recommendation goes to the editorial team for review; it is not published automatically.</p>
 
-        <a class="back" href="https://01gullah.github.io/mobilizersdiary/?v=4">← Back to The Mobilizer's Diary portal</a>
+        <form id="opportunityForm" novalidate>
+          <label for="oppTitle">Opportunity title *</label>
+          <input id="oppTitle" name="title" maxlength="180" required autocomplete="off">
+
+          <label for="oppType">Opportunity type *</label>
+          <select id="oppType" name="type" required>
+            <option value="">Choose a type</option>
+            <option>Scholarship or funding</option>
+            <option>Internship</option>
+            <option>Fellowship</option>
+            <option>Training or course</option>
+            <option>Competition or award</option>
+            <option>Conference or event</option>
+            <option>Leadership or civic programme</option>
+            <option>Other</option>
+          </select>
+
+          <label for="oppOrg">Offering organisation *</label>
+          <input id="oppOrg" name="organisation" maxlength="180" required autocomplete="organization">
+
+          <label for="oppUrl">Official opportunity link *</label>
+          <span class="hint">Use the organisation’s own website or official application page where possible.</span>
+          <input id="oppUrl" name="url" type="url" inputmode="url" placeholder="https://…" maxlength="500" required>
+
+          <label for="oppDeadline">Deadline (if stated )</label>
+          <input id="oppDeadline" name="deadline" maxlength="100" placeholder="For example: 30 November 2026">
+
+          <label for="oppEligibility">Eligibility details *</label>
+          <textarea id="oppEligibility" name="eligibility" maxlength="2500" required placeholder="Who can apply? Include location, study level or other stated requirements."></textarea>
+
+          <label for="oppNotes">Additional details (optional)</label>
+          <textarea id="oppNotes" name="notes" maxlength="2500" placeholder="Any other useful information or verification notes."></textarea>
+
+          <label for="contactName">Your name (optional)</label>
+          <input id="contactName" name="contactName" maxlength="120" autocomplete="name">
+
+          <label for="contactEmail">Your email (optional)</label>
+          <span class="hint">Provide both your name and email if you would like the team to follow up. They will not be published.</span>
+          <input id="contactEmail" name="contactEmail" type="email" maxlength="180" autocomplete="email">
+
+          <label class="check"><input id="oppConsent" type="checkbox" required><span>I confirm this recommendation is submitted in good faith. I understand it will be reviewed and may be declined, and that submitting it does not guarantee publication.</span></label>
+
+          <div class="hp" aria-hidden="true"><label for="website">Leave this field blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+          <button class="btn" id="submitOpportunity" type="submit">Send for Editorial Review</button>
+          <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
       </section>
+
+      <a class="back" href="https://01gullah.github.io/mobilizersdiary/?v=4">← Back to The Mobilizer's Diary portal</a>
     </main>
 
     <footer>
@@ -89,5 +132,122 @@
       <p>Listings are shared for information. Verify all details directly with the organisation.</p>
     </footer>
   </div>
+
+  <script src="config.js"></script>
+  <script>
+    (function ( ) {
+      var form = document.getElementById('opportunityForm');
+      var button = document.getElementById('submitOpportunity');
+      var status = document.getElementById('formStatus');
+
+      function value(id) {
+        return document.getElementById(id).value.trim();
+      }
+      function showStatus(message, kind) {
+        status.textContent = message;
+        status.className = 'status' + (kind ? ' ' + kind : '');
+      }
+      function validEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        showStatus('', '');
+
+        var title = value('oppTitle');
+        var type = value('oppType');
+        var organisation = value('oppOrg');
+        var sourceUrl = value('oppUrl');
+        var deadline = value('oppDeadline');
+        var eligibility = value('oppEligibility');
+        var notes = value('oppNotes');
+        var contactName = value('contactName');
+        var contactEmail = value('contactEmail').toLowerCase();
+        var honeypot = value('website');
+
+        if (honeypot) return;
+        if (!title || !type || !organisation || !sourceUrl || !eligibility) {
+          showStatus('Please complete all fields marked with an asterisk.', 'error');
+          return;
+        }
+        var parsedUrl;
+        try { parsedUrl = new URL(sourceUrl); }
+        catch (e) { showStatus('Enter a valid official opportunity link.', 'error'); return; }
+        if (parsedUrl.protocol !== 'https:' && parsedUrl.protocol !== 'http:' ) {
+          showStatus('The opportunity link must begin with https:// or http://.', 'error' );
+          return;
+        }
+        if ((contactName && !contactEmail) || (!contactName && contactEmail)) {
+          showStatus('Enter both your name and email for follow-up, or leave both blank.', 'error');
+          return;
+        }
+        if (contactEmail && !validEmail(contactEmail)) {
+          showStatus('Please enter a valid email address or leave it blank.', 'error');
+          return;
+        }
+        if (!document.getElementById('oppConsent').checked) {
+          showStatus('Please confirm the review statement before submitting.', 'error');
+          return;
+        }
+        if (typeof API_URL !== 'string' || API_URL.indexOf('https://script.google.com/' ) !== 0) {
+          showStatus('The submission service is not configured. Please try again later.', 'error');
+          return;
+        }
+
+        var description = 'Opportunity type: ' + type + '\nOffering organisation: ' + organisation +
+          (deadline ? '\nDeadline: ' + deadline : '');
+        var details = 'Eligibility: ' + eligibility + (notes ? '\nAdditional details: ' + notes : '');
+        var data = {
+          type: contactEmail ? 'Named submission' : 'Anonymous submission',
+          name: contactName,
+          email: contactEmail,
+          phone: '',
+          role: 'Other',
+          publish: 'No, keep my name confidential',
+          institution: '',
+          category: 'Podcast or Opportunity Suggestion',
+          title: title,
+          challenge: description,
+          why: details,
+          solutions: 'Please review this opportunity recommendation and verify its source and deadline before any publication.',
+          evidence: sourceUrl,
+          consent: true,
+          ack: true,
+          nomConsent: false,
+          declaration: true,
+          hp: '',
+          iv: null
+        };
+
+        button.disabled = true;
+        button.textContent = 'Sending…';
+        showStatus('Sending your recommendation to the editorial team…', '');
+
+        fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'report', data: data })
+        })
+        .then(function (response) { return response.text(); })
+        .then(function (text) {
+          var result;
+          try { result = JSON.parse(text); }
+          catch (e) { throw new Error('The service returned an unexpected response. Please try again later.'); }
+          if (!result.ok) throw new Error(result.error || 'The recommendation could not be submitted.');
+          var ref = result.result && result.result.ref ? ' Reference: ' + result.result.ref + '.' : '';
+          form.reset();
+          showStatus('Thank you. Your recommendation has been received for editorial review. It has not been published automatically.' + ref, 'success');
+        })
+        .catch(function (error) {
+          showStatus(error && error.message ? error.message : 'Submission failed. Please try again.', 'error');
+        })
+        .then(function () {
+          button.disabled = false;
+          button.textContent = 'Send for Editorial Review';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
