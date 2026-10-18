@@ -905,7 +905,7 @@ window.hubSend=function(){
   document.addEventListener('visibilitychange', startRotation);
 
   function loadSponsoredBanner() {
-    return api('sponsoredBanners').catch(function () { return []; });
+    return api('sponsoredBanner').then(function (banner) { return banner ? [banner] : []; }).catch(function () { return []; });
   }
   // The requested loop is fixed: volunteer message 1, survey banner, volunteer message 2.
   window.loadSponsoredBanner = function () {
