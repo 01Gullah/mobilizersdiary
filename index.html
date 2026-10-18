@@ -879,8 +879,8 @@ window.hubSend=function(){
         card.appendChild(element('p', '', item.description));
       }
       card.appendChild(element('p', 'md-feature-meta', item.kind === 'featured-survey'
-        ? 'Official survey Â· The Mobilizer\'s Diary'
-        : (item.sponsorName ? 'Sponsored Â· ' + item.sponsorName : 'Sponsored')));
+        ? 'Official survey · The Mobilizer\'s Diary'
+        : (item.sponsorName ? 'Sponsored · ' + item.sponsorName : 'Sponsored')));
       var action = element('a', 'btn ghost', item.kind === 'featured-survey' ? 'Take the survey' : 'Visit sponsor');
       action.href = item.targetUrl;
       action.target = '_blank';
@@ -930,7 +930,7 @@ window.hubSend=function(){
         label: 'Volunteer with us',
         title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
-        imageUrl: 'volunteer-banner-4x1.jpg',
+        imageUrl: 'volunteer-banner-optimized.jpg',
         imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
@@ -940,7 +940,7 @@ window.hubSend=function(){
         label: 'Volunteer with us',
         title: 'Contribute in a way that fits you.',
         description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
-        imageUrl: 'volunteer-banner-4x1.jpg',
+        imageUrl: 'volunteer-banner-optimized.jpg',
         imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
@@ -972,12 +972,12 @@ window.hubSend=function(){
       items = [{
         kind: 'volunteer', label: 'Volunteer with us', title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
-        imageUrl: 'volunteer-banner-4x1.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
+        imageUrl: 'volunteer-banner-optimized.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us', href: 'volunteer.html'
       }, {
         kind: 'volunteer', label: 'Volunteer with us', title: 'Contribute in a way that fits you.',
         description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
-        imageUrl: 'volunteer-banner-4x1.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
+        imageUrl: 'volunteer-banner-optimized.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us', href: 'volunteer.html'
       }];
       index = 0;
