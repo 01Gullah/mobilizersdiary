@@ -804,7 +804,7 @@ window.hubSend=function(){
   var items = [];
   var index = 0;
   var timer = null;
-  var intervalMs = 20000;
+  var intervalMs = 25000;
   var motionPreference = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var reduceMotion = !!(motionPreference && motionPreference.matches);
 
@@ -907,74 +907,50 @@ window.hubSend=function(){
   function loadSponsoredBanner() {
     return api('sponsoredBanners').catch(function () { return []; });
   }
-  // Keep the existing helper name available while expanding it to load the rotation data.
+  // The requested loop is fixed: volunteer message 1, survey banner, volunteer message 2.
   window.loadSponsoredBanner = function () {
-    Promise.all([
-      loadSponsoredBanner(),
-      api('publicOpportunities').catch(function () { return []; })
-    ]).then(function (results) {
-      var banners = Array.isArray(results[0]) ? results[0] : [];
-      var opportunities = Array.isArray(results[1]) ? results[1] : [];
-      var surveyBanners = [];
-      var sponsorBanners = [];
-
-      items.push({
+    loadSponsoredBanner().then(function (result) {
+      var banners = Array.isArray(result) ? result : (result ? [result] : []);
+      var volunteerFirst = {
         kind: 'volunteer',
         label: 'Volunteer with us',
         title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
-      });
-      banners.forEach(function (banner) {
-        if (!banner || !safeHttps(banner.imageUrl) || !safeHttps(banner.targetUrl)) return;
-        var sponsorName = String(banner.sponsorName || '').substring(0, 120);
-        var altText = String(banner.altText || 'Sponsored message').substring(0, 250);
-        var isPolicyDialogueSurvey = /student policy dialogue/i.test(sponsorName + ' ' + altText);
-        var bannerItem = {
-          kind: isPolicyDialogueSurvey ? 'featured-survey' : 'sponsor',
-          label: isPolicyDialogueSurvey ? 'Featured survey' : 'Sponsored',
-          sponsorName: sponsorName,
-          description: isPolicyDialogueSurvey
-            ? 'Your experience matters. Take the survey and help turn student realities into evidence, analysis and infographics that inform the public conversation.'
-            : '',
-          imageUrl: banner.imageUrl,
-          targetUrl: banner.targetUrl,
-          altText: altText
-        };
-        if (isPolicyDialogueSurvey) surveyBanners.push(bannerItem);
-        else sponsorBanners.push(bannerItem);
-      });
-      Array.prototype.push.apply(items, surveyBanners);
-      items.push({
+      };
+      var volunteerSecond = {
         kind: 'volunteer',
         label: 'Volunteer with us',
         title: 'Contribute in a way that fits you.',
         description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
-      });
-      Array.prototype.push.apply(items, sponsorBanners);
-      opportunities.forEach(function (opportunity) {
-        if (!opportunity || !opportunity.title || !opportunity.organisation) return;
-        var details = [opportunity.category, opportunity.deadline ? 'Deadline: ' + opportunity.deadline : '']
-          .filter(function (part) { return !!part; }).join(' · ');
-        var description = String(opportunity.eligibility || 'Explore this verified student opportunity.');
-        items.push({
-          kind: 'opportunity',
-          label: 'Verified student opportunity',
-          title: String(opportunity.title).substring(0, 180),
-          description: description.substring(0, 320),
-          meta: String(opportunity.organisation).substring(0, 180) + (details ? ' · ' + details : ''),
-          button: 'Explore Opportunities',
-          href: 'opportunities.html'
-        });
-      });
+      };
+      var surveyBanner = null;
+      for (var i = 0; i < banners.length; i++) {
+        var banner = banners[i];
+        if (!banner || !/student policy dialogue/i.test(String(banner.sponsorName || '') + ' ' + String(banner.altText || ''))) continue;
+        if (!safeHttps(banner.imageUrl) || !safeHttps(banner.targetUrl)) continue;
+        surveyBanner = {
+          kind: 'featured-survey',
+          label: 'Student Policy Dialogue Survey',
+          sponsorName: String(banner.sponsorName || '').substring(0, 120),
+          description: 'Your experience matters. Take the survey and help turn student realities into evidence, analysis and infographics that inform the public conversation.',
+          imageUrl: banner.imageUrl,
+          targetUrl: banner.targetUrl,
+          altText: String(banner.altText || 'Student Policy Dialogue survey banner').substring(0, 250)
+        };
+        break;
+      }
+      items = surveyBanner
+        ? [volunteerFirst, surveyBanner, volunteerSecond]
+        : [volunteerFirst, volunteerSecond];
       index = 0;
       render();
       startRotation();
     }).catch(function (error) {
-      // Keep the volunteer call-out visible if either public feed is unavailable.
+      // Keep both volunteer messages available if the survey feed is unavailable.
       items = [{
         kind: 'volunteer', label: 'Volunteer with us', title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
