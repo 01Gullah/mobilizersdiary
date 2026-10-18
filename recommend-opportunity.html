@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123F3B">
+  <meta name="description" content="Recommend a scholarship, internship, fellowship, training or other opportunity for editorial review.">
+  <title>Recommend an Opportunity | The Mobilizer's Diary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#163D39;--muted:#607D78;--line:#DED8C7;--white:#fff;--alert:#B3261E}
+    *{box-sizing:border-box}body{margin:0;background:var(--ivory );color:var(--ink);font:17px/1.65:'Source Serif 4',Georgia,serif}
+    .shell{max-width:760px;margin:0 auto;padding:20px 16px 40px}.brand{padding:24px 22px;background:var(--green);border-bottom:5px solid var(--gold);color:var(--white)}
+    .wordmark{margin:0;font:800 20px/1.25 Montserrat,Arial,sans-serif;letter-spacing:.06em}.wordmark span{color:#E2BF63}.strap{margin:8px 0 0;color:#E2BF63;font:700 10px/1.5 Montserrat,Arial,sans-serif;letter-spacing:.16em}.brandline{margin:12px 0 0;color:#F3F5F2;font:600 13px/1.5 Montserrat,Arial,sans-serif}
+    main{padding:28px 24px;background:var(--white);border:1px solid var(--line);border-top:0}.eyebrow{margin:0 0 8px;color:#9A741B;font:800 12px/1.4 Montserrat,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    h1,h2{margin:0;color:var(--green);font-family:'Playfair Display',Georgia,serif;line-height:1.2}h1{font-size:34px}.rule{width:58px;height:4px;margin:14px 0 20px;background:var(--gold)}.intro{margin:0 0 18px;font-size:17px}
+    .notice{padding:16px;border-left:5px solid var(--gold);background:var(--ivory);font-size:15px}.notice p{margin:0}
+    .form-panel{margin-top:24px;padding:20px;border:1px solid var(--line);border-top:5px solid var(--gold);background:#FFFEFB}
+    label{display:block;margin:15px 0 5px;color:var(--green);font:700 13px/1.45 Montserrat,Arial,sans-serif}.hint{display:block;margin:0 0 5px;color:var(--muted);font:13px/1.5 Arial,sans-serif}
+    input,select,textarea{display:block;width:100%;padding:12px;border:1.5px solid #BFB79F;border-radius:5px;background:#fff;color:var(--ink);font:16px 'Source Serif 4',Georgia,serif}textarea{min-height:110px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.35);border-color:var(--gold)}
+    .check{display:flex;gap:11px;align-items:flex-start;margin:17px 0;color:#344D48;font:14px/1.5 Arial,sans-serif}.check input{width:21px;height:21px;flex:none;margin:0;accent-color:var(--green)}
+    .btn{display:inline-block;margin-top:14px;padding:13px 18px;border:0;border-bottom:4px solid #A77F20;border-radius:4px;background:var(--green);color:#fff;text-align:center;font:800 12px/1.4 Montserrat,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.btn:disabled{opacity:.55;cursor:wait}
+    .status{min-height:24px;margin:12px 0 0;font:600 14px/1.5 Arial,sans-serif}.status.error{color:var(--alert)}.status.success{color:#1B5E20}.reference{display:block;margin-top:8px;padding:12px;background:var(--green);color:#fff;font:800 18px Montserrat,Arial,sans-serif;letter-spacing:.06em}
+    .hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}.back{display:inline-block;margin-top:20px;color:var(--green);font:700 13px/1.5 Montserrat,Arial,sans-serif;text-underline-offset:3px}
+    footer{padding:18px 16px;background:var(--green);color:#E7ECE8;text-align:center;font:12px/1.6 Arial,sans-serif}footer p{margin:0}
+    @media(max-width:560px){.shell{padding:12px 10px 28px}.brand{padding:20px 17px}main{padding:24px 17px}h1{font-size:29px}.form-panel{padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="brand">
+      <p class="wordmark">THE MOBILIZER'S <span>DIARY</span></p>
+      <p class="strap">INDEPENDENT STUDENT AND CIVIC ENGAGEMENT PLATFORM</p>
+      <p class="brandline">Amplifying student voices. Preserving institutional memory.</p>
+    </header>
+    <main>
+      <p class="eyebrow">For editorial review</p>
+      <h1>Recommend an Opportunity</h1>
+      <div class="rule"></div>
+      <p class="intro">Share an opportunity that may be useful to students. Your recommendation will receive its own ROP reference and go to the editorial team for review. It will not appear publicly unless verified and approved.</p>
+      <aside class="notice"><p>Please provide an official source link and accurate details. The recommendation is separate from student reports and does not guarantee publication, selection or an award.</p></aside>
+      <section class="form-panel">
+        <form id="opportunityForm" novalidate>
+          <label for="oppTitle">Opportunity title *</label>
+          <input id="oppTitle" maxlength="180" required autocomplete="off">
+          <label for="oppType">Opportunity type *</label>
+          <select id="oppType" required>
+            <option value="">Choose a type</option><option>Scholarship or funding</option><option>Internship</option><option>Fellowship</option><option>Training or course</option><option>Competition or award</option><option>Conference or event</option><option>Leadership or civic programme</option><option>Other</option>
+          </select>
+          <label for="oppOrg">Offering organisation *</label>
+          <input id="oppOrg" maxlength="180" required autocomplete="organization">
+          <label for="oppUrl">Official opportunity link *</label>
+          <span class="hint">Use the organisation's own website or official application page where possible.</span>
+          <input id="oppUrl" type="url" inputmode="url" placeholder="https://…" maxlength="500" required>
+          <label for="oppDeadline">Deadline (if stated )</label>
+          <input id="oppDeadline" maxlength="100" placeholder="For example: 30 November 2026">
+          <label for="oppEligibility">Eligibility details *</label>
+          <textarea id="oppEligibility" maxlength="2500" required placeholder="Who can apply? Include location, study level or other stated requirements."></textarea>
+          <label for="oppNotes">Additional details (optional)</label>
+          <textarea id="oppNotes" maxlength="2500" placeholder="Any other useful information for the editorial team."></textarea>
+          <label for="contactName">Your name (optional)</label>
+          <input id="contactName" maxlength="120" autocomplete="name">
+          <label for="contactEmail">Your email (optional)</label>
+          <span class="hint">Enter both your name and email if you would like follow-up. These details are not published.</span>
+          <input id="contactEmail" type="email" maxlength="180" autocomplete="email">
+          <label class="check"><input id="oppConsent" type="checkbox"><span>I confirm this recommendation is submitted in good faith. I understand it will be reviewed and may be declined, and that submitting it does not guarantee publication.</span></label>
+          <div class="hp" aria-hidden="true"><label for="website">Leave this field blank</label><input id="website" tabindex="-1" autocomplete="off"></div>
+          <button class="btn" id="submitOpportunity" type="submit">Send for Editorial Review</button>
+          <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+          <span class="reference" id="reference" hidden></span>
+        </form>
+      </section>
+      <a class="back" href="opportunities.html">← Back to approved listings</a>
+    </main>
+    <footer>
+      <p><strong>THE MOBILIZER'S DIARY</strong> · Independent, non-partisan and student-focused.</p>
+      <p>Recommendations are reviewed before any public listing.</p>
+    </footer>
+  </div>
+  <script src="config.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('opportunityForm');
+      var button = document.getElementById('submitOpportunity');
+      var status = document.getElementById('formStatus');
+      var reference = document.getElementById('reference');
+      function value(id) { return document.getElementById(id).value.trim(); }
+      function showStatus(message, kind) { status.textContent = message; status.className = 'status' + (kind ? ' ' + kind : ''); }
+      function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); showStatus('', ''); reference.hidden = true;
+        var title=value('oppTitle'), type=value('oppType'), organisation=value('oppOrg'), sourceUrl=value('oppUrl');
+        var deadline=value('oppDeadline'), eligibility=value('oppEligibility'), notes=value('oppNotes');
+        var contactName=value('contactName'), contactEmail=value('contactEmail').toLowerCase(), honeypot=value('website');
+        if (honeypot) return;
+        if (!title || !type || !organisation || !sourceUrl || !eligibility) { showStatus('Please complete all fields marked with an asterisk.', 'error'); return; }
+        var parsedUrl;
+        try { parsedUrl = new URL(sourceUrl); } catch (e) { showStatus('Enter a valid official opportunity link.', 'error'); return; }
+        if (parsedUrl.protocol !== 'https:' && parsedUrl.protocol !== 'http:' ) { showStatus('The opportunity link must begin with https:// or http://.', 'error' ); return; }
+        if ((contactName && !contactEmail) || (!contactName && contactEmail)) { showStatus('Enter both your name and email for follow-up, or leave both blank.', 'error'); return; }
+        if (contactEmail && !validEmail(contactEmail)) { showStatus('Please enter a valid email address or leave it blank.', 'error'); return; }
+        if (!document.getElementById('oppConsent').checked) { showStatus('Please confirm the review statement before submitting.', 'error'); return; }
+        if (typeof API_URL !== 'string' || API_URL.indexOf('https://script.google.com/' ) !== 0) { showStatus('The recommendation service is not configured yet.', 'error'); return; }
+        var payload={title:title,type:type,organisation:organisation,sourceUrl:sourceUrl,deadline:deadline,eligibility:eligibility,notes:notes,contactName:contactName,contactEmail:contactEmail,consent:true,hp:honeypot};
+        button.disabled=true; button.textContent='Sending…'; showStatus('Sending your recommendation for review…', '');
+        fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'recommendOpportunity',data:payload})})
+          .then(function(r){return r.text();})
+          .then(function(raw){var response;try{response=JSON.parse(raw);}catch(e){throw new Error('The service returned an unexpected response.');}
+            if(!response.ok)throw new Error(response.error||'The recommendation could not be submitted.');
+            var result=response.result||{};var ref=result.ref||result.recommendationId||'';
+            form.reset();
+            if(ref){reference.textContent='Your recommendation reference: '+ref;reference.hidden=false;}
+            showStatus('Thank you. Your recommendation has been received for editorial review. It has not been published automatically.', 'success');
+          })
+          .catch(function(error){showStatus(error&&error.message?error.message:'Submission failed. Please try again.', 'error');})
+          .then(function(){button.disabled=false;button.textContent='Send for Editorial Review';});
+      });
+    })();
+  </script>
+</body>
+</html>
