@@ -48,6 +48,32 @@
           <input id="phone" type="tel" maxlength="40" autocomplete="tel">
           <label for="institution">Institution (optional)</label>
           <input id="institution" maxlength="180" autocomplete="organization">
+          <label for="stateOfStudy">State/FCT where your institution is located *</label>
+          <select id="stateOfStudy" required>
+            <option value="">Choose a state/FCT</option>
+            <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option>
+            <option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option>
+            <option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option>
+            <option>Ekiti</option><option>Enugu</option><option>Federal Capital Territory (FCT)</option><option>Gombe</option>
+            <option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option>
+            <option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+            <option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+            <option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option>
+            <option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+          </select>
+          <label for="institutionType">Institution type *</label>
+          <select id="institutionType" required>
+            <option value="">Choose an institution type</option>
+            <option>Federal University</option>
+            <option>State University</option>
+            <option>Private University</option>
+            <option>Federal Polytechnic</option>
+            <option>State Polytechnic</option>
+            <option>Private Polytechnic</option>
+            <option>College of Education</option>
+            <option>College/School of Health or Health Technology</option>
+            <option>Other Tertiary Institution</option>
+          </select>
           <label for="studyLevel">Study level or current role (optional)</label>
           <input id="studyLevel" maxlength="100" placeholder="For example: undergraduate, graduate, alumnus">
           <label for="interestArea">Where would you like to contribute? *</label>
@@ -113,6 +139,8 @@
           email: value('email').toLowerCase(),
           phone: value('phone'),
           institution: value('institution'),
+          stateOfStudy: value('stateOfStudy'),
+          institutionType: value('institutionType'),
           studyLevel: value('studyLevel'),
           interestArea: value('interestArea'),
           skills: value('skills'),
@@ -123,7 +151,7 @@
         };
 
         if (payload.hp) return;
-        if (!payload.fullName || !payload.email || !payload.interestArea || !payload.availability || !payload.motivation) {
+        if (!payload.fullName || !payload.email || !payload.stateOfStudy || !payload.institutionType || !payload.interestArea || !payload.availability || !payload.motivation) {
           showStatus('Please complete all fields marked with an asterisk.', 'error');
           return;
         }
