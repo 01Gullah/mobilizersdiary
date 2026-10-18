@@ -12,7 +12,7 @@
 <style>
 :root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ed:#163D39;--neutral:#607D8B;--alert:#C62828;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ivory );color:var(--ed);font:17px/1.6 'Source Serif 4','Source Serif Pro',Georgia,serif}
+body{margin:0;background:var(--ivory);color:var(--ed);font:17px/1.6 'Source Serif 4','Source Serif Pro',Georgia,serif}
 .wrap{max-width:640px;margin:0 auto;padding-bottom:40px;background:var(--ivory)}
 .top img,.flyer{display:block;width:100%;height:auto}
 .bar{height:5px;background:#e3dccb}.bar i{display:block;height:5px;width:0;background:var(--gold);transition:width .3s}
@@ -61,14 +61,15 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 .md-feature-card p{margin:2px 0 4px;font-size:12px;line-height:1.35}
 .md-feature-card .md-feature-meta{color:var(--neutral);font:600 10px/1.35 Arial,sans-serif}
 .md-feature-card .btn{display:inline-flex;width:auto;margin:4px 0 0;padding:7px 10px;border-bottom-width:2px;border-radius:5px;font-size:10px;letter-spacing:.06em}
-.md-feature-image-link{display:block;max-height:72px;margin:0 0 4px;border-radius:5px;overflow:hidden}
-.md-feature-image{display:block;width:100%;max-height:68px;object-fit:contain;background:#fff}
+.md-feature-image-link{display:block;max-height:102px;margin:0 0 4px;border-radius:5px;overflow:hidden}
+.md-feature-image{display:block;width:100%;max-height:98px;object-fit:contain;background:#fff}
 .md-feature-controls{display:flex;justify-content:space-between;gap:8px;padding:0 10px 7px}
 .md-feature-controls button{padding:5px 9px;border:1px solid var(--green);border-radius:5px;background:#fff;color:var(--green);font:700 10px Montserrat,Arial,sans-serif;cursor:pointer}
 .md-feature-controls button:hover,.md-feature-controls button:focus{background:var(--green);color:#fff}
 .md-feature-controls button:disabled{opacity:.45;cursor:default}
 @keyframes mdFeatureIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.md-feature-card{animation:none!important;transition:none!important}}
+
 .hp{position:absolute;left:-9999px}
 .hubnav{display:grid;gap:10px;margin-top:14px}
 .hubnav .btn{margin-top:0}
@@ -239,7 +240,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
   <label>Evidence or Source Link (optional)</label><input type="text" id="evidence" placeholder="https://">
 
   <div class="ivwrap">
-    <h3 class="hh" style="margin-top:0">Virtual Interview (Optional )</h3>
+    <h3 class="hh" style="margin-top:0">Virtual Interview (Optional)</h3>
     <label class="chk"><input type="checkbox" id="iv" onchange="ivToggle()"><span>I am willing to be contacted for a virtual interview about this report. It is voluntary, I can decline at any time, and nothing will be recorded or published without my separate consent.</span></label>
     <div id="ivbox" style="display:none">
       <div class="note" id="ivanon" style="display:none">You are submitting anonymously. An interview would reveal your identity to the editorial team only, and you may still decline.</div>
@@ -372,7 +373,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 </footer>
 </div>
 
-<!-- GIFT POP-UP (shown after a report is submitted ) -->
+<!-- GIFT POP-UP (shown after a report is submitted) -->
 <div class="modal" id="gift" role="dialog" aria-modal="true" aria-labelledby="gift-t" onclick="if(event.target===this){closeGift()}">
   <div class="mbox">
     <button class="mx" type="button" onclick="closeGift()" aria-label="Close">&times;</button>
@@ -412,7 +413,7 @@ function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function api(action,payload){
   return new Promise(function(resolve,reject){
     var url=(typeof API_URL==='string')?API_URL:'';
-    if(url.indexOf('https://script.google.com/' )!==0){reject(new Error('This site is not connected yet. Please try again later.'));return}
+    if(url.indexOf('https://script.google.com/')!==0){reject(new Error('This site is not connected yet. Please try again later.'));return}
     var ctl=('AbortController' in window)?new AbortController():null;
     var timer=setTimeout(function(){if(ctl){ctl.abort()}},60000);
     fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:payload||{}}),redirect:'follow',signal:ctl?ctl.signal:undefined})
@@ -491,7 +492,7 @@ function send(){
   err(6,'');
   var need=['category','title','challenge','why','solutions'];
   for(var i=0;i<need.length;i++){if(!v(need[i])){err(6,'Please complete all required fields.');return}}
-  if(v('evidence')&&!/^https?:\/\/\S+$/i.test(v('evidence' ))){err(6,'The evidence link must start with http:// or https://' );return}
+  if(v('evidence')&&!/^https?:\/\/\S+$/i.test(v('evidence'))){err(6,'The evidence link must start with http:// or https://');return}
   var nom=($('category').value===NOM);
   if(nom&&!$('nomc').checked){err(6,'Please confirm the nominee has agreed to be featured.');return}
   var ivOn=$('iv').checked;
@@ -701,7 +702,7 @@ window.giveGo=function(){
   btn.disabled=true;btn.textContent='Preparing secure payment...';
   api('donate',{amount:amt,name:$('g-name').value,email:email,anonymous:$('g-anon').checked,updates:false,consent:true,hp:$('g-hp').value}).then(function(r){
     var url=(r&&r.url)?String(r.url):'';
-    if(url.indexOf('https://' )!==0){btn.disabled=false;btn.textContent='Give Securely';errEl.textContent='We could not start the payment. Please try again.';return}
+    if(url.indexOf('https://')!==0){btn.disabled=false;btn.textContent='Give Securely';errEl.textContent='We could not start the payment. Please try again.';return}
     lsSet('md_donor',JSON.stringify({n:$('g-name').value,e:email,t:Date.now()}));
     btn.style.display='none';
     okEl.textContent='Your secure payment page is ready. Reference: '+r.ref+'.';okEl.style.display='block';
@@ -803,12 +804,12 @@ window.hubSend=function(){
   var items = [];
   var index = 0;
   var timer = null;
-  var intervalMs = 7000;
+  var intervalMs = 20000;
   var motionPreference = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var reduceMotion = !!(motionPreference && motionPreference.matches);
 
   function safeHttps(value) {
-    return typeof value === 'string' && /^https:\/\/[A-Za-z0-9.-]+(?::\d{1,5} )?(?:[/?#][^\s]*)?$/i.test(value.trim());
+    return typeof value === 'string' && /^https:\/\/[A-Za-z0-9.-]+(?::\d{1,5})?(?:[/?#][^\s]*)?$/i.test(value.trim());
   }
   function element(tag, className, text) {
     var node = document.createElement(tag);
@@ -837,28 +838,42 @@ window.hubSend=function(){
     previous.disabled = items.length < 2;
     next.disabled = items.length < 2;
 
-    if (item.kind === 'sponsor') {
+    if (item.kind === 'sponsor' || item.kind === 'featured-survey') {
       var card = element('article', 'md-feature-card');
       var heading = element('h2', '', item.sponsorName || 'A sponsored message');
       card.appendChild(heading);
       var link = element('a', 'md-feature-image-link');
       link.href = item.targetUrl;
       link.target = '_blank';
-      link.rel = 'sponsored noopener noreferrer';
+      link.rel = item.kind === 'sponsor' ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
       link.setAttribute('aria-label', item.altText || 'Open sponsored message');
       var image = element('img', 'md-feature-image');
       image.src = item.imageUrl;
       image.alt = item.altText || 'Sponsored message';
       image.loading = 'lazy';
       image.onerror = function () {
-        items.splice(index, 1);
-        if (!items.length) return;
+        var failedIndex = items.indexOf(item);
+        if (failedIndex < 0) return;
+        var failedSlideIsCurrent = failedIndex === index;
+        items.splice(failedIndex, 1);
+        if (failedIndex < index) index -= 1;
         if (index >= items.length) index = 0;
-        render();
+        if (failedSlideIsCurrent) render();
+        startRotation();
       };
       link.appendChild(image);
       card.appendChild(link);
-      card.appendChild(element('p', 'md-feature-meta', item.sponsorName ? 'Sponsored · ' + item.sponsorName : 'Sponsored'));
+      if (item.kind === 'featured-survey' && item.description) {
+        card.appendChild(element('p', '', item.description));
+      }
+      card.appendChild(element('p', 'md-feature-meta', item.kind === 'featured-survey'
+        ? 'Official survey · The Mobilizer\'s Diary'
+        : (item.sponsorName ? 'Sponsored · ' + item.sponsorName : 'Sponsored')));
+      var action = element('a', 'btn ghost', item.kind === 'featured-survey' ? 'Take the survey' : 'Visit sponsor');
+      action.href = item.targetUrl;
+      action.target = '_blank';
+      action.rel = item.kind === 'sponsor' ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
+      card.appendChild(action);
       content.appendChild(card);
       return;
     }
@@ -900,18 +915,46 @@ window.hubSend=function(){
     ]).then(function (results) {
       var banners = Array.isArray(results[0]) ? results[0] : [];
       var opportunities = Array.isArray(results[1]) ? results[1] : [];
+      var surveyBanners = [];
+      var sponsorBanners = [];
 
+      items.push({
+        kind: 'volunteer',
+        label: 'Volunteer with us',
+        title: 'Help student voices travel further.',
+        description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
+        button: 'Volunteer with Us',
+        href: 'volunteer.html'
+      });
       banners.forEach(function (banner) {
         if (!banner || !safeHttps(banner.imageUrl) || !safeHttps(banner.targetUrl)) return;
-        items.push({
-          kind: 'sponsor',
-          label: 'Sponsored',
-          sponsorName: String(banner.sponsorName || '').substring(0, 120),
+        var sponsorName = String(banner.sponsorName || '').substring(0, 120);
+        var altText = String(banner.altText || 'Sponsored message').substring(0, 250);
+        var isPolicyDialogueSurvey = /student policy dialogue/i.test(sponsorName + ' ' + altText);
+        var bannerItem = {
+          kind: isPolicyDialogueSurvey ? 'featured-survey' : 'sponsor',
+          label: isPolicyDialogueSurvey ? 'Featured survey' : 'Sponsored',
+          sponsorName: sponsorName,
+          description: isPolicyDialogueSurvey
+            ? 'Your experience matters. Take the survey and help turn student realities into evidence, analysis and infographics that inform the public conversation.'
+            : '',
           imageUrl: banner.imageUrl,
           targetUrl: banner.targetUrl,
-          altText: String(banner.altText || 'Sponsored message').substring(0, 250)
-        });
+          altText: altText
+        };
+        if (isPolicyDialogueSurvey) surveyBanners.push(bannerItem);
+        else sponsorBanners.push(bannerItem);
       });
+      Array.prototype.push.apply(items, surveyBanners);
+      items.push({
+        kind: 'volunteer',
+        label: 'Volunteer with us',
+        title: 'Contribute in a way that fits you.',
+        description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
+        button: 'Volunteer with Us',
+        href: 'volunteer.html'
+      });
+      Array.prototype.push.apply(items, sponsorBanners);
       opportunities.forEach(function (opportunity) {
         if (!opportunity || !opportunity.title || !opportunity.organisation) return;
         var details = [opportunity.category, opportunity.deadline ? 'Deadline: ' + opportunity.deadline : '']
@@ -927,14 +970,6 @@ window.hubSend=function(){
           href: 'opportunities.html'
         });
       });
-      items.push({
-        kind: 'volunteer',
-        label: 'Volunteer with us',
-        title: 'Help student voices travel further.',
-        description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
-        button: 'Volunteer with Us',
-        href: 'volunteer.html'
-      });
       index = 0;
       render();
       startRotation();
@@ -943,6 +978,10 @@ window.hubSend=function(){
       items = [{
         kind: 'volunteer', label: 'Volunteer with us', title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
+        button: 'Volunteer with Us', href: 'volunteer.html'
+      }, {
+        kind: 'volunteer', label: 'Volunteer with us', title: 'Contribute in a way that fits you.',
+        description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
         button: 'Volunteer with Us', href: 'volunteer.html'
       }];
       index = 0;
