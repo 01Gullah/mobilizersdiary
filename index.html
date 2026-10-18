@@ -61,8 +61,8 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 .md-feature-card p{margin:2px 0 4px;font-size:12px;line-height:1.35}
 .md-feature-card .md-feature-meta{color:var(--neutral);font:600 10px/1.35 Arial,sans-serif}
 .md-feature-card .btn{display:inline-flex;width:auto;margin:4px 0 0;padding:7px 10px;border-bottom-width:2px;border-radius:5px;font-size:10px;letter-spacing:.06em}
-.md-feature-image-link{display:block;max-height:102px;margin:0 0 4px;border-radius:5px;overflow:hidden}
-.md-feature-image{display:block;width:100%;max-height:98px;object-fit:contain;background:#fff}
+.md-feature-image-link{display:flex;align-items:center;justify-content:center;width:100%;height:102px;max-height:102px;margin:0 0 4px;border-radius:5px;overflow:hidden;background:#fff}
+.md-feature-image{display:block;width:auto;height:auto;max-width:100%;max-height:98px;object-fit:contain;background:#fff}
 .md-feature-controls{display:flex;justify-content:space-between;gap:8px;padding:0 10px 7px}
 .md-feature-controls button{padding:5px 9px;border:1px solid var(--green);border-radius:5px;background:#fff;color:var(--green);font:700 10px Montserrat,Arial,sans-serif;cursor:pointer}
 .md-feature-controls button:hover,.md-feature-controls button:focus{background:var(--green);color:#fff}
@@ -804,7 +804,7 @@ window.hubSend=function(){
   var items = [];
   var index = 0;
   var timer = null;
-  var intervalMs = 25000;
+  var intervalMs = 15000;
   var motionPreference = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var reduceMotion = !!(motionPreference && motionPreference.matches);
 
@@ -819,6 +819,18 @@ window.hubSend=function(){
   }
   function addTextCard(parent, item) {
     var card = element('article', 'md-feature-card');
+    if (item.imageUrl) {
+      var imageLink = element('a', 'md-feature-image-link');
+      imageLink.href = item.href;
+      imageLink.setAttribute('aria-label', 'Learn more about volunteering with The Mobilizer\'s Diary');
+      var image = element('img', 'md-feature-image');
+      image.src = item.imageUrl;
+      image.alt = item.imageAlt || item.title;
+      image.loading = 'lazy';
+      image.onerror = function () { imageLink.style.display = 'none'; };
+      imageLink.appendChild(image);
+      card.appendChild(imageLink);
+    }
     var title = element('h2', '', item.title);
     var description = element('p', '', item.description);
     card.appendChild(title);
@@ -918,6 +930,8 @@ window.hubSend=function(){
         label: 'Volunteer with us',
         title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
+        imageUrl: 'volunteer-banner-optimized.jpg',
+        imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
       };
@@ -926,6 +940,8 @@ window.hubSend=function(){
         label: 'Volunteer with us',
         title: 'Contribute in a way that fits you.',
         description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
+        imageUrl: 'volunteer-banner-optimized.jpg',
+        imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us',
         href: 'volunteer.html'
       };
@@ -956,10 +972,12 @@ window.hubSend=function(){
       items = [{
         kind: 'volunteer', label: 'Volunteer with us', title: 'Help student voices travel further.',
         description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
+        imageUrl: 'volunteer-banner-optimized.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us', href: 'volunteer.html'
       }, {
         kind: 'volunteer', label: 'Volunteer with us', title: 'Contribute in a way that fits you.',
         description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
+        imageUrl: 'volunteer-banner-optimized.jpg', imageAlt: 'Student volunteers collaborating to amplify student voices.',
         button: 'Volunteer with Us', href: 'volunteer.html'
       }];
       index = 0;
