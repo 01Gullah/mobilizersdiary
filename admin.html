@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123F3B">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Portal | The Mobilizer's Diary</title>
+<style>
+:root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#183B37;--muted:#657873;--line:#DED8C7;--white:#fff;--red:#9d2e27;--soft:#e9efe9}
+*{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:16px/1.5 Arial,Helvetica,sans-serif}.wrap{max-width:900px;margin:auto;padding:14px 12px 40px}.brand{padding:20px 18px;background:var(--green);border-bottom:5px solid var(--gold);color:white;border-radius:8px 8px 0 0}.brand b{font-size:18px;letter-spacing:.07em}.brand span{color:#e2bf63}.brand p{margin:6px 0 0;color:#e2bf63;font-size:11px;letter-spacing:.12em}main{background:#fff;padding:18px;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px}.eyebrow{margin:0 0 6px;color:#8b6919;font-size:11px;font-weight:bold;letter-spacing:.13em;text-transform:uppercase}h1,h2,h3{margin:0 0 10px;color:var(--green);line-height:1.25}h1{font-size:27px}h2{font-size:20px}h3{font-size:17px}.muted{color:var(--muted);font-size:13px}.card{padding:16px;margin:14px 0;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:7px;background:#fff}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px;margin:9px 0}.field label{font-size:13px;font-weight:bold}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #aab7b1;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}.field textarea{min-height:88px;resize:vertical}.btn{appearance:none;border:0;border-bottom:3px solid #9e7921;border-radius:5px;background:var(--green);color:#fff;padding:12px 15px;font-weight:bold;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}.btn.secondary{background:#eef1ed;color:var(--green);border:1px solid #bac8c0}.btn.danger{background:#fff2f1;color:var(--red);border:1px solid #d6aaa5}.btn:disabled{opacity:.55;cursor:wait}.notice{padding:12px;border-radius:5px;background:var(--soft);color:var(--green);font-size:14px}.error{background:#fff1f0;color:var(--red)}.hidden{display:none!important}.item{padding:13px 0;border-top:1px solid var(--line)}.item:first-child{border-top:0}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#f1ead8;color:#5e4a18;font-size:11px;font-weight:bold}.status{font-size:13px;font-weight:bold;color:var(--green)}.details{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}.divider{height:1px;background:var(--line);margin:16px 0}.small{font-size:12px}.right{text-align:right}.sticky{position:sticky;top:0;background:var(--ivory);padding:6px 0;z-index:2}.list{max-height:580px;overflow:auto}.footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
+@media(max-width:620px){.wrap{padding:8px 8px 28px}.brand{padding:17px 15px}main{padding:14px}.grid{grid-template-columns:1fr}h1{font-size:24px}.btn{min-height:44px}.card{padding:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="brand"><b>THE MOBILIZER'S <span>DIARY</span></b><p>SECURE ADMINISTRATIVE PORTAL</p></header>
+<main>
+<section id="loginView">
+  <p class="eyebrow">Administrator sign-in</p>
+  <h1>Sign in securely</h1>
+  <p class="muted">Use the personal Google email address approved by the Chief Administrator. We will email you a one-time code. The code expires after 10 minutes.</p>
+  <div id="loginMessage" class="notice hidden" role="status"></div>
+  <form id="emailForm">
+    <div class="field"><label for="loginEmail">Administrator email</label><input id="loginEmail" type="email" autocomplete="email" required maxlength="180" placeholder="you@example.com"></div>
+    <button class="btn" type="submit">Email me a sign-in code</button>
+  </form>
+  <form id="codeForm" class="hidden">
+    <div class="field"><label for="loginCode">8-digit code</label><input id="loginCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" maxlength="8" required placeholder="12345678"></div>
+    <button class="btn" type="submit">Verify and sign in</button>
+    <button id="changeEmail" class="btn secondary" type="button">Use a different email</button>
+  </form>
+  <p class="muted small">If you are not on the administrator list, the portal will not send a code. Ask the Chief Administrator to add your email.</p>
+</section>
+
+<section id="appView" class="hidden">
+  <div class="sticky row space">
+    <div><p class="eyebrow">Admin dashboard</p><h1 id="welcome">Welcome</h1></div>
+    <button id="logoutBtn" class="btn secondary" type="button">Sign out</button>
+  </div>
+  <div id="appMessage" class="notice hidden" role="status"></div>
+
+  <section class="card">
+    <div class="row space"><div><h2>Your availability</h2><p class="muted">Set this when you are away. Your Chief Administrator can see the return date.</p></div><span id="rolePill" class="pill"></span></div>
+    <div class="grid">
+      <div class="field"><label for="availability">Status</label><select id="availability"><option>Available</option><option>Temporarily unavailable</option></select></div>
+      <div class="field"><label for="awayUntil">Expected return date (optional)</label><input id="awayUntil" type="date"></div>
+    </div>
+    <div class="field"><label for="awayNote">Short note (optional)</label><input id="awayNote" maxlength="300" placeholder="For example: exams until Friday"></div>
+    <button id="saveAvailability" class="btn" type="button">Save availability</button>
+  </section>
+
+  <section class="card"><div class="row space"><div><h2>My assigned work</h2><p class="muted">Acknowledge a task so the Chief Administrator knows you have seen it.</p></div></div><div id="taskList" class="list"></div></section>
+
+  <section class="card"><div class="row space"><div><h2>New entries and notifications</h2><p class="muted">Email alerts contain only a category and reference. Sign in here to open a submission.</p></div><button id="refreshBtn" class="btn secondary" type="button">Refresh</button></div><div id="notificationList" class="list"></div></section>
+
+  <section id="chiefSection" class="hidden">
+    <section class="card">
+      <p class="eyebrow">Chief Administrator</p><h2>Assign a task</h2>
+      <form id="taskForm">
+        <div class="field"><label for="taskTitle">Task title</label><input id="taskTitle" required maxlength="180" placeholder="Review new volunteer applications"></div>
+        <div class="field"><label for="taskDetails">Instructions</label><textarea id="taskDetails" maxlength="3000" placeholder="What should be done? Add context or guidance."></textarea></div>
+        <div class="grid">
+          <div class="field"><label for="taskAssignee">Assign to</label><select id="taskAssignee" required></select></div>
+          <div class="field"><label for="taskCategory">Work area</label><input id="taskCategory" maxlength="100" placeholder="Reports, Volunteers, Opportunities"></div>
+        </div>
+        <div class="grid"><div class="field"><label for="taskRef">Submission reference (optional)</label><input id="taskRef" maxlength="120" placeholder="For example, VOL-2026-0001"></div><div class="field"><label for="taskDue">Due date (optional)</label><input id="taskDue" type="date"></div></div>
+        <button class="btn" type="submit">Assign task and email administrator</button>
+      </form>
+    </section>
+    <section class="card">
+      <p class="eyebrow">Access and responsibilities</p><h2>Manage administrators</h2>
+      <p class="muted">Add an administrator by email, change their responsibilities, or deactivate access. Inactive users cannot request or use portal codes.</p>
+      <div class="field"><label for="adminPicker">Edit an existing administrator (optional)</label><select id="adminPicker"><option value="">Add a new administrator</option></select></div>
+      <form id="adminForm">
+        <div class="grid"><div class="field"><label for="adminName">Name</label><input id="adminName" maxlength="120" required></div><div class="field"><label for="adminEmail">Personal Google email</label><input id="adminEmail" type="email" maxlength="180" required></div></div>
+        <div class="field"><label for="adminRole">Role label</label><input id="adminRole" maxlength="80" value="Administrator" placeholder="For example: Volunteer Coordinator"></div>
+        <div class="field"><label for="adminResponsibilities">Responsibilities</label><textarea id="adminResponsibilities" maxlength="1200" placeholder="Describe the duties this person is responsible for."></textarea></div>
+        <div class="field"><label for="adminAccess">Portal access</label><select id="adminAccess"><option>Active</option><option>Inactive</option></select></div>
+        <button class="btn" type="submit">Save administrator</button>
+      </form>
+      <div class="divider"></div><h3>Team activity</h3><div id="teamList" class="list"></div>
+    </section>
+  </section>
+</section>
+
+<section id="entryModal" class="card hidden" aria-live="polite"><div class="row space"><h2>Submission details</h2><button id="closeEntry" class="btn secondary" type="button">Close</button></div><div id="entryContent" class="details"></div></section>
+</main>
+<p class="footer">The Mobilizer's Diary · Admin activity is logged for accountability.</p>
+</div>
+<script src="config.js"></script>
+<script>
+(function(){
+  'use strict';
+  var TOKEN_KEY='md_admin_session_v1';
+  var token=localStorage.getItem(TOKEN_KEY)||'';
+  var loginEmail='';
+  var dashboard=null;
+  var $=function(id){return document.getElementById(id);};
+  function show(el,yes){el.classList.toggle('hidden',!yes);}
+  function message(el,text,isError){el.textContent=text||'';el.classList.remove('hidden','error');if(isError)el.classList.add('error');if(!text)el.classList.add('hidden');}
+  function api(action,data){
+    if(typeof API_URL!=='string'||API_URL.indexOf('https://script.google.com/')!==0) return Promise.reject(new Error('The API URL is not configured.'));
+    data=data||{}; if(token)data.token=token;
+    return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:data})})
+      .then(function(r){return r.text();}).then(function(raw){var out;try{out=JSON.parse(raw);}catch(e){throw new Error('The service returned an unreadable response.');}if(!out.ok)throw new Error(out.error||'The request could not be completed.');return out.result;});
+  }
+  function text(parent,tag,value,className){var el=document.createElement(tag);if(className)el.className=className;el.textContent=String(value==null?'':value);parent.appendChild(el);return el;}
+  function enterLogin(){show($('appView'),false);show($('loginView'),true);}
+  function enterApp(){show($('loginView'),false);show($('appView'),true);loadDashboard();}
+  function setBusy(button,busy,label){button.disabled=busy;if(label)button.textContent=busy?'Please wait…':label;}
+  $('emailForm').addEventListener('submit',function(ev){
+    ev.preventDefault();var button=this.querySelector('button[type=submit]');loginEmail=$('loginEmail').value.trim().toLowerCase();setBusy(button,true,'Email me a sign-in code');message($('loginMessage'),'');
+    api('adminRequestCode',{email:loginEmail}).then(function(res){message($('loginMessage'),res.message||'If this email is an active administrator, a code has been sent.');show($('emailForm'),false);show($('codeForm'),true);$('loginCode').focus();}).catch(function(e){message($('loginMessage'),e.message,true);}).finally(function(){setBusy(button,false,'Email me a sign-in code');});
+  });
+  $('changeEmail').addEventListener('click',function(){show($('codeForm'),false);show($('emailForm'),true);$('loginCode').value='';});
+  $('codeForm').addEventListener('submit',function(ev){
+    ev.preventDefault();var button=this.querySelector('button[type=submit]');setBusy(button,true,'Verify and sign in');
+    api('adminVerifyCode',{email:loginEmail,code:$('loginCode').value.trim()}).then(function(res){token=res.token;localStorage.setItem(TOKEN_KEY,token);message($('loginMessage'),'');enterApp();}).catch(function(e){message($('loginMessage'),e.message,true);}).finally(function(){setBusy(button,false,'Verify and sign in');});
+  });
+  $('logoutBtn').addEventListener('click',function(){var old=token;token='';localStorage.removeItem(TOKEN_KEY);api('adminLogout',{token:old}).catch(function(){}).finally(enterLogin);});
+  $('refreshBtn').addEventListener('click',loadDashboard);
+  $('saveAvailability').addEventListener('click',function(){
+    api('adminSetAvailability',{status:$('availability').value,awayUntil:$('awayUntil').value,note:$('awayNote').value}).then(function(r){message($('appMessage'),r.message||'Availability saved.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});
+  });
+  $('taskForm').addEventListener('submit',function(ev){
+    ev.preventDefault();var button=this.querySelector('button[type=submit]');var assignee=$('taskAssignee').value;if(!assignee){message($('appMessage'),'Add an active administrator before assigning work.',true);return;}setBusy(button,true,'Assign task and email administrator');
+    api('adminCreateTask',{title:$('taskTitle').value,details:$('taskDetails').value,assigneeEmail:assignee,category:$('taskCategory').value,ref:$('taskRef').value,dueAt:$('taskDue').value}).then(function(r){message($('appMessage'),'Task created ('+r.taskId+'). Email status: '+r.emailStatus+'.');$('taskForm').reset();loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);}).finally(function(){setBusy(button,false,'Assign task and email administrator');});
+  });
+  $('adminForm').addEventListener('submit',function(ev){
+    ev.preventDefault();var button=this.querySelector('button[type=submit]');setBusy(button,true,'Save administrator');
+    api('adminManageUser',{name:$('adminName').value,email:$('adminEmail').value,role:$('adminRole').value,responsibilities:$('adminResponsibilities').value,accessStatus:$('adminAccess').value}).then(function(r){message($('appMessage'),r.message||'Administrator saved.');$('adminForm').reset();$('adminRole').value='Administrator';loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);}).finally(function(){setBusy(button,false,'Save administrator');});
+  });
+  $('adminPicker').addEventListener('change',function(){
+    var email=this.value;var user=(dashboard&&dashboard.admins||[]).filter(function(x){return String(x.Email).toLowerCase()===email;})[0];
+    if(!user){$('adminForm').reset();$('adminRole').value='Administrator';return;}
+    $('adminName').value=user.Full_Name||'';$('adminEmail').value=user.Email||'';$('adminRole').value=user.Role||'Administrator';$('adminResponsibilities').value=user.Responsibilities||'';$('adminAccess').value=user.Access_Status||'Active';
+  });
+  $('closeEntry').addEventListener('click',function(){show($('entryModal'),false);});
+  function loadDashboard(){
+    message($('appMessage'),'Loading dashboard…');
+    api('adminDashboard',{}).then(function(data){dashboard=data;renderDashboard(data);message($('appMessage'),'');}).catch(function(e){message($('appMessage'),e.message,true);if(/sign in|session|inactive/i.test(e.message)){token='';localStorage.removeItem(TOKEN_KEY);enterLogin();message($('loginMessage'),e.message,true);}});
+  }
+  function renderDashboard(data){
+    $('welcome').textContent='Hello, '+(data.me.name||'Administrator');$('rolePill').textContent=data.me.role||'Administrator';$('availability').value=data.me.availability||'Available';$('awayUntil').value=data.me.awayUntil||'';$('awayNote').value=data.me.awayNote||'';
+    show($('chiefSection'),!!data.isChief);
+    renderTasks(data.tasks||[]);renderNotifications(data.notifications||[]);
+    if(data.isChief)renderAdmins(data.admins||[]);
+  }
+  function renderTasks(items){var root=$('taskList');root.textContent='';if(!items.length){text(root,'p','No assigned work is listed yet.','muted');return;}
+    items.forEach(function(task){var box=document.createElement('div');box.className='item';text(box,'strong',task.Title||'Untitled task');if(dashboard&&dashboard.isChief&&task.Status==='Assigned'&&task.Created_At&&Date.now()-new Date(task.Created_At).getTime()>48*3600000)text(box,'p','Needs follow-up: this task has not been acknowledged within 48 hours.','notice error');var meta=(task.Category||'General')+(task.Record_Reference?' · Ref: '+task.Record_Reference:'')+(task.Due_At?' · Due: '+task.Due_At:'');text(box,'p',meta,'muted');if(task.Details)text(box,'p',task.Details,'details');text(box,'span','Status: '+(task.Status||'Assigned'),'pill');if(task.Status==='Assigned'){var ack=document.createElement('button');ack.className='btn';ack.type='button';ack.textContent='Acknowledge task';ack.addEventListener('click',function(){api('adminAcknowledgeTask',{taskId:task.Task_ID}).then(loadDashboard).catch(function(e){message($('appMessage'),e.message,true);});});box.appendChild(ack);}var select=document.createElement('select');select.setAttribute('aria-label','Update task status');['In Progress','Completed','Request Reassignment'].forEach(function(s){var op=document.createElement('option');op.value=s;op.textContent=s;select.appendChild(op);});box.appendChild(select);if(task.Status==='Reassignment Requested')select.value='In Progress';var note=document.createElement('input');note.placeholder='Optional note for reassignment';note.maxLength=1000;note.className='field';box.appendChild(note);var update=document.createElement('button');update.className='btn secondary';update.type='button';update.textContent='Update task';update.addEventListener('click',function(){api('adminUpdateTask',{taskId:task.Task_ID,status:select.value,note:note.value}).then(function(r){message($('appMessage'),r.message||'Task updated.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});});box.appendChild(update);if(dashboard&&dashboard.isChief&&String(task.Email_Status||'').indexOf('Failed')===0){var retryTask=document.createElement('button');retryTask.className='btn secondary';retryTask.type='button';retryTask.textContent='Retry assignment email';retryTask.addEventListener('click',function(){api('adminRetryTaskEmail',{taskId:task.Task_ID}).then(function(r){message($('appMessage'),r.message,r.ok===false);loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});});box.appendChild(retryTask);}if(dashboard&&dashboard.isChief){var reassignSelect=document.createElement('select');reassignSelect.setAttribute('aria-label','Reassign task to');(dashboard.admins||[]).filter(function(a){return a.Access_Status==='Active';}).forEach(function(a){var op=document.createElement('option');op.value=String(a.Email||'').toLowerCase();op.textContent=(a.Full_Name||a.Email)+' — '+(a.Availability_Status||'Available');if(String(a.Email||'').toLowerCase()===String(task.Assigned_To_Email||'').toLowerCase())op.selected=true;reassignSelect.appendChild(op);});box.appendChild(reassignSelect);var reassign=document.createElement('button');reassign.className='btn secondary';reassign.type='button';reassign.textContent='Reassign task';reassign.addEventListener('click',function(){api('adminReassignTask',{taskId:task.Task_ID,assigneeEmail:reassignSelect.value}).then(function(r){message($('appMessage'),r.message+' Email status: '+r.emailStatus+'.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});});box.appendChild(reassign);}root.appendChild(box);});
+  }
+  function renderNotifications(items){var root=$('notificationList');root.textContent='';if(!items.length){text(root,'p','No new entries or notifications yet.','muted');return;}
+    items.forEach(function(n){var box=document.createElement('div');box.className='item';text(box,'strong',n.Category||n.Type||'Notification');text(box,'p',(n.Item_Reference?'Reference: '+n.Item_Reference+' · ':'')+(n.Timestamp||''),'muted');text(box,'p',n.Message||'Open the portal to review.','details');var row=document.createElement('div');row.className='row';var open=document.createElement('button');open.className='btn';open.type='button';open.textContent='Open submission';open.addEventListener('click',function(){api('adminGetEntry',{category:n.Category,ref:n.Item_Reference}).then(function(entry){renderEntry(entry);}).catch(function(e){message($('appMessage'),e.message,true);});});open.disabled=!n.Item_Reference||n.Item_Reference==='Reference pending';row.appendChild(open);var read=document.createElement('button');read.className='btn secondary';read.type='button';read.textContent=n.Read_At?'Read':'Mark read';read.disabled=!!n.Read_At;read.addEventListener('click',function(){api('adminMarkNotificationRead',{notificationId:n.Notification_ID}).then(loadDashboard).catch(function(e){message($('appMessage'),e.message,true);});});row.appendChild(read);box.appendChild(row);if(dashboard&&dashboard.isChief&&n.Status==='Failed'){var retry=document.createElement('button');retry.className='btn secondary';retry.type='button';retry.textContent='Retry failed email';retry.addEventListener('click',function(){api('adminRetryNotification',{notificationId:n.Notification_ID}).then(function(r){message($('appMessage'),r.message,r.ok===false);loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});});box.appendChild(retry);}root.appendChild(box);});
+  }
+  function renderEntry(entry){var root=$('entryContent');root.textContent='';text(root,'p',(entry.category||'Submission')+' · '+entry.ref,'pill');Object.keys(entry.fields||{}).forEach(function(key){var wrap=document.createElement('p');var label=document.createElement('strong');label.textContent=key+': ';wrap.appendChild(label);wrap.appendChild(document.createTextNode(String(entry.fields[key]||'—')));root.appendChild(wrap);});show($('entryModal'),true);$('entryModal').scrollIntoView({behavior:'smooth',block:'start'});}
+  function renderAdmins(items){var picker=$('adminPicker'),assignee=$('taskAssignee');var oldPick=picker.value,oldAssign=assignee.value;picker.textContent='';var blank=document.createElement('option');blank.value='';blank.textContent='Add a new administrator';picker.appendChild(blank);assignee.textContent='';items.filter(function(a){return a.Access_Status==='Active';}).forEach(function(a){var opt=document.createElement('option');opt.value=String(a.Email||'').toLowerCase();opt.textContent=(a.Full_Name||a.Email)+' — '+(a.Role||'Administrator');picker.appendChild(opt.cloneNode(true));assignee.appendChild(opt);});picker.value=oldPick;assignee.value=oldAssign;
+    var team=$('teamList');team.textContent='';items.forEach(function(a){var box=document.createElement('div');box.className='item';text(box,'strong',a.Full_Name||a.Email);text(box,'p',(a.Role||'Administrator')+' · '+(a.Access_Status||'')+' · '+(a.Availability_Status||''),'muted');text(box,'p','Last sign-in: '+(a.Last_Login_At||'Not yet')+' | Last portal activity: '+(a.Last_Activity_At||'Not yet'),'small');if(a.Responsibilities)text(box,'p',a.Responsibilities,'details');var days=a.Last_Activity_At?Math.floor((Date.now()-new Date(a.Last_Activity_At).getTime())/86400000):null;if(a.Access_Status==='Active'&&(days===null||days>=14))text(box,'p','Needs check-in: no recent portal activity (14-day review threshold).','notice error');team.appendChild(box);});
+  }
+  if(token)enterApp();else enterLogin();
+})();
+</script>
+</body>
+</html>
