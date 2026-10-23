@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title><?= edition.issueTitle || edition.headline || "The Mobilizer's Diary" ?></title></head>
+<?
+  /* Same active template name used by the existing MD16 controller. */
+  var e = edition || {}, footer = e.footer || {}, entries = [], greeting = e.founderGreeting || 'Welcome to The Mobilizer’s Diary — student voices, shared memory and practical opportunities.';
+  function safeUrl(v) { return /^https?:\/\/[^\s<>"']+$/i.test(String(v || '')) ? String(v) : ''; }
+  function esc(v) { return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+  function lines(v) { return esc(v).replace(/\r?\n/g,'<br>'); }
+  function orderOf(v, fallback) { return v != null && String(v).trim() !== '' && isFinite(Number(v)) ? Number(v) : fallback; }
+  function addLegacy(a, section, order) {
+    (a || []).forEach(function(i) { entries.push({Section:section,Title:i.title || i.Episode_Title || '',Body:i.body || i.Summary || '',Image_URL:i.imageUrl || '',Source_URL:i.sourceUrl || i.url || i.Audio_URL || '',Display_Order:orderOf(i.displayOrder,order),Item_ID:i.id || i.title || i.Episode_Title || '',Subtitle:i.subtitle || '',Meta:i.meta || '',Takeaway:i.takeaway || ''}); });
+  }
+  if (Array.isArray(e.items)) {
+    entries = e.items.slice();
+  } else {
+    addLegacy(e.historyCorner,'History Corner',10); addLegacy(e.campusSpotlight,'Campus Spotlight',20);
+    addLegacy(e.studentVoices,'Student Voices',30); addLegacy(e.opportunities,'Opportunities',40); addLegacy(e.podcast,'Podcast',50);
+    if (e.founderDesk && (e.founderDesk.body || e.founderDesk.title || e.founderDesk.imageUrl)) addLegacy([e.founderDesk],'Founder’s Note',70);
+  }
+  var ranks = {'History Corner':10,'Campus Spotlight':20,'Student Voices':30,'Opportunities':40,'Podcast':50,'Other':60,'Founder’s Note':70};
+  entries.sort(function(a,b) { var d = orderOf(a.Display_Order,ranks[a.Section] || 60)-orderOf(b.Display_Order,ranks[b.Section] || 60); return d || String(a.Item_ID || a.Title || '').localeCompare(String(b.Item_ID || b.Title || '')); });
+  var footerLinks = [['Website',footer.websiteUrl],['Share your experience',footer.shareUrl],['Recommend an opportunity',footer.recommendUrl],['Volunteer',footer.volunteerUrl]].filter(function(a) { return safeUrl(a[1]); });
+  var hasAd = footer.adTitle || footer.adText || safeUrl(footer.adImageUrl) || safeUrl(footer.adUrl);
+?>
+<body style="margin:0;padding:0;background:#d5f0e9;color:#dce7e3;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;"><?= e.issueTitle || e.headline || "The Mobilizer's Diary" ?></div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#d5f0e9;"><tr><td align="center" style="padding:18px 10px;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:640px;background:#202326;">
+<tr><td style="padding:22px 22px 18px;background:#123f3b;border-bottom:4px solid #c59b35;">
+  <div style="font-family:Georgia,serif;font-size:27px;line-height:1.2;font-weight:bold;color:#e5f6f0;">THE MOBILIZER'S <span style="color:#e2bf63;">DIARY</span></div>
+  <div style="margin-top:8px;color:#bfe5dd;font-size:12px;letter-spacing:1px;"><?= e.issueTitle || 'Student voices · civic participation · shared memory' ?></div>
+  <? if (e.headline && e.headline !== e.issueTitle) { ?><div style="margin-top:8px;color:#e2bf63;font-family:Georgia,serif;font-size:19px;"><?= e.headline ?></div><? } ?>
+</td></tr>
+<tr><td style="padding:14px 22px;color:#dce7e3;font-size:14px;line-height:1.55;border-bottom:1px solid #394044;"><?= greeting ?></td></tr>
+<? entries.forEach(function(item) { var founder = item.Section === 'Founder’s Note', image = safeUrl(item.Image_URL), source = safeUrl(item.Source_URL); ?>
+<tr><td style="padding:19px 22px;border-bottom:1px solid #394044;">
+  <div style="margin:0 0 8px;color:#e2bf63;font-size:11px;font-weight:bold;letter-spacing:1.6px;text-transform:uppercase;"><?= item.Section || 'Other' ?></div>
+  <? if (image) { ?><div style="margin:10px 0 12px;text-align:center;"><img src="<?= image ?>" alt="<?= item.Title || item.Section || 'Newsletter image' ?>" width="<?= founder ? 140 : 280 ?>" style="display:block;width:100%;max-width:<?= founder ? 140 : 280 ?>px;height:auto;margin:auto;border:2px solid #c59b35;"></div><? } ?>
+  <? if (item.Title) { ?><h2 style="margin:0 0 8px;color:#bfe5dd;font-family:Georgia,serif;font-size:22px;line-height:1.25;"><?= item.Title ?></h2><? } ?>
+  <? if (item.Subtitle) { ?><p style="margin:0 0 6px;color:#e2bf63;font-size:13px;"><?= item.Subtitle ?></p><? } ?>
+  <? if (item.Meta) { ?><p style="margin:0 0 7px;color:#aab7b1;font-size:12px;"><?= item.Meta ?></p><? } ?>
+  <? if (item.Body) { ?><div style="color:#dce7e3;font-size:15px;line-height:1.6;"><?!= lines(item.Body) ?></div><? } ?>
+  <? if (item.Takeaway) { ?><p style="margin:10px 0 0;border-left:3px solid #c59b35;padding-left:10px;color:#e2bf63;font-size:14px;"><strong>Takeaway:</strong> <?= item.Takeaway ?></p><? } ?>
+  <? if (source) { ?><p style="margin:10px 0 0;font-size:13px;"><a href="<?= source ?>" style="color:#e2bf63;text-decoration:underline;">Read more</a></p><? } ?>
+</td></tr>
+<? }); ?>
+<? if (e.autoOpportunitiesHtml) { ?>
+<!-- Existing MD16 replaces this marker with verified, approved CMS opportunities at queue preparation. -->
+<tr><td><?!= e.autoOpportunitiesHtml ?></td></tr>
+<? } ?>
+<? if (!Array.isArray(e.items) && e.opportunities && e.opportunities.length && safeUrl(e.opportunitiesPageUrl)) { ?>
+<tr><td style="padding:12px 22px;"><a href="<?= e.opportunitiesPageUrl ?>" style="color:#e2bf63;font-size:13px;">Browse all verified opportunities</a></td></tr>
+<? } ?>
+<? if (hasAd) { ?>
+<tr><td style="padding:16px 22px;border-top:3px solid #c59b35;background:#292c2f;">
+  <div style="color:#aab7b1;font-size:10px;letter-spacing:1px;text-transform:uppercase;">Partner message</div>
+  <? if (safeUrl(footer.adImageUrl)) { ?><p style="margin:10px 0;"><img src="<?= footer.adImageUrl ?>" alt="<?= footer.adTitle || 'Partner message' ?>" width="240" style="display:block;width:100%;max-width:240px;height:auto;margin:auto;"></p><? } ?>
+  <? if (footer.adTitle) { ?><h3 style="margin:8px 0 5px;color:#bfe5dd;font-family:Georgia,serif;font-size:18px;"><?= footer.adTitle ?></h3><? } ?>
+  <? if (footer.adText) { ?><p style="margin:0;color:#dce7e3;font-size:14px;line-height:1.5;"><?= footer.adText ?></p><? } ?>
+  <? if (safeUrl(footer.adUrl)) { ?><p style="margin:8px 0 0;"><a href="<?= footer.adUrl ?>" style="color:#e2bf63;font-size:13px;">Learn more</a></p><? } ?>
+</td></tr>
+<? } ?>
+<tr><td style="padding:17px 22px;border-top:1px solid #394044;text-align:center;color:#b5c6c0;font-size:12px;line-height:1.7;">
+  <strong style="color:#bfe5dd;">The Mobilizer's Diary</strong><br>Student voices. Shared memory. Practical action.
+  <? if (footerLinks.length) { ?><div style="margin-top:8px;"><? footerLinks.forEach(function(link,index) { ?><? if (index) { ?> · <? } ?><a href="<?= link[1] ?>" style="color:#e2bf63;text-decoration:underline;"><?= link[0] ?></a><? }); ?></div><? } ?>
+  <? if (safeUrl(e.unsubscribeUrl)) { ?><div style="margin-top:8px;"><a href="<?= e.unsubscribeUrl ?>" style="color:#e2bf63;text-decoration:underline;">Unsubscribe</a></div><? } ?>
+  <!-- Compiled campaigns have no recipient token here: MD16 ALWAYS adds its
+       individualized clickable Unsubscribe footer at queue preparation. -->
+</td></tr>
+</table>
+</td></tr></table>
+</body>
+</html>
