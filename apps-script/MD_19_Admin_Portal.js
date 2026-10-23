@@ -153,6 +153,10 @@ function MD19_route_(action, data) {
     case 'adminApproveNewsletterIssue': return MD21_approveIssue_(user, data);
     case 'adminGetNewsletterItem': return MD21_getItem_(user, data);
     case 'adminUpdateNewsletterItem': return MD21_updateEditorialItem_(user, data);
+        // Paystack Financial Engine Integration
+    case 'adminVerifyPaystackPayment':
+      return MD22_verifyPaystackPayment_(d);
+
     case 'adminListNewsletterIssues': return MD21_listIssues_(user);
     case 'adminUpdateNewsletterIssue': return MD21_updateIssue_(user, data);
     case 'adminPreviewNewsletterIssue': return MD21_previewIssue_(user, data);
