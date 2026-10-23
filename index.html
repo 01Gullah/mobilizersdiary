@@ -1,993 +1,404 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Mobilizer's Diary | Student Reporting and Feedback Portal</title>
-<meta name="description" content="The official platform for non-partisan student engagement. Amplifying student voices.">
-<meta property="og:title" content="The Mobilizer's Diary">
-<meta property="og:description" content="The official platform for non-partisan student engagement. Amplifying student voices.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#123F3B">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Portal | The Mobilizer's Diary</title>
+<!-- Paystack Inline JS V2 -->
+<script src="https://js.paystack.co/v2/inline.js" async></script>
 <style>
-:root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ed:#163D39;--neutral:#607D8B;--alert:#C62828;color-scheme:light}
-*{box-sizing:border-box}
-body{margin:0;background:var(--ivory);color:var(--ed);font:17px/1.6 'Source Serif 4','Source Serif Pro',Georgia,serif}
-.wrap{max-width:640px;margin:0 auto;padding-bottom:40px;background:var(--ivory)}
-.top img,.flyer{display:block;width:100%;height:auto}
-.bar{height:5px;background:#e3dccb}.bar i{display:block;height:5px;width:0;background:var(--gold);transition:width .3s}
-.step{display:none;padding:22px 18px}.step.on{display:block}
-h1,h2{font-family:'Playfair Display',Georgia,serif;color:var(--green);line-height:1.2;margin:0 0 8px}
-h1{font-size:28px}h2{font-size:24px}
-.kick{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 6px}
-.rule{width:56px;height:4px;background:var(--gold);margin:8px 0 16px}
-.doc{background:#fff;border:1px solid #d9d1bd;border-left:5px solid var(--gold);padding:4px 14px 10px;max-height:300px;overflow-y:auto;font-size:15px;margin:12px 0}
-.doc h3{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.1em;color:var(--green);margin:14px 0 4px;text-transform:uppercase}
-.doc p{margin:0 0 8px}
-label{display:block;font:800 13px Montserrat,Arial,sans-serif;color:var(--green);margin:16px 0 4px}
-small{display:block;color:var(--neutral);font-size:14px;margin-bottom:4px}
-input[type=text],input[type=email],select,textarea{width:100%;padding:12px;border:1.5px solid #bfb79f;border-radius:6px;background:#fff;font:16px 'Source Serif 4',Georgia,serif;color:var(--ed)}
-textarea{min-height:120px}
-input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);border-color:var(--gold)}
-.chk,.card{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--gold);border-radius:6px;padding:14px;margin:12px 0;font:400 15px/1.5 'Source Serif 4',Georgia,serif;color:var(--ed)}
-.card b{font:800 14px Montserrat,Arial,sans-serif;color:var(--green);display:block;margin-bottom:2px}
-.chk input,.card input{width:22px;height:22px;margin-top:2px;accent-color:var(--green);flex:none}
-.note{border-left:5px solid var(--gold);background:#fff;padding:10px 14px;font-size:14px;margin:12px 0}
-.btn{display:block;width:100%;margin-top:18px;padding:15px;border:0;border-bottom:4px solid var(--gold);border-radius:6px;background:var(--green);color:#fff;font:800 14px Montserrat,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none}
-.btn:disabled{opacity:.4}
-.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);margin-top:10px}
-.err{color:var(--alert);font:600 14px Arial,sans-serif;margin:10px 0 0;min-height:18px}
-.refbox{background:var(--ed);border-left:6px solid var(--gold);color:#fff;padding:18px;margin:16px 0}
-.refbox span{display:block;font:800 26px Montserrat,Arial,sans-serif;color:#E0BB62;letter-spacing:.06em}
-.foot{padding:0 18px;color:var(--neutral);font:12px Arial,sans-serif;text-align:center}
-.md-ad-slot{width:100%;max-width:640px;margin:10px auto 16px;padding:10px;border:1px solid rgba(18,63,59,.2);border-radius:8px;background:#fff;color:var(--green)}
-.md-ad-slot[hidden]{display:none!important}
-.md-ad-label{display:block;margin:0 0 7px;color:var(--neutral);font:700 10px/1.4 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
-.md-ad-link{display:block;overflow:hidden;border-radius:6px;color:var(--green);text-decoration:none}
-.md-ad-image{display:block;width:100%;height:auto;max-height:280px;object-fit:cover;background:var(--green)}
-.md-ad-sponsor{display:block;padding:7px 2px 0;color:var(--green);font:600 12px/1.4 Arial,sans-serif}
-.md-footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin:10px 0}
-.md-footer-links button{border:0;background:none;color:var(--green);font:700 12px Arial,sans-serif;text-decoration:underline;text-underline-offset:2px;padding:8px}
-.md-footer-links a,.md-footer-links a:visited{color:var(--green);font:700 12px Arial,sans-serif;text-decoration:underline;text-underline-offset:2px;padding:8px}
-.md-footer-links a:hover,.md-footer-links a:focus{color:var(--gold)}
-.md-sponsor-ack{margin:6px 0 0;color:var(--neutral);font:11px/1.5 Arial,sans-serif}
-.md-feature-rotation{width:calc(100% - 24px);max-width:640px;margin:5px auto 7px;overflow:hidden;border:1px solid rgba(18,63,59,.2);border-top:4px solid var(--gold);border-radius:7px;background:#fff;box-shadow:0 3px 10px rgba(18,63,59,.07)}
-.md-feature-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px 0}
-.md-feature-kicker{display:inline-block;padding:3px 7px;border-radius:20px;background:#F2E8C8;color:#765A12;font:800 9px/1.3 Montserrat,Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase}
-.md-feature-count{color:var(--neutral);font:600 10px Arial,sans-serif;white-space:nowrap}
-.md-feature-content{padding:5px 10px 4px}
-.md-feature-card{animation:mdFeatureIn .42s ease-out both}
-.md-feature-card h2{margin:0 0 3px;font-size:16px}
-.md-feature-card p{margin:2px 0 4px;font-size:12px;line-height:1.35}
-.md-feature-card .md-feature-meta{color:var(--neutral);font:600 10px/1.35 Arial,sans-serif}
-.md-feature-card .btn{display:inline-flex;width:auto;margin:4px 0 0;padding:7px 10px;border-bottom-width:2px;border-radius:5px;font-size:10px;letter-spacing:.06em}
-.md-feature-image-link{display:flex;align-items:center;justify-content:center;width:100%;height:102px;max-height:102px;margin:0 0 4px;border-radius:5px;overflow:hidden;background:#fff}
-.md-feature-image{display:block;width:auto;height:auto;max-width:100%;max-height:98px;object-fit:contain;background:#fff}
-.md-feature-controls{display:flex;justify-content:space-between;gap:8px;padding:0 10px 7px}
-.md-feature-controls button{padding:5px 9px;border:1px solid var(--green);border-radius:5px;background:#fff;color:var(--green);font:700 10px Montserrat,Arial,sans-serif;cursor:pointer}
-.md-feature-controls button:hover,.md-feature-controls button:focus{background:var(--green);color:#fff}
-.md-feature-controls button:disabled{opacity:.45;cursor:default}
-@keyframes mdFeatureIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.md-feature-card{animation:none!important;transition:none!important}}
-
-.hp{position:absolute;left:-9999px}
-.hubnav{display:grid;gap:10px;margin-top:14px}
-.hubnav .btn{margin-top:0}
-.hh{font:800 12px Montserrat,Arial,sans-serif;letter-spacing:.12em;color:var(--green);text-transform:uppercase;margin:22px 0 8px}
-.muted{color:var(--neutral)}
-.vals{margin:6px 0 0;padding-left:20px}
-.pcard{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ddd5c2;border-left:5px solid var(--gold);padding:14px;margin:10px 0}
-.pcard img{width:84px;height:84px;object-fit:cover;border-radius:6px;border:2px solid var(--gold);flex:none}
-.pcard .pn{font:700 18px/1.3 'Playfair Display',Georgia,serif;color:var(--green)}
-.pcard .pr{font:600 13px Arial,sans-serif;color:var(--neutral);margin:2px 0 6px}
-.pcard .pbio{font-size:15px;line-height:1.5}
-.pcard a{color:var(--green);font-weight:700}
-.acct{background:var(--ed);color:#fff;border-left:6px solid var(--gold);padding:16px;margin:14px 0}
-.acct .k{font:800 11px Montserrat,Arial,sans-serif;letter-spacing:.14em;color:#E0BB62;text-transform:uppercase;margin-top:10px}
-.acct .n{font:800 22px Montserrat,Arial,sans-serif;letter-spacing:.06em}
-.acct button{margin-top:12px;padding:10px 14px;border:1.5px solid #E0BB62;background:transparent;color:#fff;border-radius:6px;font:800 12px Arial,sans-serif}
-.okmsg{display:none;background:#DCEFDD;color:#1B5E20;border-left:5px solid #2E7D32;padding:12px;margin:12px 0;font:600 14px Arial,sans-serif}
-.ivwrap{background:#fff;border:1.5px solid var(--gold);border-radius:6px;padding:14px;margin:16px 0}
-.ivwrap .chk{border:0;padding:0;margin:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-.chip{padding:11px 14px;border:1.5px solid var(--green);border-radius:6px;background:#fff;color:var(--green);font:800 14px Montserrat,Arial,sans-serif}
-.chip.sel{background:var(--green);color:#fff;border-color:var(--green)}
-.givebox{display:none;background:#fff;border:1.5px solid var(--gold);border-top:6px solid var(--gold);border-radius:6px;padding:4px 14px 16px;margin:18px 0}
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,40,37,.72);z-index:50;align-items:center;justify-content:center;padding:16px}
-.mbox{position:relative;background:var(--ivory);border-top:6px solid var(--gold);max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:22px 18px 18px;border-radius:6px}
-.mx{position:absolute;top:6px;right:8px;border:0;background:transparent;font-size:30px;line-height:1;color:var(--green);padding:6px 10px}
+:root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#183B37;--muted:#657873;--line:#DED8C7;--white:#fff;--red:#9d2e27;--soft:#e9efe9}
+*{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:16px/1.5 Arial,Helvetica,sans-serif}.wrap{max-width:980px;margin:auto;padding:12px 10px 36px}.brand{padding:19px 17px;background:var(--green);border-bottom:5px solid var(--gold);color:#fff;border-radius:8px 8px 0 0}.brand b{font-size:18px;letter-spacing:.07em}.brand span{color:#e2bf63}.brand p{margin:5px 0 0;color:#e2bf63;font-size:11px;letter-spacing:.12em}main{background:#fff;padding:16px;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px}.eyebrow{margin:0 0 6px;color:#8b6919;font-size:11px;font-weight:bold;letter-spacing:.13em;text-transform:uppercase}h1,h2,h3{margin:0 0 9px;color:var(--green);line-height:1.25}h1{font-size:25px}h2{font-size:20px}h3{font-size:17px}.muted{color:var(--muted);font-size:13px}.card{padding:15px;margin:13px 0;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:7px;background:#fff}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px;margin:8px 0}.field label{font-size:13px;font-weight:bold}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #aab7b1;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}.field textarea{min-height:84px;resize:vertical}.btn{appearance:none;border:0;border-bottom:3px solid #9e7921;border-radius:5px;background:var(--green);color:#fff;padding:11px 14px;font-weight:bold;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}.btn.secondary{background:#eef1ed;color:var(--green);border:1px solid #bac8c0}.btn.danger{background:#fff2f1;color:var(--red);border:1px solid #d6aaa5}.btn:disabled{opacity:.55;cursor:wait}.notice{padding:11px;border-radius:5px;background:var(--soft);color:var(--green);font-size:14px}.error{background:#fff1f0;color:var(--red)}.hidden{display:none!important}.item{padding:13px 0;border-top:1px solid var(--line)}.item:first-child{border-top:0}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#f1ead8;color:#5e4a18;font-size:11px;font-weight:bold}.details{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}.divider{height:1px;background:var(--line);margin:14px 0}.small{font-size:12px}.sticky{position:sticky;top:0;background:var(--ivory);padding:6px 0;z-index:2}.list{max-height:650px;overflow:auto}.footer{text-align:center;color:var(--muted);font-size:12px;padding:13px}.submission-summary{margin:6px 0;padding:9px 11px;background:#f7f4ee;border-left:3px solid var(--gold);border-radius:3px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.team-label{font-size:12px;color:var(--muted)}a.work-link{color:var(--green);font-weight:bold;overflow-wrap:anywhere}.filter-grid{display:grid;grid-template-columns:1fr 1.5fr auto;gap:8px;align-items:end}.page-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0}.deliverable{margin:8px 0;padding:10px;background:#f7f8f5;border:1px solid var(--line);border-radius:5px}.deliverable strong{color:var(--green)}
+@media(max-width:620px){.wrap{padding:7px 7px 25px}.brand{padding:16px 14px}main{padding:12px}.grid,.filter-grid{grid-template-columns:1fr}h1{font-size:23px}.btn{min-height:44px}.card{padding:12px}.page-controls .btn{flex:1}.sticky{align-items:flex-start}}
+.help{padding:10px 12px;margin:10px 0;background:#eef7f3;border-left:3px solid var(--gold);font-size:12px;line-height:1.55;color:var(--ink)}.composer-row{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.composer-row label{flex:1;font-size:12px}.composer-row input[type=number]{width:80px;padding:7px;border:1px solid #aab7b1;border-radius:4px}.footer-options{padding:10px 0}.footer-options summary{font-weight:bold;color:var(--green);cursor:pointer}.attention-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}.attention-metric{padding:10px;background:#f7f4ee;border:1px solid var(--line);border-radius:5px}.attention-metric strong{display:block;font-size:23px;color:var(--green)}.attention-metric span{font-size:12px}pre.details{max-height:500px;overflow:auto;background:#f7f8f5;padding:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-<div class="top" id="top" style="display:none">
-  <img id="bannerImg" alt="The Mobilizer's Diary" style="display:none">
-  <div class="bar"><i id="pb"></i></div>
-</div>
-
-<!-- Rotating, clearly labelled homepage feature: approved sponsors, opportunities, and volunteers. -->
-<section id="home-feature-rotation" class="md-feature-rotation" aria-label="Sponsored messages, student opportunities, and volunteering">
-  <div class="md-feature-head">
-    <span class="md-feature-kicker" id="md-feature-kicker">Volunteer with us</span>
-    <span class="md-feature-count" id="md-feature-count">Featured</span>
-  </div>
-  <div id="md-feature-content" class="md-feature-content">
-    <article class="md-feature-card">
-      <h2>Help student voices travel further.</h2>
-      <p>Volunteer with The Mobilizer's Diary and contribute to non-partisan student and civic engagement.</p>
-      <a class="btn ghost" href="volunteer.html">Volunteer with Us</a>
-    </article>
-  </div>
-  <div class="md-feature-controls" aria-label="Homepage feature controls">
-    <button type="button" id="md-feature-prev" aria-label="Show previous feature">Previous</button>
-    <button type="button" id="md-feature-next" aria-label="Show next feature">Next</button>
-  </div>
+<header class="brand"><b>THE MOBILIZER'S <span>DIARY</span></b><p>SECURE ADMINISTRATIVE PORTAL</p></header>
+<main>
+<section id="loginView">
+  <p class="eyebrow">Administrator sign-in</p><h1>Sign in securely</h1>
+  <p class="muted">Use the email address approved by the Chief Administrator. We will email you a one-time code. It expires after 10 minutes.</p>
+  <div id="loginMessage" class="notice hidden" role="status"></div>
+  <form id="emailForm"><div class="field"><label for="loginEmail">Administrator email</label><input id="loginEmail" type="email" autocomplete="email" required maxlength="180" placeholder="you@example.com"></div><button class="btn" type="submit">Email me a sign-in code</button></form>
+  <form id="codeForm" class="hidden"><div class="field"><label for="loginCode">8-digit code</label><input id="loginCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" maxlength="8" required placeholder="12345678"></div><button class="btn" type="submit">Verify and sign in</button> <button id="changeEmail" class="btn secondary" type="button">Use a different email</button></form>
+  <p class="muted small">Only active administrators can sign in. Ask the Chief Administrator to add your email if you are not on the list.</p>
 </section>
 
-<!-- 1 WELCOME -->
-<div class="step on" id="s1" style="padding-top:0">
-  <img class="flyer" id="flyerImg" alt="What The Mobilizer's Diary does" style="display:none">
-  <div style="padding-top:20px">
-    <p class="kick">Student Reporting and Feedback Portal</p>
-    <h1>Your voice is part of the record.</h1>
-    <div class="rule"></div>
-    <p>This is not a complaints board. It is a civic participation tool. Tell us the challenge, why it matters, and what you suggest. You can also nominate a student, project or event for Campus Spotlight.</p>
-    <p>Reports are reviewed and verified before any publication or action. Please read the privacy notice and terms on the next page.</p>
-    <button class="btn" type="button" onclick="show(2)">Start a Student Report</button>
-    <div class="note" role="navigation" aria-label="Student opportunities">
-      <strong>Browse verified opportunities for students.</strong>
-      <p>On the opportunities page, you can also recommend a listing for our editorial team to review.</p>
-      <a class="btn ghost" href="opportunities.html">Browse Student Opportunities</a>
+<section id="appView" class="hidden">
+  <div class="sticky row space"><div><p class="eyebrow">Admin dashboard</p><h1 id="welcome">Welcome</h1></div><button id="logoutBtn" class="btn secondary" type="button">Sign out</button></div>
+  <div id="appMessage" class="notice hidden" role="status"></div>
+
+  <!-- PAYSTACK PAYMENT CARD -->
+  <section class="card" id="paystackPanel">
+    <p class="eyebrow">Financial Engine</p>
+    <h2>Paystack Payments & Support</h2>
+    <div class="help">Process online donations or support payments securely via Paystack. Transactions are verified instantly against the Google Apps Script backend.</div>
+    <form id="paystackForm">
+      <div class="grid">
+        <div class="field">
+          <label for="payEmail">Payer Email</label>
+          <input id="payEmail" type="email" required placeholder="payer@example.com">
+        </div>
+        <div class="field">
+          <label for="payAmount">Amount (NGN ₦)</label>
+          <input id="payAmount" type="number" min="100" step="50" required placeholder="5000">
+        </div>
+      </div>
+      <button class="btn" type="submit" id="paystackSubmitBtn">Proceed to Paystack Checkout</button>
+    </form>
+    <div id="paystackMessage" class="notice hidden" role="status"></div>
+  </section>
+
+  <section class="card" id="attentionPanel"><p class="eyebrow">At a glance</p><h2>Needs attention</h2><div class="help">A live summary of existing team tasks, your notices, editorial approvals and newsletter delivery. Review the corresponding lists below; this is not a new external monitoring integration.</div><div id="attentionSummary" class="attention-grid"></div></section>
+  <section class="card">
+    <div class="row space"><div><h2>Your availability</h2><p class="muted">Set this when you are away. The Chief Administrator can see your return date.</p></div><span id="rolePill" class="pill"></span></div>
+    <div class="grid"><div class="field"><label for="availability">Status</label><select id="availability"><option>Available</option><option>Temporarily unavailable</option></select></div><div class="field"><label for="awayUntil">Expected return date (optional)</label><input id="awayUntil" type="date"></div></div>
+    <div class="field"><label for="awayNote">Short note (optional)</label><input id="awayNote" maxlength="300" placeholder="For example: exams until Friday"></div><button id="saveAvailability" class="btn" type="button">Save availability</button>
+  </section>
+
+  <section class="card" id="inboxSection">
+    <div class="row space"><div><p class="eyebrow">Shared by the whole team</p><h2>Submission inbox</h2><p class="muted">All active administrators can review the submitted forms here. Opening a record does not change its original CMS row.</p></div><button id="inboxRefresh" class="btn secondary" type="button">Refresh inbox</button></div>
+    <div class="filter-grid"><div class="field"><label for="inboxCategory">Submission category</label><select id="inboxCategory"><option value="all">All submissions</option><option value="reports">Reports and student voices</option><option value="opportunities">Opportunity recommendations</option><option value="volunteers">Volunteer applications</option><option value="support">Support and donations</option><option value="newsletter">Newsletter signups</option><option value="other">Other submissions</option></select></div><div class="field"><label for="inboxSearch">Search by reference, name, institution, or text</label><input id="inboxSearch" type="search" maxlength="120" placeholder="e.g. VOL-2026-0001"></div><button id="inboxSearchBtn" class="btn" type="button">Search</button></div>
+    <div id="inboxMessage" class="notice hidden" role="status"></div><p id="inboxMeta" class="muted small"></p><div id="submissionList" class="list"></div>
+    <div class="page-controls"><button id="inboxPrev" class="btn secondary" type="button">Previous</button><span id="inboxPageText" class="muted small">Page 1</span><button id="inboxNext" class="btn secondary" type="button">Next</button></div>
+  </section>
+
+  <section class="card"><div class="row space"><div><p class="eyebrow">Shared accountability</p><h2>Team task board</h2><p class="muted">Every active administrator can see assignments and submitted work. Only the assigned administrator or Chief can update a task.</p></div><button id="refreshBtn" class="btn secondary" type="button">Refresh board</button></div><div id="taskList" class="list"></div></section>
+
+  <section class="card"><div class="row space"><div><h2>Your notifications</h2><p class="muted">Email alerts link you to new records; the shared inbox above is the full list.</p></div></div><div id="notificationList" class="list"></div></section>
+
+  <section class="card" id="studioPanel">
+    <div class="row space"><div><p class="eyebrow">Newsletter Studio</p><h2>Compose the next issue</h2></div><button id="studioRefresh" class="btn secondary" type="button">Refresh studio</button></div>
+    <div class="help"><strong>Release path:</strong> Draft items → request approval → approve items → select and order items → compile issue → request and approve issue → prepare queue → send. Preparing never sends.</div>
+    <div class="grid">
+      <div><h3 id="studioItemHeading">Add editorial item</h3>
+        <div class="help">Use short paragraphs and a public image URL. Blank order uses section defaults; History Corner is first. Saving an edit creates a new Draft revision and invalidates its old approval.</div>
+        <form id="studioItemForm">
+          <input id="studioItemId" type="hidden"><input id="studioItemRevision" type="hidden">
+          <div class="field"><label for="studioSectionSelect">Section</label><select id="studioSectionSelect"><option>History Corner</option><option>Campus Spotlight</option><option>Student Voices</option><option>Opportunities</option><option>Podcast</option><option>Other</option><option>Founder’s Note</option></select></div>
+          <div class="field"><label for="studioTitle">Title</label><input id="studioTitle" required maxlength="240"></div>
+          <div class="field"><label for="studioBody">Body</label><textarea id="studioBody" required maxlength="8000"></textarea></div>
+          <div class="field"><label for="studioSource">Source link (optional)</label><input id="studioSource" type="url" maxlength="600"></div>
+          <div class="field"><label for="studioImage">Image URL (optional)</label><input id="studioImage" type="url" maxlength="1000" placeholder="https://..."></div>
+          <div class="field"><label for="studioItemOrder">Default display order (optional)</label><input id="studioItemOrder" type="number" min="-100000" max="100000" step="any" placeholder="Lower numbers appear first"></div>
+          <div class="actions"><button id="studioSaveItem" class="btn" type="submit">Create editorial item</button><button id="studioCancelEdit" class="btn secondary hidden" type="button">Cancel edit</button></div>
+        </form>
+      </div>
+      <div><h3>Issue composer</h3>
+        <div class="field"><label for="studioIssuePicker">Load an active issue, or create a new one</label><select id="studioIssuePicker"><option value="">New issue</option></select></div>
+        <form id="studioIssueForm">
+          <input id="studioIssueRevision" type="hidden">
+          <div class="field"><label for="studioIssueTitle">Issue title</label><input id="studioIssueTitle" required maxlength="240"></div>
+          <div class="field"><label for="studioSubject">Email subject</label><input id="studioSubject" required maxlength="240"></div>
+          <div class="field"><label for="studioCover">Cover headline (optional)</label><input id="studioCover" maxlength="240"></div>
+          <div class="field"><label for="studioIssueOrder">Issue list display order</label><input id="studioIssueOrder" type="number" min="-100000" max="100000" step="any" value="100"></div>
+          <div class="help"><strong>Ordering:</strong> select Approved items below and set an order for this issue. Lower numbers come first, even across sections. Equal values use a stable item ID tie-break, not insertion order. Sent issues are frozen; create a new issue for changes.</div>
+          <div id="studioComposition" class="list" aria-label="Issue item selection and order"></div>
+          <details class="footer-options"><summary>Footer links and optional partner message</summary>
+            <div class="help">Leave optional URLs blank to hide them. Supply your actual website/form URLs—no new integrations are assumed. Unsubscribe is permanent and individualized by the existing send controller.</div>
+            <div class="field"><label for="footerWebsite">Website URL (optional)</label><input id="footerWebsite" type="url" maxlength="1000"></div>
+            <div class="field"><label for="footerShare">Share experience URL (optional)</label><input id="footerShare" type="url" maxlength="1000"></div>
+            <div class="field"><label for="footerRecommend">Recommend opportunity URL (optional)</label><input id="footerRecommend" type="url" maxlength="1000"></div>
+            <div class="field"><label for="footerVolunteer">Volunteer URL (optional)</label><input id="footerVolunteer" type="url" maxlength="1000"></div>
+            <div class="field"><label for="footerAdTitle">Ad title (optional)</label><input id="footerAdTitle" maxlength="160"></div>
+            <div class="field"><label for="footerAdText">Ad text (optional)</label><textarea id="footerAdText" maxlength="1200"></textarea></div>
+            <div class="field"><label for="footerAdImage">Ad image URL (optional)</label><input id="footerAdImage" type="url" maxlength="1000"></div>
+            <div class="field"><label for="footerAdUrl">Ad destination URL (optional)</label><input id="footerAdUrl" type="url" maxlength="1000"></div>
+          </details>
+          <button id="studioSaveIssue" class="btn" type="submit">Create issue</button>
+        </form>
+        <div class="field"><label for="studioIssueId">Selected issue ID</label><input id="studioIssueId" readonly placeholder="Select or create an issue above"></div>
+        <p id="studioIssueStatus" class="muted small"></p>
+        <div class="actions"><button id="studioCompile" class="btn secondary" type="button">Save settings and compile</button><button id="studioPreview" class="btn secondary" type="button">Preview compiled issue</button><button id="studioRequestApproval" class="btn secondary" type="button">Request issue approval</button></div>
+        <div class="field"><label for="studioApprovalId">Current issue approval ID</label><input id="studioApprovalId" placeholder="APR-..."></div>
+        <div class="actions"><button id="studioApprove" class="btn" type="button">Approve issue</button><button id="studioArchiveIssue" class="btn secondary" type="button">Archive selected issue</button></div>
+      </div>
     </div>
-    <div class="hubnav">
-      <button class="btn ghost" onclick="hubOpen('about')">About Us</button>
-      <button class="btn ghost" onclick="hubOpen('support')">Support Our Work</button>
-      <button class="btn ghost" onclick="hubOpen('advertise')">Advertise and Partner</button>
-      <a class="btn ghost" href="volunteer.html">Volunteer with Us</a>
-    </div>
-  </div>
+    <div id="studioMessage" class="notice hidden" role="status"></div>
+    <details id="studioPreviewBox" class="hidden"><summary>Compiled email preview (no send)</summary><iframe id="studioPreviewFrame" title="Compiled newsletter preview" sandbox="" style="width:100%;height:650px;border:1px solid #aab7b1;"></iframe><p class="muted small">Individual unsubscribe links and current verified CMS opportunities are added at queue preparation. Preview does not send.</p></details>
+    <div class="divider"></div><h3>Active editorial items</h3><div id="studioItems" class="list"></div>
+  </section>
+
+  <section class="card" id="newsletterArchiveSection">
+    <div class="row space"><div><p class="eyebrow">History, not active work</p><h2>Newsletter archive</h2></div><button id="archiveRefresh" class="btn secondary" type="button">Refresh archive</button></div>
+    <div class="help"><strong>Archive is read-only.</strong> Records leave active lists, but snapshots and original delivery rows remain. Sent rows are never deleted or made Pending. Finish or resolve a campaign’s delivery before archiving the whole issue.</div>
+    <div class="actions"><button id="archiveSent" class="btn secondary" type="button">Archive Sent delivery records</button></div>
+    <div class="field"><label for="archiveCampaignPicker">Active campaign (including older standalone campaigns)</label><select id="archiveCampaignPicker"><option value="">Select a campaign</option></select></div>
+    <button id="archiveCampaign" class="btn secondary" type="button">Archive completed campaign</button>
+    <div class="field"><label for="archiveFilter">Archive type</label><select id="archiveFilter"><option value="all">All archived records</option><option value="Issue">Issues</option><option value="Item">Editorial items</option><option value="Campaign">Campaigns</option><option value="Queue">Delivery records</option><option value="Approval">Newsletter approval history</option></select></div>
+    <div id="archiveMessage" class="notice hidden" role="status"></div><div id="archiveList" class="list"></div>
+    <div class="page-controls"><button id="archivePrev" class="btn secondary" type="button">Previous</button><span id="archivePageText" class="muted small"></span><button id="archiveNext" class="btn secondary" type="button">Next</button></div>
+    <details id="archiveDetails" class="hidden"><summary>Read-only archived snapshot</summary><pre id="archiveSnapshot" class="details"></pre></details>
+    <div class="divider"></div><h3>Reset Active Workspace</h3>
+    <div class="help">Chief only. Archives active newsletter items/issues/campaigns/deliveries and newsletter approval history; cancels unsent delivery. Existing archive, subscribers, admins, tasks, public submissions and opportunities are not reset. Resolve Sending / Needs Review first.</div>
+    <div class="field"><label for="resetConfirmation">Type RESET ACTIVE WORKSPACE to confirm</label><input id="resetConfirmation" autocomplete="off" maxlength="22" placeholder="RESET ACTIVE WORKSPACE"></div>
+    <button id="studioResetActive" class="btn danger" type="button" disabled>Reset Active Workspace</button><p id="resetRoleNote" class="muted small">Only the Chief Administrator can run a reset.</p>
+  </section>
+
+  <section class="card" id="newsletterSection">
+    <div class="row space"><div><p class="eyebrow">Newsletter operations</p><h2>Newsletter queue</h2><p class="muted">Review delivery status after the campaign has been approved. Queue actions do not change editorial approval. Sent history can move to the separate archive.</p></div><button id="queueRefresh" class="btn secondary" type="button">Refresh queue</button></div>
+    <div class="grid"><div class="field"><label for="queueFilter">Queue status</label><select id="queueFilter"><option value="all">All active rows</option><option>Pending</option><option>Sent</option><option>Failed</option><option>Needs Review</option><option>Cancelled</option></select></div><div class="actions"><button id="queuePrepare" class="btn secondary" type="button">Prepare approved campaign queue</button><button id="queueSend" class="btn" type="button">Send next 9 pending messages</button></div></div>
+    <div id="queueMessage" class="notice hidden" role="status"></div><div id="queueList" class="list"></div>
+  </section>
+
+  <section id="chiefSection" class="hidden">
+    <section class="card"><p class="eyebrow">Chief Administrator</p><h2>Assign a task</h2><p class="muted">Use “Assign this record” in the inbox to attach an exact submission reference. The assignee sees the linked record and a form to submit completed work.</p>
+      <form id="taskForm"><div class="field"><label for="taskTitle">Task title</label><input id="taskTitle" required maxlength="180" placeholder="Review new volunteer applications"></div><div class="field"><label for="taskDetails">Instructions</label><textarea id="taskDetails" maxlength="3000" placeholder="What should be done? Add context or guidance."></textarea></div>
+      <div class="grid"><div class="field"><label for="taskAssignee">Assign to</label><select id="taskAssignee" required></select></div><div class="field"><label for="taskCategory">Submission type / work area</label><input id="taskCategory" maxlength="100" placeholder="Report, Volunteer application, Opportunity recommendation"></div></div>
+      <div class="grid"><div class="field"><label for="taskRef">Linked submission reference</label><input id="taskRef" maxlength="120" placeholder="Select a record from the inbox or enter its reference"></div><div class="field"><label for="taskDue">Due date (optional)</label><input id="taskDue" type="date"></div></div><button class="btn" type="submit">Assign task and email administrator</button></form>
+    </section>
+    <section class="card"><p class="eyebrow">Access and responsibilities</p><h2>Manage administrators</h2><p class="muted">Add an administrator by email, change responsibilities, or deactivate access.</p>
+      <div class="field"><label for="adminPicker">Edit an existing administrator (optional)</label><select id="adminPicker"><option value="">Add a new administrator</option></select></div>
+      <form id="adminForm"><div class="grid"><div class="field"><label for="adminName">Name</label><input id="adminName" maxlength="120" required></div><div class="field"><label for="adminEmail">Email</label><input id="adminEmail" type="email" maxlength="180" required></div></div><div class="field"><label for="adminRole">Role label</label><input id="adminRole" maxlength="80" value="Administrator" placeholder="For example: Volunteer Coordinator"></div><div class="field"><label for="adminResponsibilities">Responsibilities</label><textarea id="adminResponsibilities" maxlength="1200" placeholder="Describe the duties this person is responsible for."></textarea></div><div class="field"><label for="adminAccess">Portal access</label><select id="adminAccess"><option>Active</option><option>Inactive</option></select></div><button class="btn" type="submit">Save administrator</button></form>
+      <div class="divider"></div><h3>Team activity</h3><div id="teamList" class="list"></div>
+    </section>
+  </section>
+</section>
+
+<section id="entryModal" class="card hidden" aria-live="polite"><div class="row space"><h2>Submission details</h2><button id="closeEntry" class="btn secondary" type="button">Close</button></div><div id="entryContent" class="details"></div></section>
+</main>
+<p class="footer">The Mobilizer's Diary · Individual actions are logged for accountability.</p>
 </div>
-
-<!-- 2 LEGAL -->
-<div class="step" id="s2">
-  <p class="kick">Step 1</p><h2>Privacy, Terms and Consent</h2><div class="rule"></div>
-  <p>Please read this page fully. You cannot continue without your consent.</p>
-  <div class="doc">
-    <h3>Privacy Notice</h3>
-    <p><b>Who we are:</b> The Mobilizer's Diary, an independent civic and student engagement platform founded by Comr. (Engr.) Lukman Aminu Gullah.</p>
-    <p><b>What we collect:</b> only what you enter here. For named submissions: your name, email, optional contact details and your report. For anonymous submissions we do not ask for your name. If you choose a virtual interview, we also keep the contact and times you give.</p>
-    <p><b>Gifts:</b> if you choose to give online, the payment is processed by Paystack on its own secure page. We receive your optional name, your email, the amount and a payment reference. We never see or store your card details. Gifts are kept separate from reports and are not linked to them.</p>
-    <p><b>Why:</b> to review and verify your report, to respond where possible, to issue receipts, and, only with editorial approval, to inform our publications and advocacy.</p>
-    <p><b>Who sees it:</b> authorised members of the editorial team only. We never publish your name unless you give permission.</p>
-    <p><b>How long:</b> kept while needed for review, records and the archive. You may ask us to correct or delete your information by replying to your acknowledgement email and quoting your Reference Number.</p>
-    <p>We handle personal data with regard to applicable Nigerian data protection law, including the Nigeria Data Protection Act 2023.</p>
-    <h3>Terms of Use</h3>
-    <p>1. Submit only information you honestly believe to be true. Include evidence or sources where possible.</p>
-    <p>2. Be constructive and respectful. No hate speech, threats, harassment, defamation or unlawful content.</p>
-    <p>3. Do not name private individuals, or share phone numbers, addresses, ID numbers or confidential documents, without a clear public-interest reason and the right to share them.</p>
-    <p>4. Submission does not guarantee publication. We may verify, edit for clarity and length, decline, or withhold any report.</p>
-    <p>5. This portal is not an emergency, legal or medical service. In danger, contact emergency services (112 in Nigeria).</p>
-    <p>6. You keep ownership of your content. You allow us to review it and, if approved, publish it in edited form with the attribution you choose.</p>
-    <p>7. We may disclose information if the law requires it or to prevent serious harm.</p>
-    <p>8. Gifts are voluntary. They are not payment for any service, they never affect how any report is handled or published, and they never buy editorial influence.</p>
-  </div>
-  <label class="chk"><input type="checkbox" id="consent"><span>I have read and understood the Privacy Notice and Terms of Use, and I agree to proceed.</span></label>
-  <button class="btn" id="b2" disabled onclick="show(3)">Continue</button>
-  <button class="btn ghost" onclick="show(1)">Back</button>
-</div>
-
-<!-- 3 SUBMISSION TYPE -->
-<div class="step" id="s3">
-  <p class="kick">Step 2</p><h2>How would you like to submit?</h2><div class="rule"></div>
-  <label class="card"><input type="radio" name="ptype" value="Named submission"><span><b>Named submission</b>You are identified to the editorial team only. We can follow up with you.</span></label>
-  <label class="card"><input type="radio" name="ptype" value="Anonymous submission"><span><b>Anonymous submission</b>No name is requested. There are limitations, explained next.</span></label>
-  <button class="btn" id="b3" disabled onclick="go3()">Continue</button>
-  <button class="btn ghost" onclick="show(2)">Back</button>
-</div>
-
-<!-- 4 NAMED -->
-<div class="step" id="s4">
-  <p class="kick">Step 3</p><h2>Your Details</h2><div class="rule"></div>
-  <small>Visible to the editorial team only.</small>
-  <label>Full Name *</label><input type="text" id="name" autocomplete="name">
-  <label>Email Address *</label><small>Your acknowledgement and Reference Number will be sent here.</small><input type="email" id="email" autocomplete="email">
-  <label>Phone or WhatsApp (optional)</label><input type="text" id="phone" autocomplete="tel">
-  <label>Your Role *</label>
-  <select id="role"><option value="">Select</option><option>Student</option><option>Student union executive or member</option><option>Alumnus or alumna</option><option>Staff</option><option>Other</option></select>
-  <label>May We Publish Your Name? *</label>
-  <select id="publish"><option value="">Select</option><option>Yes, you may publish my name</option><option>No, keep my name confidential</option></select>
-  <p class="err" id="e4"></p>
-  <button class="btn" onclick="next4()">Continue</button>
-  <button class="btn ghost" onclick="show(3)">Back</button>
-</div>
-
-<!-- 5 ANONYMOUS -->
-<div class="step" id="s5">
-  <p class="kick">Step 3</p><h2>Anonymous Submission</h2><div class="rule"></div>
-  <p>Please understand the limits before you continue.</p>
-  <div class="doc">
-    <p>1. Anonymous reports require verification before publication or action. Reports that cannot be verified may be set aside.</p>
-    <p>2. We cannot ask follow-up questions or send private updates unless you give an optional email below.</p>
-    <p>3. Do not include details that could identify you (name, matric number, phone number or unique circumstances).</p>
-    <p>4. We cannot guarantee action on any report.</p>
-  </div>
-  <label>Email for Acknowledgement Only (optional)</label>
-  <small>Used only to send your Reference Number. Kept in the restricted submission log and never published. Leave blank for no email; your Reference Number will still appear on screen.</small>
-  <input type="email" id="aemail">
-  <label class="chk"><input type="checkbox" id="aconsent"><span>I consent to my anonymous report being reviewed, verified and, if approved, published in edited form without my name.</span></label>
-  <label class="chk"><input type="checkbox" id="ack"><span>I acknowledge that anonymous reports require verification before publication or action, and that the team may be unable to follow up with me.</span></label>
-  <p class="err" id="e5"></p>
-  <button class="btn" onclick="next5()">Continue</button>
-  <button class="btn ghost" onclick="show(3)">Back</button>
-</div>
-
-<!-- 6 REPORT -->
-<div class="step" id="s6">
-  <p class="kick">Step 4</p><h2>Your Report</h2><div class="rule"></div>
-  <small>Good reports state the challenge, explain why it matters, and offer practical solutions.</small>
-  <label>Category *</label>
-  <select id="category" onchange="catChange()"><option value="">Select</option><option>Academic and Welfare</option><option>Student Union Governance and Accountability</option><option>Fees, Funding and NELFUND</option><option>Campus Infrastructure and Security</option><option>Accommodation and Facilities</option><option>Health and Wellbeing</option><option>Elections and Civic Participation</option><option>History and Leadership Archive</option><option>Podcast or Opportunity Suggestion</option><option>Campus Spotlight Nomination</option><option>Other</option></select>
-  <div class="note" id="nombox" style="display:none">
-    <b>Campus Spotlight nomination.</b> Use <b>The Challenge</b> to describe what the student, project or event achieved, <b>Why It Matters</b> for its impact, and <b>Suggested Solutions</b> for how others can support or learn from it. Add a proof link below (result, award, demo or announcement).
-    <label class="chk"><input type="checkbox" id="nomc"><span>The person, project or organisers I am nominating have agreed to be featured, or I will obtain their consent before publication.</span></label>
-  </div>
-  <label>Institution or Campus</label><small>Optional for anonymous submissions.</small><input type="text" id="institution">
-  <label>Report Title *</label><input type="text" id="title" maxlength="150">
-  <label>1. The Challenge *</label><small>What is happening? Be specific and factual.</small><textarea id="challenge"></textarea>
-  <label>2. Why It Matters *</label><small>Who is affected and what is the impact?</small><textarea id="why"></textarea>
-  <label>3. Suggested Solutions *</label><small>What practical steps would you recommend, and who should act?</small><textarea id="solutions"></textarea>
-  <label>Evidence or Source Link (optional)</label><input type="text" id="evidence" placeholder="https://">
-
-  <div class="ivwrap">
-    <h3 class="hh" style="margin-top:0">Virtual Interview (Optional)</h3>
-    <label class="chk"><input type="checkbox" id="iv" onchange="ivToggle()"><span>I am willing to be contacted for a virtual interview about this report. It is voluntary, I can decline at any time, and nothing will be recorded or published without my separate consent.</span></label>
-    <div id="ivbox" style="display:none">
-      <div class="note" id="ivanon" style="display:none">You are submitting anonymously. An interview would reveal your identity to the editorial team only, and you may still decline.</div>
-      <label>Preferred Contact (email or WhatsApp number) *</label><input type="text" id="ivcontact">
-      <label>Preferred Platform</label>
-      <select id="ivplat"><option>Google Meet</option><option>Zoom</option><option>WhatsApp call</option><option>Phone call</option></select>
-      <label>Days and Times That Suit You (optional)</label><input type="text" id="ivtime" placeholder="e.g. weekday evenings">
-    </div>
-  </div>
-
-  <input type="text" id="hp" class="hp" tabindex="-1" autocomplete="off">
-  <label class="chk"><input type="checkbox" id="decl"><span>I confirm that this report is truthful to the best of my knowledge and is submitted in good faith.</span></label>
-  <p class="err" id="e6"></p>
-  <button class="btn" id="b6" onclick="send()">Submit Report</button>
-  <button class="btn ghost" onclick="back6()">Back</button>
-</div>
-
-<!-- 7 DONE -->
-<div class="step" id="s7">
-  <p class="kick">Received</p><h2>Thank you.</h2><div class="rule"></div>
-  <p>Your submission has been received and will undergo review. Anonymous reports require verification before publication or action.</p>
-  <div class="refbox">Reference Number<span id="ref"></span></div>
-  <p id="note"></p>
-  <button class="btn ghost" onclick="hubOpen('support')">Support Our Work</button>
-  <button class="btn" onclick="location.reload()">Submit Another Report</button>
-</div>
-
-<!-- 8 ABOUT -->
-<div class="step" id="s8">
-  <p class="kick">About</p><h2>The Mobilizer's Diary</h2><div class="rule"></div>
-  <div id="ab-body"><p class="muted">Loading...</p></div>
-  <button class="btn ghost" onclick="show(1)">Back to Home</button>
-</div>
-
-<!-- 9 SUPPORT (reached only after the consent page) -->
-<div class="step" id="s9">
-  <p class="kick">Support Our Work</p><h2>Help Keep This Platform Free</h2><div class="rule"></div>
-  <div id="su-body"><p class="muted">Loading...</p></div>
-
-  <div class="givebox" id="giveBox">
-    <h3 class="hh">Give Online</h3>
-    <small>Choose an amount in naira. You will pay on Paystack's secure page. We never see your card details.</small>
-    <div class="chips" id="g-chips"></div>
-    <label>Amount (naira) *</label><input type="text" id="g-amt" inputmode="numeric" placeholder="e.g. 5,000" autocomplete="off">
-    <label>Name (optional)</label><input type="text" id="g-name" autocomplete="name">
-    <label>Email for Your Receipt *</label><input type="email" id="g-email" autocomplete="email">
-    <input type="text" id="g-hp" class="hp" tabindex="-1" autocomplete="off">
-    <label class="chk"><input type="checkbox" id="g-anon"><span>Please do not list my name in any supporter acknowledgement.</span></label>
-    <p class="err" id="e-g"></p><div class="okmsg" id="ok-g"></div>
-    <button class="btn" id="g-btn" onclick="giveGo()">Give Securely</button>
-    <a class="btn" id="g-go" style="display:none" rel="noopener">Continue to Secure Payment</a>
-  </div>
-
-  <button class="btn ghost" onclick="openUpdates('',false)">Gave by Bank Transfer? Request Updates</button>
-  <button class="btn ghost" onclick="show(1)">Back to Home</button>
-</div>
-
-<!-- 10 ADVERTISE -->
-<div class="step" id="s10">
-  <p class="kick">Advertise and Partner</p><h2>Partner With Us</h2><div class="rule"></div>
-  <div id="ad-body"><p class="muted">Loading...</p></div>
-  <h3 class="hh">Send an Enquiry</h3>
-  <small>We use your details only to respond to this enquiry.</small>
-  <label>Enquiry Type *</label>
-  <select id="a-type"><option>Advertise</option><option>Sponsor or Partner</option><option>General</option></select>
-  <label>Your Name *</label><input type="text" id="a-name" autocomplete="name">
-  <label>Organisation</label><input type="text" id="a-org" autocomplete="organization">
-  <label>Email *</label><input type="email" id="a-email" autocomplete="email">
-  <label>Phone or WhatsApp (optional)</label><input type="text" id="a-phone" autocomplete="tel">
-  <label>Message *</label><textarea id="a-msg"></textarea>
-  <input type="text" id="a-hp" class="hp" tabindex="-1" autocomplete="off">
-  <label class="chk"><input type="checkbox" id="a-consent"><span>I agree to be contacted about this enquiry.</span></label>
-  <p class="err" id="e-a"></p><div class="okmsg" id="ok-a"></div>
-  <button class="btn" id="a-btn" onclick="hubSend()">Send Enquiry</button>
-  <button class="btn ghost" onclick="show(1)">Back to Home</button>
-</div>
-
-<!-- 11 PAYMENT RESULT -->
-<div class="step" id="s11">
-  <p class="kick">Support Our Work</p><h2 id="pr-t">Confirming your payment.</h2><div class="rule"></div>
-  <p id="pr-m">Please wait a moment...</p>
-  <div class="refbox" id="pr-ref" style="display:none">Reference Number<span id="pr-r"></span></div>
-  <button class="btn" onclick="payHome()">Back to Home</button>
-</div>
-
-<!-- 12 CONSENT BEFORE GIVING -->
-<div class="step" id="s12">
-  <p class="kick">Support Our Work</p><h2>Before You Give</h2><div class="rule"></div>
-  <p>Thank you for considering a gift. Please read this short note first.</p>
-  <div class="doc">
-    <p><b>Giving is voluntary.</b> You are free not to give. Whether or not you give has no effect on how any report is handled or published.</p>
-    <p><b>Not payment for a service.</b> A gift is not payment for any service, and it never buys editorial influence.</p>
-    <p><b>Secure payment.</b> You will be taken to Paystack's secure payment page. We never see or store your card details.</p>
-    <p><b>What we receive.</b> Your optional name, the email for your receipt, the amount and a payment reference. Gifts are kept separate from reports and are not linked to them.</p>
-    <p><b>Updates.</b> After your gift you may choose to receive an update on how resources are used. This is optional.</p>
-    <p><b>You can stop at any time</b> before you pay.</p>
-  </div>
-  <label class="chk"><input type="checkbox" id="gate-c"><span>I understand that this gift is entirely voluntary and is not payment for any service. I agree to be taken to Paystack's secure payment page to complete it, and that my name (if given), email and amount will be used to process the gift and send my receipt.</span></label>
-  <small>Ticking the box takes you straight to the giving page. Nothing is charged until you confirm on Paystack.</small>
-  <button class="btn ghost" onclick="show(1)">Back</button>
-</div>
-
-<!-- 13 UPDATES (after a gift, or from the bank transfer button) -->
-<div class="step" id="s13">
-  <p class="kick">Updates</p><h2 id="u-title">Receive Updates</h2><div class="rule"></div>
-  <p id="u-intro">Want to know how resources are used? Leave your email and we will send you an update. You do not have to.</p>
-  <div class="refbox" id="u-refbox" style="display:none">Gift Reference<span id="u-ref"></span></div>
-  <label>Name (optional)</label><input type="text" id="u-name" autocomplete="name">
-  <label>Email *</label><input type="email" id="u-email" autocomplete="email">
-  <div id="u-extra">
-    <label>Amount Given (optional)</label><input type="text" id="u-amt">
-    <label>Date Given (optional)</label><input type="text" id="u-date" placeholder="e.g. 12 October 2026">
-  </div>
-  <input type="text" id="u-hp" class="hp" tabindex="-1" autocomplete="off">
-  <label class="chk"><input type="checkbox" id="u-consent"><span>I would like to receive updates on how resources are used, and I agree to be contacted at this email.</span></label>
-  <p class="err" id="e-u"></p><div class="okmsg" id="ok-u"></div>
-  <button class="btn" id="u-btn" onclick="updSend()">Send My Request</button>
-  <button class="btn ghost" id="u-skip" onclick="updSkip()">No Thanks</button>
-  <button class="btn ghost" id="u-back" onclick="show(9)" style="display:none">Back</button>
-  <button class="btn" id="u-home" onclick="payHome()" style="display:none">Back to Home</button>
-</div>
-
-<footer class="foot">
-  <div>THE MOBILIZER'S DIARY. Amplifying student voices, preserving institutional memory, promoting accountability.</div>
-  <nav class="md-footer-links" aria-label="Project links">
-    <button type="button" onclick="hubOpen('support')">Support Our Work</button>
-    <a href="https://01gullah.github.io/mobilizersdiary/?v=4" target="_blank" rel="noopener">Visit The Mobilizer's Diary</a>
-  </nav>
-  <p class="md-sponsor-ack">Sponsored placements will be clearly labelled. Sponsor acknowledgements appear only for approved partners.</p>
-</footer>
-</div>
-
-<!-- GIFT POP-UP (shown after a report is submitted) -->
-<div class="modal" id="gift" role="dialog" aria-modal="true" aria-labelledby="gift-t" onclick="if(event.target===this){closeGift()}">
-  <div class="mbox">
-    <button class="mx" type="button" onclick="closeGift()" aria-label="Close">&times;</button>
-    <p class="kick">Optional</p>
-    <h2 id="gift-t">Help Keep This Platform Free</h2>
-    <div class="rule"></div>
-    <p>Thank you. Your report is complete and will be reviewed in exactly the same way whether or not you give.</p>
-    <p>The Mobilizer's Diary is free for every student and runs on voluntary support. If you are able, a gift of any size helps us keep reviewing reports, publishing and supporting students.</p>
-    <div class="note">Giving is entirely optional. It never affects how any report is handled or published. We do not link gifts to reports or to the people who submit them, and a gift is not payment for any service.</div>
-    <button class="btn" type="button" onclick="giftYes()">Give Now</button>
-    <button class="btn ghost" type="button" onclick="closeGift()">Maybe Later</button>
-  </div>
-</div>
-
 <script src="config.js"></script>
 <script>
-var subType='';
-var NOM='Campus Spotlight Nomination';
-var prog={1:0,2:1,3:2,4:3,5:3,6:4,7:5,8:0,9:0,10:0,11:0,12:0,13:0};
-function $(i){return document.getElementById(i)}
-function v(i){return $(i).value.replace(/^\s+|\s+$/g,'')}
-function mail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
-function err(n,m){$('e'+n).textContent=m||''}
-function show(n){
-  var s=document.querySelectorAll('.step');
-  for(var i=0;i<s.length;i++){s[i].classList.remove('on')}
-  $('s'+n).classList.add('on');
-  $('top').style.display=(n===1)?'none':'block';
-  $('pb').style.width=((prog[n]||0)/5*100)+'%';
-  window.scrollTo(0,0);
-}
-function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
-function lsSet(k,x){try{localStorage.setItem(k,x)}catch(e){}}
-function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
-
-/* ---------- connection to the Apps Script back end ---------- */
-function api(action,payload){
-  return new Promise(function(resolve,reject){
-    var url=(typeof API_URL==='string')?API_URL:'';
-    if(url.indexOf('https://script.google.com/')!==0){reject(new Error('This site is not connected yet. Please try again later.'));return}
-    var ctl=('AbortController' in window)?new AbortController():null;
-    var timer=setTimeout(function(){if(ctl){ctl.abort()}},60000);
-    fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:payload||{}}),redirect:'follow',signal:ctl?ctl.signal:undefined})
-    .then(function(r){return r.text()})
-    .then(function(t){
-      clearTimeout(timer);
-      var j;try{j=JSON.parse(t)}catch(e){throw new Error('The server did not respond correctly. Please try again.')}
-      if(!j.ok){throw new Error(j.error||'Something went wrong. Please try again.')}
-      resolve(j.result);
-    })
-    .catch(function(e){
-      clearTimeout(timer);
-      reject(new Error(e&&e.name==='AbortError'?'The connection timed out. Please check your connection and try again.':(e&&e.message?e.message:'Something went wrong. Please try again.')));
-    });
-  });
-}
-
-/* ---------- banner and flyer: tries every spelling of the file name on this site, then the back end ---------- */
-var initP=null;
-function initApi(){
-  if(!initP){initP=api('init')}
-  return initP;
-}
-function loadImg(id,files,key){
-  var el=$(id),i=0;
-  el.onload=function(){el.style.display='block'};
-  el.onerror=function(){
-    i++;
-    if(i<files.length){el.src=files[i];return}
-    el.onerror=null;
-    initApi().then(function(r){
-      if(r&&r[key]){el.onload=function(){el.style.display='block'};el.src=r[key]}
-    },function(){});
-  };
-  el.src=files[0];
-}
-loadImg('flyerImg',['MD_Flyer_What_We_Do.png.PNG','MD_Flyer_What_We_Do.PNG','MD_Flyer_What_We_Do.png.png','MD_Flyer_What_We_Do.png'],'flyer');
-loadImg('bannerImg',['MD_Header_Web.png.PNG','MD_Header_Web.PNG','MD_Header_Web.png.png','MD_Header_Web.png'],'banner');
-
-function isNamed(){return subType==='Named submission'}
-function go3(){show(isNamed()?4:5)}
-function back6(){show(isNamed()?4:5)}
-function catChange(){$('nombox').style.display=($('category').value===NOM)?'block':'none'}
-function ivToggle(){
-  var on=$('iv').checked;
-  $('ivbox').style.display=on?'block':'none';
-  $('ivanon').style.display=(on&&subType==='Anonymous submission')?'block':'none';
-  if(on&&isNamed()&&!v('ivcontact')){$('ivcontact').value=v('email')}
-}
-$('consent').onchange=function(){$('b2').disabled=!this.checked};
-var radios=document.getElementsByName('ptype');
-for(var i=0;i<radios.length;i++){radios[i].onchange=function(){subType=this.value;$('b3').disabled=false}}
-function next4(){
-  err(4,'');
-  if(!v('name')||!mail(v('email'))||!v('role')||!v('publish')){err(4,'Please complete all required fields with a valid email.');return}
-  show(6);
-}
-function next5(){
-  err(5,'');
-  if(!$('aconsent').checked||!$('ack').checked){err(5,'Please tick both boxes to continue.');return}
-  if(v('aemail')&&!mail(v('aemail'))){err(5,'Please enter a valid email or leave it blank.');return}
-  show(6);
-}
-
-/* ---------- gift pop-up (after a report) ---------- */
-function openGift(){
-  if(!$('s7').classList.contains('on'))return;
-  $('gift').style.display='flex';
-  var b=$('gift').querySelector('.btn');if(b){b.focus()}
-}
-function closeGift(){$('gift').style.display='none'}
-function giftYes(){closeGift();hubOpen('support',true)}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeGift()}});
-
-function send(){
-  err(6,'');
-  var need=['category','title','challenge','why','solutions'];
-  for(var i=0;i<need.length;i++){if(!v(need[i])){err(6,'Please complete all required fields.');return}}
-  if(v('evidence')&&!/^https?:\/\/\S+$/i.test(v('evidence'))){err(6,'The evidence link must start with http:// or https://');return}
-  var nom=($('category').value===NOM);
-  if(nom&&!$('nomc').checked){err(6,'Please confirm the nominee has agreed to be featured.');return}
-  var ivOn=$('iv').checked;
-  if(ivOn&&!v('ivcontact')){err(6,'Please add a contact for the interview, or untick the interview box.');return}
-  if(!$('decl').checked){err(6,'Please tick the declaration to submit.');return}
-  var anon=(subType==='Anonymous submission');
-  var d={type:subType,name:anon?'':v('name'),email:anon?v('aemail'):v('email'),phone:v('phone'),role:v('role'),publish:v('publish'),
-    institution:v('institution'),category:v('category'),title:v('title'),challenge:v('challenge'),why:v('why'),
-    solutions:v('solutions'),evidence:v('evidence'),consent:$('consent').checked&&(!anon||$('aconsent').checked),
-    ack:anon?$('ack').checked:false,nomConsent:nom?$('nomc').checked:false,declaration:true,hp:v('hp'),
-    iv:ivOn?{consent:true,contact:v('ivcontact'),platform:$('ivplat').value,availability:v('ivtime')}:null};
-  $('b6').disabled=true;$('b6').textContent='Submitting...';
-  api('report',d).then(function(res){
-    $('ref').textContent=res.ref||'';
-    var t=res.emailed?'An acknowledgement has been sent to your email.':'Please keep your Reference Number. No email was sent.';
-    if(res.interview){t+=' Your interview request has been recorded and we will be in touch.'}
-    $('note').textContent=t;
-    show(7);
-    setTimeout(openGift,900);
-  },function(e){
-    $('b6').disabled=false;$('b6').textContent='Submit Report';
-    err(6,(e&&e.message)?e.message:'Something went wrong. Please try again.');
-  });
-}
-
-/* ---------- payment return (Paystack sends donors back here) ---------- */
-var PAYMSG={
-  success:['Thank you.','Your gift has been confirmed. A payment confirmation is on its way to your email.'],
-  pending:['Confirming your payment.','We are still waiting for confirmation from the payment provider. Please check your email shortly, or refresh this page in a minute.'],
-  abandoned:['Payment not completed.','The payment was not completed. You are welcome to try again.'],
-  failed:['We could not confirm this payment.','If money left your account, please contact us and quote the reference below. We will resolve it.'],
-  unknown:['Reference not found.','We could not find this payment reference.']
-};
-function payHome(){try{history.replaceState(null,'',location.pathname)}catch(e){}show(1)}
-function payShow(st,ref){
-  var m=PAYMSG[st]||PAYMSG.unknown;
-  $('pr-t').textContent=m[0];$('pr-m').textContent=m[1];
-  if(ref){$('pr-r').textContent=ref;$('pr-ref').style.display='block'}
-  if(st==='success'&&ref&&!lsGet('md_upd_'+ref)){
-    setTimeout(function(){
-      if($('s11').classList.contains('on')&&window.openUpdates){window.openUpdates(ref,true)}
-    },2000);
-  }
-}
-function payCheck(ref,n){
-  api('verify',{ref:ref}).then(function(r){
-    var st=(r&&r.status)||'unknown';
-    if(st==='pending'&&n<4){setTimeout(function(){payCheck(ref,n+1)},4000);return}
-    payShow(st,ref);
-  },function(){payShow('pending',ref)});
-}
 (function(){
-  var m=/[?&](?:reference|trxref)=([^&#]+)/.exec(location.search);
-  if(!m)return;
-  var ref=decodeURIComponent(m[1]);
-  show(11);
-  if(!/^DON-\d{4}-\d{4}$/.test(ref)){payShow('unknown','');return}
-  $('pr-ref').style.display='block';$('pr-r').textContent=ref;
-  payCheck(ref,0);
-})();
-
-/* ---------- About / Support (with consent page) / Advertise / Give / Updates ---------- */
-(function(){
-var data=null,loading=false,queue=[];
-var giveConsent=false,pendingGive=false,updRef='';
-function mk(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
-function lines(t){return String(t||'').split(/\n+/).filter(function(x){return x.replace(/\s/g,'')})}
-function paras(box,t){lines(t).forEach(function(l){box.appendChild(mk('p',null,l))})}
-function noteBox(t){return mk('div','note',t)}
-function fmt(n){return String(Math.round(Number(n)||0)).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
-
-function load(cb){
-  if(data){cb();return}
-  queue.push(cb);if(loading)return;loading=true;
-  api('hub').then(function(d){
-    data=d;loading=false;var q=queue;queue=[];q.forEach(function(f){f()});
-  },function(){
-    loading=false;queue=[];
-    ['ab-body','su-body','ad-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
-  });
-}
-
-function pcard(p){
-  var c=mk('div','pcard');
-  if(p.image){var im=mk('img');im.src=p.image;im.alt=p.name;c.appendChild(im)}
-  var t=mk('div');
-  t.appendChild(mk('div','pn',p.name));
-  if(p.role)t.appendChild(mk('div','pr',p.role));
-  if(p.bio)t.appendChild(mk('div','pbio',p.bio));
-  if(p.link){var a=mk('a',null,'Visit website');a.href=p.link;a.target='_blank';a.rel='noopener';t.appendChild(a)}
-  c.appendChild(t);return c;
-}
-
-function renderAbout(){
-  var s=data.s,b=$('ab-body');b.innerHTML='';
-  if(s.ABOUT_MISSION)paras(b,s.ABOUT_MISSION);
-  var vs=lines(s.ABOUT_VALUES);
-  if(vs.length){b.appendChild(mk('h3','hh','What We Stand For'));var ul=mk('ul','vals');vs.forEach(function(x){ul.appendChild(mk('li',null,x))});b.appendChild(ul)}
-  [['Founder','Our Founder'],['Advisor','Advisors'],['Dignitary','Dignitaries'],['Sponsor','Sponsors'],['Partner','Partners']].forEach(function(gr){
-    var list=data.p.filter(function(p){return p.category===gr[0]});
-    if(!list.length)return;
-    b.appendChild(mk('h3','hh',gr[1]));
-    list.forEach(function(p){b.appendChild(pcard(p))});
-  });
-  if(s.CONTACT_EMAIL){
-    b.appendChild(mk('h3','hh','Contact'));
-    var p=mk('p',null,'Email: ');var a=mk('a',null,s.CONTACT_EMAIL);a.href='mailto:'+s.CONTACT_EMAIL;p.appendChild(a);b.appendChild(p);
+  'use strict';
+  var TOKEN_KEY='md_admin_session_v1';
+  var PAYSTACK_PUBLIC_KEY='pk_live_a85e64433ff98ba0301b6b52037640226328741e';
+  var token=localStorage.getItem(TOKEN_KEY)||'';
+  var loginEmail='';
+  var dashboard=null;
+  var inboxPage=1;
+  var $=function(id){return document.getElementById(id);};
+  function show(el,yes){el.classList.toggle('hidden',!yes);}
+  function message(el,text,isError){el.textContent=text||'';el.classList.remove('hidden','error');if(isError)el.classList.add('error');if(!text)el.classList.add('hidden');}
+  function api(action,data){
+    if(typeof API_URL!=='string'||API_URL.indexOf('https://script.google.com/')!==0)return Promise.reject(new Error('The Apps Script API URL is not configured in config.js.'));
+    data=data||{};if(token)data.token=token;
+    return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:data})})
+      .then(function(r){return r.text();}).then(function(raw){var out;try{out=JSON.parse(raw);}catch(e){throw new Error('The service returned an unreadable response.');}if(!out.ok)throw new Error(out.error||'The request could not be completed.');return out.result;});
   }
-}
+  function text(parent,tag,value,className){var el=document.createElement(tag);if(className)el.className=className;el.textContent=String(value==null?'':value);parent.appendChild(el);return el;}
+  function button(label,secondary,handler){var b=document.createElement('button');b.type='button';b.className='btn'+(secondary?' secondary':'');b.textContent=label;b.addEventListener('click',handler);return b;}
+  function field(labelText,tag,placeholder,maxLength){var wrap=document.createElement('div');wrap.className='field';var label=document.createElement('label');label.textContent=labelText;wrap.appendChild(label);var control=document.createElement(tag);if(placeholder)control.placeholder=placeholder;if(maxLength)control.maxLength=maxLength;wrap.appendChild(control);return {wrap:wrap,control:control};}
+  function enterLogin(){show($('appView'),false);show($('loginView'),true);}
+  function enterApp(){show($('loginView'),false);show($('appView'),true);loadDashboard();}
+  function setBusy(b,busy,label){b.disabled=busy;if(label)b.textContent=busy?'Please wait…':label;}
 
-function copyText(t,btn){
-  function done(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1500)}
-  function fb(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(ta)}
-  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fb);return}}catch(e){}
-  fb();
-}
-
-function setupGive(){
-  var box=$('giveBox'),pay=data.pay;
-  if(!pay||!pay.ready){box.style.display='none';return}
-  box.style.display='block';
-  var chips=$('g-chips');chips.innerHTML='';
-  (pay.presets||[]).forEach(function(n){
-    var c=mk('button','chip','\u20A6'+fmt(n));c.type='button';
-    c.onclick=function(){
-      $('g-amt').value=fmt(n);
-      var all=chips.querySelectorAll('.chip');for(var i=0;i<all.length;i++){all[i].classList.remove('sel')}
-      c.classList.add('sel');
-    };
-    chips.appendChild(c);
-  });
-}
-
-function renderSupport(){
-  var s=data.s,b=$('su-body');b.innerHTML='';
-  paras(b,s.DONATE_WHY);
-  if(s.DONATE_TRANSPARENCY)b.appendChild(noteBox(s.DONATE_TRANSPARENCY));
-  var has=!!(data.pay&&data.pay.ready);
-  if(s.DONATE_ACCOUNT_NUMBER||s.DONATE_LINK){
-    b.appendChild(mk('h3','hh','Give by Bank Transfer'));
-  }
-  if(s.DONATE_ACCOUNT_NUMBER){
-    has=true;var a=mk('div','acct');
-    if(s.DONATE_ACCOUNT_NAME){a.appendChild(mk('div','k','Account Name'));a.appendChild(mk('div',null,s.DONATE_ACCOUNT_NAME))}
-    if(s.DONATE_BANK){a.appendChild(mk('div','k','Bank'));a.appendChild(mk('div',null,s.DONATE_BANK))}
-    a.appendChild(mk('div','k','Account Number'));a.appendChild(mk('div','n',s.DONATE_ACCOUNT_NUMBER));
-    var cb=mk('button',null,'Copy Account Number');cb.type='button';cb.onclick=function(){copyText(s.DONATE_ACCOUNT_NUMBER,cb)};
-    a.appendChild(cb);b.appendChild(a);
-  }
-  if(s.DONATE_LINK){
-    has=true;var l=mk('a','btn','Give Through Our Link');l.href=s.DONATE_LINK;l.target='_blank';l.rel='noopener';b.appendChild(l);
-  }
-  if(!has)b.appendChild(mk('p','muted','Giving details will be available shortly. Please use the Advertise and Partner page to get in touch.'));
-  if(s.DONATE_SAFETY)b.appendChild(noteBox(s.DONATE_SAFETY));
-  setupGive();
-}
-
-function renderAd(){
-  var s=data.s,b=$('ad-body');b.innerHTML='';
-  paras(b,s.AD_AUDIENCE);
-  var os=lines(s.AD_OPTIONS);
-  if(os.length){b.appendChild(mk('h3','hh','Ways to Partner'));var ul=mk('ul','vals');os.forEach(function(o){ul.appendChild(mk('li',null,o))});b.appendChild(ul)}
-  if(s.AD_POLICY){b.appendChild(mk('h3','hh','Our Editorial Independence'));b.appendChild(noteBox(s.AD_POLICY))}
-}
-
-/* consent page: shown every time before the giving page */
-function gateOpen(toGive){
-  pendingGive=!!toGive;giveConsent=false;
-  $('gate-c').checked=false;
-  show(12);
-}
-function openSupport(toGive){
-  show(9);
-  load(function(){
-    renderSupport();
-    if(toGive){
-      setTimeout(function(){var g=$('giveBox');if(g&&g.style.display!=='none'){g.scrollIntoView()}},60);
-    }
-  });
-}
-$('gate-c').onchange=function(){
-  if(!this.checked)return;
-  setTimeout(function(){
-    if($('s12').classList.contains('on')&&$('gate-c').checked){
-      giveConsent=true;
-      openSupport(pendingGive);
-    }
-  },500);
-};
-
-window.hubOpen=function(which,toGive){
-  if(which==='support'){gateOpen(toGive);return}
-  show(which==='about'?8:10);
-  load(function(){if(which==='about')renderAbout();else renderAd()});
-};
-
-window.giveGo=function(){
-  var errEl=$('e-g'),okEl=$('ok-g'),btn=$('g-btn');
-  errEl.textContent='';okEl.style.display='none';
-  var pay=data&&data.pay;
-  if(!pay||!pay.ready){errEl.textContent='Online giving is not available yet.';return}
-  if(!giveConsent){errEl.textContent='Please accept the consent on the previous page first.';return}
-  var amt=parseInt(($('g-amt').value||'').replace(/[^\d]/g,''),10);
-  if(!amt||amt<pay.min||amt>pay.max){errEl.textContent='Please enter an amount between '+fmt(pay.min)+' and '+fmt(pay.max)+' naira.';return}
-  var email=$('g-email').value.replace(/^\s+|\s+$/g,'');
-  if(!mail(email)){errEl.textContent='Please enter a valid email address for your receipt.';return}
-  btn.disabled=true;btn.textContent='Preparing secure payment...';
-  api('donate',{amount:amt,name:$('g-name').value,email:email,anonymous:$('g-anon').checked,updates:false,consent:true,hp:$('g-hp').value}).then(function(r){
-    var url=(r&&r.url)?String(r.url):'';
-    if(url.indexOf('https://')!==0){btn.disabled=false;btn.textContent='Give Securely';errEl.textContent='We could not start the payment. Please try again.';return}
-    lsSet('md_donor',JSON.stringify({n:$('g-name').value,e:email,t:Date.now()}));
-    btn.style.display='none';
-    okEl.textContent='Your secure payment page is ready. Reference: '+r.ref+'.';okEl.style.display='block';
-    var go=$('g-go');go.href=url;go.style.display='block';
-    window.location.href=url;
-  },function(e){
-    btn.disabled=false;btn.textContent='Give Securely';
-    errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
-  });
-};
-
-/* updates page: opens automatically after a confirmed gift, or from the bank transfer button */
-window.openUpdates=function(ref,post){
-  updRef=ref||'';
-  $('e-u').textContent='';$('ok-u').style.display='none';
-  $('u-btn').disabled=false;$('u-btn').style.display='block';$('u-btn').textContent='Send My Request';
-  $('u-home').style.display='none';$('u-consent').checked=false;
-  if(post){
-    $('u-title').textContent='Thank you. Your gift is confirmed.';
-    $('u-intro').textContent='Would you like to know how your gift is used? Leave your details and we will send you an update. This is optional.';
-    $('u-refbox').style.display='block';$('u-ref').textContent=ref;
-    $('u-extra').style.display='none';
-    $('u-skip').style.display='block';$('u-back').style.display='none';
-    var raw=lsGet('md_donor');
-    if(raw){
-      try{
-        var o=JSON.parse(raw);
-        if(o&&o.t&&(Date.now()-o.t)<7200000){$('u-name').value=o.n||'';$('u-email').value=o.e||''}
-      }catch(e){}
-      lsDel('md_donor');
-    }
-  }else{
-    $('u-title').textContent='Receive Updates';
-    $('u-intro').textContent='Gave by bank transfer or another way? Leave your email and we will send you an update on how resources are used. You do not have to.';
-    $('u-refbox').style.display='none';
-    $('u-extra').style.display='block';
-    $('u-skip').style.display='none';$('u-back').style.display='block';
-  }
-  show(13);
-};
-
-window.updSkip=function(){
-  if(updRef){lsSet('md_upd_'+updRef,'1')}
-  payHome();
-};
-
-window.updSend=function(){
-  var errEl=$('e-u'),okEl=$('ok-u'),btn=$('u-btn');
-  errEl.textContent='';okEl.style.display='none';
-  var email=$('u-email').value.replace(/^\s+|\s+$/g,'');
-  if(!mail(email)){errEl.textContent='Please enter a valid email address.';return}
-  if(!$('u-consent').checked){errEl.textContent='Please tick the box to agree to be contacted.';return}
-  var post=!!updRef;
-  var p={type:'Donor Update Request',name:$('u-name').value,org:'',email:email,phone:'',
-    message:post?('Gift '+updRef):'Gift by bank transfer or other means',
-    amount:post?'':$('u-amt').value,date:post?'':$('u-date').value,consent:true,hp:$('u-hp').value};
-  btn.disabled=true;btn.textContent='Sending...';
-  api('support',p).then(function(r){
-    okEl.textContent='Thank you. Your reference is '+r.ref+'.'+(r.emailed?' A confirmation has been sent to your email.':'');
-    okEl.style.display='block';
-    btn.style.display='none';$('u-skip').style.display='none';$('u-back').style.display='none';$('u-home').style.display='block';
-    if(updRef){lsSet('md_upd_'+updRef,'1')}
-  },function(e){
-    btn.disabled=false;btn.textContent='Send My Request';
-    errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
-  });
-};
-
-window.hubSend=function(){
-  var errEl=$('e-a'),okEl=$('ok-a'),btn=$('a-btn');
-  var p={type:$('a-type').value,name:$('a-name').value,org:$('a-org').value,email:$('a-email').value,phone:$('a-phone').value,message:$('a-msg').value,amount:'',date:'',consent:$('a-consent').checked,hp:$('a-hp').value};
-  errEl.textContent='';okEl.style.display='none';
-  if(!mail(p.email.replace(/^\s+|\s+$/g,''))){errEl.textContent='Please enter a valid email address.';return}
-  if(!p.name.replace(/\s/g,'')||!p.message.replace(/\s/g,'')){errEl.textContent='Please enter your name and a short message.';return}
-  if(!p.consent){errEl.textContent='Please tick the box to agree to be contacted.';return}
-  btn.disabled=true;btn.textContent='Sending...';
-  api('support',p).then(function(r){
-    okEl.textContent='Thank you. Your reference is '+r.ref+'.'+(r.emailed?' A confirmation has been sent to your email.':'');
-    okEl.style.display='block';btn.textContent='Sent';
-  },function(e){
-    btn.disabled=false;btn.textContent='Send Enquiry';
-    errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
-  });
-};
-})();
-</script>
-
-<script>
-/* Rotating public homepage feature: approved sponsor banners, verified opportunities, and volunteer call-out. */
-(function () {
-  var slot = document.getElementById('home-feature-rotation');
-  var content = document.getElementById('md-feature-content');
-  var kicker = document.getElementById('md-feature-kicker');
-  var count = document.getElementById('md-feature-count');
-  var previous = document.getElementById('md-feature-prev');
-  var next = document.getElementById('md-feature-next');
-  if (!slot || !content || typeof api !== 'function') return;
-
-  var items = [];
-  var index = 0;
-  var timer = null;
-  var intervalMs = 15000;
-  var motionPreference = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var reduceMotion = !!(motionPreference && motionPreference.matches);
-
-  function safeHttps(value) {
-    return typeof value === 'string' && /^https:\/\/[A-Za-z0-9.-]+(?::\d{1,5})?(?:[/?#][^\s]*)?$/i.test(value.trim());
-  }
-  function element(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text != null) node.textContent = String(text);
-    return node;
-  }
-  function addTextCard(parent, item) {
-    var card = element('article', 'md-feature-card');
-    if (item.imageUrl) {
-      var imageLink = element('a', 'md-feature-image-link');
-      imageLink.href = item.href;
-      imageLink.setAttribute('aria-label', 'Learn more about volunteering with The Mobilizer\'s Diary');
-      var image = element('img', 'md-feature-image');
-      image.src = item.imageUrl;
-      image.alt = item.imageAlt || item.title;
-      image.loading = 'lazy';
-      image.onerror = function () { imageLink.style.display = 'none'; };
-      imageLink.appendChild(image);
-      card.appendChild(imageLink);
-    }
-    var title = element('h2', '', item.title);
-    var description = element('p', '', item.description);
-    card.appendChild(title);
-    card.appendChild(description);
-    if (item.meta) card.appendChild(element('p', 'md-feature-meta', item.meta));
-    var link = element('a', 'btn ghost', item.button);
-    link.href = item.href;
-    card.appendChild(link);
-    parent.appendChild(card);
-  }
-  function render() {
-    if (!items.length) return;
-    var item = items[index];
-    content.textContent = '';
-    kicker.textContent = item.label;
-    count.textContent = (index + 1) + ' of ' + items.length;
-    previous.disabled = items.length < 2;
-    next.disabled = items.length < 2;
-
-    if (item.kind === 'sponsor' || item.kind === 'featured-survey') {
-      var card = element('article', 'md-feature-card');
-      var heading = element('h2', '', item.sponsorName || 'A sponsored message');
-      card.appendChild(heading);
-      var link = element('a', 'md-feature-image-link');
-      link.href = item.targetUrl;
-      link.target = '_blank';
-      link.rel = item.kind === 'sponsor' ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
-      link.setAttribute('aria-label', item.altText || 'Open sponsored message');
-      var image = element('img', 'md-feature-image');
-      image.src = item.imageUrl;
-      image.alt = item.altText || 'Sponsored message';
-      image.loading = 'lazy';
-      image.onerror = function () {
-        var failedIndex = items.indexOf(item);
-        if (failedIndex < 0) return;
-        var failedSlideIsCurrent = failedIndex === index;
-        items.splice(failedIndex, 1);
-        if (failedIndex < index) index -= 1;
-        if (index >= items.length) index = 0;
-        if (failedSlideIsCurrent) render();
-        startRotation();
-      };
-      link.appendChild(image);
-      card.appendChild(link);
-      if (item.kind === 'featured-survey' && item.description) {
-        card.appendChild(element('p', '', item.description));
-      }
-      card.appendChild(element('p', 'md-feature-meta', item.kind === 'featured-survey'
-        ? 'Official survey · The Mobilizer\'s Diary'
-        : (item.sponsorName ? 'Sponsored · ' + item.sponsorName : 'Sponsored')));
-      var action = element('a', 'btn ghost', item.kind === 'featured-survey' ? 'Take the survey' : 'Visit sponsor');
-      action.href = item.targetUrl;
-      action.target = '_blank';
-      action.rel = item.kind === 'sponsor' ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
-      card.appendChild(action);
-      content.appendChild(card);
+  // PAYSTACK PAYMENT INTEGRATION HANDLER
+  $('paystackForm').addEventListener('submit', function(ev) {
+    ev.preventDefault();
+    var email = $('payEmail').value.trim();
+    var amount = parseFloat($('payAmount').value);
+    var submitBtn = $('paystackSubmitBtn');
+    
+    if(!email || !amount || amount <= 0) {
+      message($('paystackMessage'), 'Please enter a valid email and payment amount.', true);
       return;
     }
-    addTextCard(content, item);
-  }
-  function move(step) {
-    if (!items.length) return;
-    index = (index + step + items.length) % items.length;
-    render();
-  }
-  function stopRotation() {
-    if (timer) window.clearInterval(timer);
-    timer = null;
-  }
-  function startRotation() {
-    stopRotation();
-    if (items.length > 1 && !reduceMotion && !document.hidden) {
-      timer = window.setInterval(function () { move(1); }, intervalMs);
-    }
-  }
-  previous.addEventListener('click', function () { move(-1); startRotation(); });
-  next.addEventListener('click', function () { move(1); startRotation(); });
-  slot.addEventListener('mouseenter', stopRotation);
-  slot.addEventListener('mouseleave', startRotation);
-  slot.addEventListener('focusin', stopRotation);
-  slot.addEventListener('focusout', function (event) {
-    if (!slot.contains(event.relatedTarget)) startRotation();
-  });
-  document.addEventListener('visibilitychange', startRotation);
 
-  function loadSponsoredBanner() {
-    return api('sponsoredBanner').then(function (banner) {
-      return banner ? [banner] : [];
-    }).catch(function () { return []; });
+    if (typeof PaystackPop === 'undefined') {
+      message($('paystackMessage'), 'Paystack SDK failed to load. Please check your internet connection.', true);
+      return;
+    }
+
+    setBusy(submitBtn, true, 'Processing Paystack Checkout');
+    message($('paystackMessage'), 'Opening secure checkout window...');
+
+    try {
+      var popup = new PaystackPop();
+      popup.newTransaction({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: Math.round(amount * 100), // Convert NGN to Kobo
+        currency: 'NGN',
+        onSuccess: function(transaction) {
+          message($('paystackMessage'), 'Payment approved! Verifying with backend reference: ' + transaction.reference);
+          api('adminVerifyPaystackPayment', { reference: transaction.reference })
+            .then(function(r) {
+              message($('paystackMessage'), r.message || 'Payment successfully verified and recorded in backend database!');
+              $('paystackForm').reset();
+            })
+            .catch(function(err) {
+              message($('paystackMessage'), 'Payment completed on Paystack, but backend recording failed: ' + err.message, true);
+            })
+            .finally(function() {
+              setBusy(submitBtn, false, 'Proceed to Paystack Checkout');
+            });
+        },
+        onClose: function() {
+          message($('paystackMessage'), 'Payment process was cancelled by user.', true);
+          setBusy(submitBtn, false, 'Proceed to Paystack Checkout');
+        }
+      });
+    } catch(err) {
+      message($('paystackMessage'), 'Error initializing Paystack popup: ' + err.message, true);
+      setBusy(submitBtn, false, 'Proceed to Paystack Checkout');
+    }
+  });
+
+  $('emailForm').addEventListener('submit',function(ev){ev.preventDefault();var b=this.querySelector('button[type=submit]');loginEmail=$('loginEmail').value.trim().toLowerCase();setBusy(b,true,'Email me a sign-in code');message($('loginMessage'),'');api('adminRequestCode',{email:loginEmail}).then(function(r){message($('loginMessage'),r.message||'If this email is active, a code has been sent.');show($('emailForm'),false);show($('codeForm'),true);$('loginCode').focus();}).catch(function(e){message($('loginMessage'),e.message,true);}).finally(function(){setBusy(b,false,'Email me a sign-in code');});});
+  $('changeEmail').addEventListener('click',function(){show($('codeForm'),false);show($('emailForm'),true);$('loginCode').value='';});
+  $('codeForm').addEventListener('submit',function(ev){ev.preventDefault();var b=this.querySelector('button[type=submit]');setBusy(b,true,'Verify and sign in');api('adminVerifyCode',{email:loginEmail,code:$('loginCode').value.trim()}).then(function(r){token=r.token;localStorage.setItem(TOKEN_KEY,token);message($('loginMessage'),'');enterApp();}).catch(function(e){message($('loginMessage'),e.message,true);}).finally(function(){setBusy(b,false,'Verify and sign in');});});
+  $('logoutBtn').addEventListener('click',function(){var old=token;token='';localStorage.removeItem(TOKEN_KEY);api('adminLogout',{token:old}).catch(function(){}).finally(enterLogin);});
+  $('refreshBtn').addEventListener('click',loadDashboard);
+  $('inboxRefresh').addEventListener('click',function(){loadInbox(inboxPage);});
+  $('inboxSearchBtn').addEventListener('click',function(){loadInbox(1);});
+  $('inboxCategory').addEventListener('change',function(){loadInbox(1);});
+  $('inboxSearch').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();loadInbox(1);}});
+  $('inboxPrev').addEventListener('click',function(){if(inboxPage>1)loadInbox(inboxPage-1);});
+  $('inboxNext').addEventListener('click',function(){if(inboxData&&inboxPage<inboxData.pageCount)loadInbox(inboxPage+1);});
+  $('saveAvailability').addEventListener('click',function(){api('adminSetAvailability',{status:$('availability').value,awayUntil:$('awayUntil').value,note:$('awayNote').value}).then(function(r){message($('appMessage'),r.message||'Availability saved.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});});
+
+  $('taskForm').addEventListener('submit',function(ev){ev.preventDefault();var b=this.querySelector('button[type=submit]');var assignee=$('taskAssignee').value;if(!assignee){message($('appMessage'),'Add an active administrator before assigning work.',true);return;}setBusy(b,true,'Assign task and email administrator');api('adminCreateTask',{title:$('taskTitle').value,details:$('taskDetails').value,assigneeEmail:assignee,category:$('taskCategory').value,ref:$('taskRef').value,dueAt:$('taskDue').value}).then(function(r){message($('appMessage'),'Task created ('+r.taskId+'). Email status: '+r.emailStatus+'. All admins can see it on the team task board.');$('taskForm').reset();loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);}).finally(function(){setBusy(b,false,'Assign task and email administrator');});});
+
+  $('adminForm').addEventListener('submit',function(ev){ev.preventDefault();var b=this.querySelector('button[type=submit]');setBusy(b,true,'Save administrator');api('adminManageUser',{name:$('adminName').value,email:$('adminEmail').value,role:$('adminRole').value,responsibilities:$('adminResponsibilities').value,accessStatus:$('adminAccess').value}).then(function(r){message($('appMessage'),r.message||'Administrator saved.');$('adminForm').reset();$('adminRole').value='Administrator';loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);}).finally(function(){setBusy(b,false,'Save administrator');});});
+  $('adminPicker').addEventListener('change',function(){var email=this.value;var user=(dashboard&&dashboard.admins||[]).filter(function(x){return String(x.Email).toLowerCase()===email;})[0];if(!user){$('adminForm').reset();$('adminRole').value='Administrator';return;}$('adminName').value=user.Full_Name||'';$('adminEmail').value=user.Email||'';$('adminRole').value=user.Role||'Administrator';$('adminResponsibilities').value=user.Responsibilities||'';$('adminAccess').value=user.Access_Status||'Active';});
+  $('closeEntry').addEventListener('click',function(){show($('entryModal'),false);});
+
+  var studioItemsData=[], studioIssuesData=[], studioIssueRevision=1, archivePage=1, archiveData=null;
+  var footerFields={websiteUrl:'footerWebsite',shareUrl:'footerShare',recommendUrl:'footerRecommend',volunteerUrl:'footerVolunteer',adTitle:'footerAdTitle',adText:'footerAdText',adImageUrl:'footerAdImage',adUrl:'footerAdUrl'};
+  function studioRun(b,label,operation,root){
+    root=root||$('studioMessage');setBusy(b,true,label);
+    return Promise.resolve().then(operation).catch(function(e){message(root,e.message,true);}).finally(function(){setBusy(b,false,b===$('studioSaveItem')?($('studioItemId').value?'Save revision as Draft':'Create editorial item'):(b===$('studioSaveIssue')?($('studioIssueId').value?'Save issue settings':'Create issue'):label));});
   }
-  // The requested loop is fixed: volunteer message 1, survey banner, volunteer message 2.
-  window.loadSponsoredBanner = function () {
-    loadSponsoredBanner().then(function (result) {
-      var banners = Array.isArray(result) ? result : (result ? [result] : []);
-      var volunteerFirst = {
-        kind: 'volunteer',
-        label: 'Volunteer with us',
-        title: 'Help student voices travel further.',
-        description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
-        imageUrl: 'volunteer-banner-4x1.png',
-        imageAlt: 'Student volunteers collaborating to amplify student voices.',
-        button: 'Volunteer with Us',
-        href: 'volunteer.html'
-      };
-      var volunteerSecond = {
-        kind: 'volunteer',
-        label: 'Volunteer with us',
-        title: 'Contribute in a way that fits you.',
-        description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
-        imageUrl: 'volunteer-banner-4x1.png',
-        imageAlt: 'Student volunteers collaborating to amplify student voices.',
-        button: 'Volunteer with Us',
-        href: 'volunteer.html'
-      };
-      var surveyBanner = null;
-      for (var i = 0; i < banners.length; i++) {
-        var banner = banners[i];
-        if (!banner || !/student policy dialogue/i.test(String(banner.sponsorName || '') + ' ' + String(banner.altText || ''))) continue;
-        if (!safeHttps(banner.imageUrl) || !safeHttps(banner.targetUrl)) continue;
-        surveyBanner = {
-          kind: 'featured-survey',
-          label: 'Student Policy Dialogue Survey',
-          sponsorName: String(banner.sponsorName || '').substring(0, 120),
-          description: 'Your experience matters. Take the survey and help turn student realities into evidence, analysis and infographics that inform the public conversation.',
-          imageUrl: banner.imageUrl,
-          targetUrl: banner.targetUrl,
-          altText: String(banner.altText || 'Student Policy Dialogue survey banner').substring(0, 250)
-        };
-        break;
-      }
-      items = surveyBanner
-        ? [volunteerFirst, surveyBanner, volunteerSecond]
-        : [volunteerFirst, volunteerSecond];
-      index = 0;
-      render();
-      startRotation();
-    }).catch(function (error) {
-      // Keep both volunteer messages available if the survey feed is unavailable.
-      items = [{
-        kind: 'volunteer', label: 'Volunteer with us', title: 'Help student voices travel further.',
-        description: 'Contribute to a non-partisan platform that amplifies lived student experience and preserves institutional memory.',
-        imageUrl: 'volunteer-banner-4x1.png', imageAlt: 'Student volunteers collaborating to amplify student voices.',
-        button: 'Volunteer with Us', href: 'volunteer.html'
-      }, {
-        kind: 'volunteer', label: 'Volunteer with us', title: 'Contribute in a way that fits you.',
-        description: 'Choose an area such as research, writing, outreach, design or technology. Flexible and occasional contributions are welcome.',
-        imageUrl: 'volunteer-banner-4x1.png', imageAlt: 'Student volunteers collaborating to amplify student voices.',
-        button: 'Volunteer with Us', href: 'volunteer.html'
-      }];
-      index = 0;
-      render();
-      if (window.console && console.warn) console.warn('Homepage feature feed unavailable.', error);
+  function clearItemEdit(){ $('studioItemForm').reset();$('studioItemId').value='';$('studioItemRevision').value='';$('studioItemHeading').textContent='Add editorial item';$('studioSaveItem').textContent='Create editorial item';show($('studioCancelEdit'),false); }
+  $('studioCancelEdit').addEventListener('click',clearItemEdit);
+  $('studioItemForm').addEventListener('submit',function(ev){
+    ev.preventDefault();var id=$('studioItemId').value,b=$('studioSaveItem'),label=id?'Save revision as Draft':'Create editorial item';
+    studioRun(b,label,function(){return api(id?'adminUpdateNewsletterItem':'adminCreateNewsletterItem',{itemId:id,revision:$('studioItemRevision').value,section:$('studioSectionSelect').value,title:$('studioTitle').value,body:$('studioBody').value,sourceUrl:$('studioSource').value,imageUrl:$('studioImage').value,displayOrder:$('studioItemOrder').value}).then(function(r){message($('studioMessage'),r.message+' ID: '+r.itemId);clearItemEdit();return loadStudioItems();});});
+  });
+  function editStudioItem(id){api('adminGetNewsletterItem',{itemId:id}).then(function(r){var i=r.item;$('studioItemId').value=i.Item_ID;$('studioItemRevision').value=i.Revision||1;$('studioSectionSelect').value=i.Section;$('studioTitle').value=i.Title||'';$('studioBody').value=i.Body||'';$('studioSource').value=i.Source_URL||'';$('studioImage').value=i.Image_URL||'';$('studioItemOrder').value=i.Display_Order==null?'':i.Display_Order;$('studioItemHeading').textContent='Edit item · revision '+(i.Revision||1);$('studioSaveItem').textContent='Save revision as Draft';show($('studioCancelEdit'),true);$('studioItemForm').scrollIntoView({behavior:'smooth',block:'start'});$('studioTitle').focus();}).catch(function(e){message($('studioMessage'),e.message,true);});}
+  function composition(){return Array.from($('studioComposition').querySelectorAll('[data-composer-item]')).filter(function(row){return row.querySelector('input[type=checkbox]').checked;}).map(function(row){return {itemId:row.dataset.composerItem,order:row.querySelector('input[type=number]').value};});}
+  function renderComposition(saved){
+    var root=$('studioComposition');root.textContent='';var selected={};(saved||[]).forEach(function(x){selected[x.itemId]=x.order;});
+    if(!studioItemsData.length){text(root,'p','Create and approve editorial items first.','muted');return;}
+    studioItemsData.forEach(function(i){var box=document.createElement('div');box.className='composer-row';box.dataset.composerItem=i.Item_ID;var label=document.createElement('label'),check=document.createElement('input');check.type='checkbox';check.checked=saved==null?i.Status==='Approved':Object.prototype.hasOwnProperty.call(selected,i.Item_ID);check.disabled=i.Status!=='Approved';label.appendChild(check);label.appendChild(document.createTextNode(' '+i.Section+' · '+i.Title+' ('+i.Status+')'));box.appendChild(label);var n=document.createElement('input');n.type='number';n.min='-100000';n.max='100000';n.step='any';n.value=Object.prototype.hasOwnProperty.call(selected,i.Item_ID)?selected[i.Item_ID]:(i.Display_Order==null||i.Display_Order===''?({ 'History Corner':10,'Campus Spotlight':20,'Student Voices':30,'Opportunities':40,'Podcast':50,'Other':60,'Founder’s Note':70 }[i.Section]||60):i.Display_Order);n.setAttribute('aria-label','Issue display order for '+i.Title);n.disabled=i.Status!=='Approved';box.appendChild(n);root.appendChild(box);});
+  }
+  function issuePayload(){var footer={};Object.keys(footerFields).forEach(function(k){footer[k]=$(footerFields[k]).value;});return {issueId:$('studioIssueId').value,revision:studioIssueRevision,issueTitle:$('studioIssueTitle').value,subject:$('studioSubject').value,coverHeadline:$('studioCover').value,displayOrder:$('studioIssueOrder').value,itemOrder:composition(),footer:footer};}
+  function loadIssueFields(r){
+    $('studioIssueForm').reset();$('studioIssueId').value=r?r.Issue_ID:'';$('studioIssuePicker').value=r?r.Issue_ID:'';studioIssueRevision=r?Number(r.Revision||1):1;$('studioIssueRevision').value=studioIssueRevision;
+    $('studioIssueTitle').value=r?r.Issue_Title||'':'';$('studioSubject').value=r?r.Subject||'':'';$('studioCover').value=r?r.Cover_Headline||'':'';$('studioIssueOrder').value=r&&r.Display_Order!==''&&r.Display_Order!=null?r.Display_Order:100;
+    var footer=r&&r.Footer_JSON?JSON.parse(r.Footer_JSON):{};Object.keys(footerFields).forEach(function(k){$(footerFields[k]).value=footer[k]||'';});
+    var selected=r&&r.Item_Order_JSON?JSON.parse(r.Item_Order_JSON):null;renderComposition(selected);$('studioApprovalId').value=r?r.Approval_ID||'':'';$('studioSaveIssue').textContent=r?'Save issue settings':'Create issue';$('studioIssueStatus').textContent=r?(r.Status+' · revision '+studioIssueRevision+(r.Campaign_ID?' · campaign '+r.Campaign_ID:'')):'';show($('studioPreviewBox'),false);
+  }
+  $('studioIssuePicker').addEventListener('change',function(){var id=this.value;var r=studioIssuesData.filter(function(x){return x.Issue_ID===id;})[0];try{loadIssueFields(r||null);}catch(e){message($('studioMessage'),'Unable to load saved issue settings: '+e.message,true);}});
+  function saveIssueSettings(){var d=issuePayload();if(!$('studioIssueForm').reportValidity())return Promise.reject(new Error('Complete the issue fields before saving or compiling.'));return api(d.issueId?'adminUpdateNewsletterIssue':'adminCreateNewsletterIssue',d).then(function(r){$('studioIssueId').value=r.issueId;studioIssueRevision=r.revision||studioIssueRevision;$('studioIssueRevision').value=studioIssueRevision;$('studioSaveIssue').textContent='Save issue settings';return r;});}
+  $('studioIssueForm').addEventListener('submit',function(ev){ev.preventDefault();var b=$('studioSaveIssue'),label=$('studioIssueId').value?'Save issue settings':'Create issue';studioRun(b,label,function(){return saveIssueSettings().then(function(r){message($('studioMessage'),r.message+' ID: '+r.issueId);return loadStudioItems();});});});
+  function requireIssue(){var id=$('studioIssueId').value;if(!id)throw new Error('Create or select an issue first.');return id;}
+  $('studioCompile').addEventListener('click',function(){var b=this;studioRun(b,'Save settings and compile',function(){requireIssue();return saveIssueSettings().then(function(){return api('adminCompileNewsletterIssue',{issueId:requireIssue()});}).then(function(r){message($('studioMessage'),r.message+' Campaign: '+r.campaignId);$('studioApprovalId').value='';show($('studioPreviewBox'),false);return loadStudioItems();});});});
+  $('studioPreview').addEventListener('click',function(){var b=this;studioRun(b,'Preview compiled issue',function(){return api('adminPreviewNewsletterIssue',{issueId:requireIssue()}).then(function(r){$('studioPreviewFrame').srcdoc=r.html;show($('studioPreviewBox'),true);message($('studioMessage'),'Compiled snapshot displayed. No email was sent.');});});});
+  $('studioRequestApproval').addEventListener('click',function(){var b=this;studioRun(b,'Request issue approval',function(){return api('adminRequestNewsletterApproval',{issueId:requireIssue()}).then(function(r){$('studioApprovalId').value=r.approvalId;message($('studioMessage'),r.message+' Approval: '+r.approvalId);return loadStudioItems();});});});
+  $('studioApprove').addEventListener('click',function(){var b=this;studioRun(b,'Approve issue',function(){return api('adminApproveNewsletterIssue',{issueId:requireIssue(),approvalId:$('studioApprovalId').value,note:'Approved from Newsletter Studio'}).then(function(r){message($('studioMessage'),r.message||'Approval recorded.');return loadStudioItems();});});});
+  function archiveRecord(type,id){if(!id)return Promise.reject(new Error('Select a record to archive.'));if(!window.confirm('Archive this '+type.toLowerCase()+'? It will be read-only, hidden from active lists, and retained in history.'))return Promise.resolve();return api('adminArchiveNewsletterRecord',{recordType:type,recordId:id}).then(function(r){message($('archiveMessage'),r.message);if(type==='Issue'||type==='Campaign')loadIssueFields(null);return Promise.all([loadStudioItems(),loadQueue(),loadArchive(1)]);});}
+  $('studioArchiveIssue').addEventListener('click',function(){var b=this;studioRun(b,'Archive selected issue',function(){return archiveRecord('Issue',requireIssue());});});
+  $('archiveCampaign').addEventListener('click',function(){var b=this;studioRun(b,'Archive completed campaign',function(){return archiveRecord('Campaign',$('archiveCampaignPicker').value);},$('archiveMessage'));});
+  $('archiveSent').addEventListener('click',function(){var b=this;studioRun(b,'Archive Sent delivery records',function(){return api('adminArchiveSentNewsletterRecords',{}).then(function(r){message($('archiveMessage'),r.message);return Promise.all([loadQueue(),loadArchive(1)]);});},$('archiveMessage'));});
+  $('studioResetActive').addEventListener('click',function(){var b=this;if($('resetConfirmation').value!=='RESET ACTIVE WORKSPACE'){message($('archiveMessage'),'Type RESET ACTIVE WORKSPACE exactly to confirm.',true);return;}studioRun(b,'Reset Active Workspace',function(){return api('adminResetNewsletterWorkspace',{confirmation:$('resetConfirmation').value}).then(function(r){message($('archiveMessage'),r.message);$('resetConfirmation').value='';clearItemEdit();loadIssueFields(null);show($('archiveDetails'),false);return Promise.all([loadStudioItems(),loadQueue(),loadArchive(1)]);});},$('archiveMessage'));});
+  $('studioRefresh').addEventListener('click',function(){loadStudioItems();});
+  $('archiveRefresh').addEventListener('click',function(){loadArchive(archivePage);});$('archiveFilter').addEventListener('change',function(){loadArchive(1);});$('archivePrev').addEventListener('click',function(){if(archivePage>1)loadArchive(archivePage-1);});$('archiveNext').addEventListener('click',function(){if(archiveData&&archivePage<archiveData.pageCount)loadArchive(archivePage+1);});
+  function loadArchive(page){return api('adminListNewsletterArchive',{recordType:$('archiveFilter').value,page:page||1}).then(function(r){archiveData=r;archivePage=r.page;var root=$('archiveList');root.textContent='';$('archivePageText').textContent='Page '+r.page+' of '+r.pageCount+' · '+r.total+' archived records';$('archivePrev').disabled=r.page<=1;$('archiveNext').disabled=r.page>=r.pageCount;if(!r.items.length)text(root,'p','No archived newsletter records match this filter.','muted');r.items.forEach(function(i){var box=document.createElement('article');box.className='item';text(box,'strong',i.summary||i.recordId);text(box,'p',i.recordType+' · '+i.recordId+' · '+i.archivedAt,'muted');text(box,'p',i.reason+' · '+i.archivedBy,'small');box.appendChild(button('Open read-only snapshot',true,function(){api('adminGetNewsletterArchive',{archiveId:i.archiveId}).then(function(a){$('archiveSnapshot').textContent=JSON.stringify(a.snapshot,null,2);show($('archiveDetails'),true);$('archiveDetails').open=true;}).catch(function(e){message($('archiveMessage'),e.message,true);});}));root.appendChild(box);});}).catch(function(e){message($('archiveMessage'),e.message,true);});}
+  function loadStudioItems(){
+    var currentId=$('studioIssueId').value, oldChoices=$('studioComposition').children.length?composition():null;
+    return Promise.all([api('adminListNewsletterItems',{status:'all'}),api('adminListNewsletterIssues',{}),api('adminListNewsletterCampaigns',{})]).then(function(results){
+      studioItemsData=results[0].items||[];studioIssuesData=results[1].items||[];renderStudioItems();renderComposition(oldChoices);
+      var picker=$('studioIssuePicker');picker.textContent='';var blank=document.createElement('option');blank.value='';blank.textContent='New issue';picker.appendChild(blank);
+      studioIssuesData.forEach(function(i){var o=document.createElement('option');o.value=i.Issue_ID;o.textContent=(i.Display_Order==null||i.Display_Order===''?100:i.Display_Order)+' · '+i.Issue_Title+' · '+i.Status;picker.appendChild(o);});picker.value=currentId;
+      var active=studioIssuesData.filter(function(i){return i.Issue_ID===currentId;})[0];if(active){if(Number(active.Revision||1)!==studioIssueRevision)message($('studioMessage'),'This issue has changed on the server. Reselect it before saving.',true);$('studioIssueStatus').textContent=active.Status+' · revision '+studioIssueRevision+(active.Campaign_ID?' · campaign '+active.Campaign_ID:'');$('studioApprovalId').value=active.Approval_ID||'';}
+      var cp=$('archiveCampaignPicker'),prior=cp.value;cp.textContent='';var choose=document.createElement('option');choose.value='';choose.textContent='Select a campaign';cp.appendChild(choose);(results[2].items||[]).forEach(function(c){var o=document.createElement('option');o.value=c.Campaign_ID;o.textContent=(c.Issue_Title||c.Campaign_ID)+' · '+c.Approval_Status+' · '+c.Queue_Status;cp.appendChild(o);});cp.value=prior;
+    }).catch(function(e){message($('studioMessage'),e.message,true);});
+  }
+  function renderStudioItems(){var root=$('studioItems');root.textContent='';if(!studioItemsData.length){text(root,'p','No active editorial items. Archived items are in the separate archive.','muted');return;}studioItemsData.forEach(function(item){var box=document.createElement('article');box.className='item';text(box,'strong',item.Section+' · '+item.Title);text(box,'p',item.Status+' · '+item.Item_ID+' · revision '+(item.Revision||1)+' · default order '+(item.Display_Order==null||item.Display_Order===''?'section default':item.Display_Order),'muted');if(item.Image_URL&&/^https?:\/\//i.test(item.Image_URL)){var image=document.createElement('img');image.src=item.Image_URL;image.alt=item.Title;image.loading='lazy';image.style.maxWidth='140px';image.style.maxHeight='140px';image.style.objectFit='contain';box.appendChild(image);}var actions=document.createElement('div');actions.className='actions';actions.appendChild(button('Edit item',true,function(){editStudioItem(item.Item_ID);}));if(item.Status!=='Approved'){actions.appendChild(button('Request item approval',true,function(){api('adminRequestNewsletterItemApproval',{itemId:item.Item_ID}).then(function(r){message($('studioMessage'),r.message+' Approval: '+r.approvalId);return loadStudioItems();}).catch(function(e){message($('studioMessage'),e.message,true);});}));if(item.Approval_ID){text(box,'p','Current approval: '+item.Approval_ID,'small');actions.appendChild(button('Approve current revision',true,function(){api('adminApproveNewsletterItem',{itemId:item.Item_ID,approvalId:item.Approval_ID,note:'Approved from Newsletter Studio'}).then(function(r){message($('studioMessage'),r.message);return loadStudioItems();}).catch(function(e){message($('studioMessage'),e.message,true);});}));}}actions.appendChild(button('Archive item',true,function(){archiveRecord('Item',item.Item_ID).catch(function(e){message($('studioMessage'),e.message,true);});}));box.appendChild(actions);root.appendChild(box);});}
+  function renderAttention(a){var root=$('attentionSummary');root.textContent='';if(!a){text(root,'p','Refresh the dashboard for the available task and delivery summary.','muted');return;}var metrics=[['Open team tasks',a.openTasks],['Overdue tasks',a.overdueTasks],['Unacknowledged ≥48h',a.unacknowledged48h],['Your unread notices',a.unreadNotifications],['Pending editorial approvals',a.pendingEditorialApprovals],['Newsletter delivery review',a.newsletterDeliveryReview],['Pending newsletter messages',a.pendingNewsletterMessages]];metrics.forEach(function(m){var x=document.createElement('div');x.className='attention-metric';text(x,'strong',m[1]||0);text(x,'span',m[0]);root.appendChild(x);});}
+
+  $('queueRefresh').addEventListener('click',loadQueue);
+  $('queueFilter').addEventListener('change',loadQueue);
+  $('queuePrepare').addEventListener('click',function(){var b=this;setBusy(b,true,'Prepare approved campaign queue');api('adminPrepareApprovedCampaigns',{}).then(function(r){message($('queueMessage'),r.message||('Queue prepared: '+(r.prepared||0)+' row(s).'));loadQueue();}).catch(function(e){message($('queueMessage'),e.message,true);});});
+  $('queueSend').addEventListener('click',function(){if(!window.confirm('This will send up to 9 pending newsletter messages. This is not a preview. Continue?'))return;var b=this;setBusy(b,true,'Send next 9 pending messages');api('adminSendNewsletterBatch',{maxRows:9}).then(function(r){message($('queueMessage'),'Send run completed. Attempted: '+(r.attempted||0)+'. Sent rows are not sent again.');loadQueue();}).catch(function(e){message($('queueMessage'),e.message,true);});});
+
+  function loadDashboard(){
+    message($('appMessage'),'Loading shared dashboard…');
+    api('adminDashboard',{}).then(function(data){dashboard=data;renderDashboard(data);message($('appMessage'),'');loadInbox(1);loadStudioItems();loadQueue();loadArchive(1);}).catch(function(e){message($('appMessage'),e.message,true);if(/sign in|session|inactive/i.test(e.message)){token='';localStorage.removeItem(TOKEN_KEY);enterLogin();message($('loginMessage'),e.message,true);}});
+  }
+  var inboxData=null;
+  function loadInbox(page){
+    inboxPage=page||1;message($('inboxMessage'),'Loading submissions…');
+    api('adminListSubmissions',{category:$('inboxCategory').value,query:$('inboxSearch').value.trim(),page:inboxPage}).then(function(data){inboxData=data;inboxPage=data.page;renderSubmissions(data);message($('inboxMessage'),'');}).catch(function(e){message($('inboxMessage'),e.message,true);});
+  }
+  function renderDashboard(data){
+    $('welcome').textContent='Hello, '+(data.me.name||'Administrator');$('rolePill').textContent=data.me.role||'Administrator';$('availability').value=data.me.availability||'Available';$('awayUntil').value=data.me.awayUntil||'';$('awayNote').value=data.me.awayNote||'';
+    show($('chiefSection'),!!data.isChief);$('studioResetActive').disabled=!data.isChief;renderAttention(data.attention);renderTasks(data.tasks||[],data.taskDeliverables||[]);renderNotifications(data.notifications||[]);if(data.isChief)renderAdmins(data.admins||[]);
+  }
+  function renderSubmissions(data){
+    var root=$('submissionList');root.textContent='';var items=data.items||[];
+    $('inboxMeta').textContent='Showing '+(data.total?((data.page-1)*data.pageSize+1):0)+'–'+Math.min(data.page*data.pageSize,data.total)+' of '+data.total+' submissions.';
+    $('inboxPageText').textContent='Page '+data.page+' of '+data.pageCount;$('inboxPrev').disabled=data.page<=1;$('inboxNext').disabled=data.page>=data.pageCount;
+    if(!items.length){text(root,'p','No submissions match this filter yet.','muted');return;}
+    items.forEach(function(item){
+      var box=document.createElement('article');box.className='item';text(box,'strong',item.title||item.category||'Submission');
+      text(box,'p',(item.category||'Submission')+' · '+item.ref+' · '+(item.submittedAt||'Date not recorded'),'muted');
+      if(item.name||item.institution)text(box,'p',[item.name,item.institution].filter(Boolean).join(' · '),'small');
+      if(item.status)text(box,'span','Status: '+item.status,'pill');
+      if(item.summary)text(box,'p',item.summary,'submission-summary details');
+      var actions=document.createElement('div');actions.className='actions';actions.appendChild(button('Open full submission',false,function(){openEntry(item.category,item.ref);}));
+      if(dashboard&&dashboard.isChief)actions.appendChild(button('Assign this record',true,function(){prepareTask(item);}));
+      box.appendChild(actions);root.appendChild(box);
     });
-  };
-  window.loadSponsoredBanner();
+  }
+  function prepareTask(item){
+    $('taskTitle').value='Review: '+(item.category||'submission')+' — '+item.ref;
+    $('taskDetails').value='Please review this submission in the Admin Portal and record your outcome in the work submission form. Original CMS record: '+item.ref;
+    $('taskCategory').value=item.category||'General';$('taskRef').value=item.ref;
+    $('chiefSection').scrollIntoView({behavior:'smooth',block:'start'});$('taskTitle').focus();
+  }
+  function openEntry(category,ref){api('adminGetEntry',{category:category,ref:ref}).then(renderEntry).catch(function(e){message($('appMessage'),e.message,true);});}
+  function openTask(taskId){var el=document.getElementById('task-'+taskId);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});else message($('appMessage'),'This task is not in the current board view. Refresh the board and try again.',true);}
+  function renderEntry(entry){
+    var root=$('entryContent');root.textContent='';text(root,'p',(entry.category||'Submission')+' · '+entry.ref,'pill');
+    Object.keys(entry.fields||{}).forEach(function(key){var line=document.createElement('p');var label=document.createElement('strong');label.textContent=key+': ';line.appendChild(label);line.appendChild(document.createTextNode(String(entry.fields[key]||'—')));root.appendChild(line);});
+    show($('entryModal'),true);$('entryModal').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function renderTasks(items,deliverables){
+    var root=$('taskList');root.textContent='';if(!items.length){text(root,'p','No team tasks have been assigned yet.','muted');return;}
+    items.forEach(function(task){
+      var box=document.createElement('article');box.className='item';box.id='task-'+task.Task_ID;text(box,'strong',task.Title||'Untitled task');
+      var assignee=String(task.Assigned_To_Email||'');text(box,'p','Assigned to: '+(assignee||'Unassigned')+(task.Due_At?' · Due: '+task.Due_At:''),'team-label');
+      if(dashboard&&dashboard.isChief&&task.Status==='Assigned'&&task.Created_At&&Date.now()-new Date(task.Created_At).getTime()>48*3600000)text(box,'p','Needs follow-up: not acknowledged within 48 hours.','notice error');
+      var meta=(task.Category||'General')+(task.Record_Reference?' · Record: '+task.Record_Reference:'');text(box,'p',meta,'muted');if(task.Details)text(box,'p',task.Details,'details');text(box,'span','Status: '+(task.Status||'Assigned'),'pill');
+      var isAssignee=assignee.toLowerCase()===(dashboard.me.email||'').toLowerCase();var canEdit=!!dashboard.isChief||isAssignee;
+      if(task.Record_Reference){var linkBtn=button('Open linked submission',true,function(){openEntry(task.Category,task.Record_Reference);});linkBtn.classList.add('linked-record-btn');box.appendChild(linkBtn);}
+      if(task.Status==='Assigned'&&canEdit){box.appendChild(button('Acknowledge task',false,function(){api('adminAcknowledgeTask',{taskId:task.Task_ID}).then(function(){loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});}));}
+      var related=(deliverables||[]).filter(function(d){return d.Task_ID===task.Task_ID;});
+      if(related.length){text(box,'h3','Submitted work and notes to Chief');related.forEach(function(d){var version=document.createElement('div');version.className='deliverable';text(version,'p','Submitted by '+(d.Submitted_By_Email||'administrator')+' · '+(d.Submitted_At||''),'small');if(d.Work_Summary)text(version,'p',d.Work_Summary,'details');if(d.Work_Product_URL&&/^https:\/\//i.test(d.Work_Product_URL)){var a=document.createElement('a');a.className='work-link';a.href=d.Work_Product_URL;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open submitted work link';version.appendChild(a);}if(d.Note_To_Chief)text(version,'p','Note to Chief: '+d.Note_To_Chief,'submission-summary details');box.appendChild(version);});}
+      if(canEdit&&task.Status!=='Cancelled'){
+        if(task.Status!=='Completed'){
+          var status=document.createElement('select');status.setAttribute('aria-label','Update task status');['In Progress','Request Reassignment'].forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;status.appendChild(o);});if(task.Status==='Reassignment Requested')status.value='In Progress';box.appendChild(status);
+          var note=field('Note for reassignment (optional)','input','Explain why you need a change',1000);box.appendChild(note.wrap);
+          box.appendChild(button('Update task status',true,function(){api('adminUpdateTask',{taskId:task.Task_ID,status:status.value,note:note.control.value}).then(function(r){message($('appMessage'),r.message||'Task updated.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});}));
+        }
+        var deliverForm=document.createElement('div');deliverForm.className='deliverable';text(deliverForm,'h3',task.Status==='Completed'?'Submit a follow-up work update':'Submit completed work');
+        text(deliverForm,'p','Your submission is saved as a new record; it does not replace or delete the original task or form entry. The Chief Administrator will be notified.','muted');
+        var sum=field('Work completed / outcome','textarea','Write the finished work, findings, or action taken.',6000);var url=field('Work document link (optional)','input','Paste a shareable HTTPS link, for example a Google Drive document',1000);url.control.type='url';var comment=field('Note to Chief Administrator (optional)','textarea','Anything the Chief should know or act on?',2000);
+        deliverForm.appendChild(sum.wrap);deliverForm.appendChild(url.wrap);deliverForm.appendChild(comment.wrap);
+        deliverForm.appendChild(button('Submit work and note to Chief',false,function(){var b=deliverForm.querySelector('button');b.disabled=true;api('adminSubmitTaskDeliverable',{taskId:task.Task_ID,summary:sum.control.value,workUrl:url.control.value,noteToChief:comment.control.value}).then(function(r){message($('appMessage'),r.message||'Work submitted.');loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);}).finally(function(){b.disabled=false;});}));box.appendChild(deliverForm);
+      }else if(!canEdit)text(box,'p','Read-only for you. Only the assigned administrator or Chief can update this task.','muted');
+      root.appendChild(box);
+    });
+  }
+
+  function loadQueue(){message($('queueMessage'),'Loading newsletter queue…');api('adminListNewsletterQueue',{status:$('queueFilter').value}).then(function(r){renderQueue(r.items||[]);message($('queueMessage'),'');}).catch(function(e){message($('queueMessage'),e.message,true);});}
+  function renderQueue(items){var root=$('queueList');root.textContent='';if(!items.length){text(root,'p','No queue rows match this status.','muted');return;}items.forEach(function(item){var box=document.createElement('article');box.className='item';text(box,'strong',(item.subject||'Newsletter message')+' · '+(item.email||''));text(box,'p','Row '+item.rowNumber+' · '+(item.campaignId||'')+' · '+(item.createdAt||''),'muted');text(box,'span','Status: '+(item.status||''),'pill');if(item.deliveryMethod)text(box,'p','Delivery: '+item.deliveryMethod,'small');if(item.error)text(box,'p',item.error,'submission-summary details');var actions=document.createElement('div');actions.className='actions';if(item.status==='Failed'){actions.appendChild(button('Return failed row to Pending',true,function(){var note=window.prompt('Why was delivery confirmed not to have occurred?');if(!note)return;api('adminRetryFailedNewsletterRow',{rowNumber:item.rowNumber,queueId:item.queueId,reviewNote:note}).then(function(r){message($('queueMessage'),r.message||'Row returned to Pending.');loadQueue();}).catch(function(e){message($('queueMessage'),e.message,true);});}));}if(item.status==='Needs Review'){actions.appendChild(button('Mark Sent — delivery confirmed',true,function(){var note=window.prompt('Record how delivery was confirmed.');if(!note)return;api('adminResolveNewsletterRow',{rowNumber:item.rowNumber,queueId:item.queueId,decision:'Sent',reviewNote:note}).then(function(r){message($('queueMessage'),r.message||'Row marked Sent.');loadQueue();}).catch(function(e){message($('queueMessage'),e.message,true);});}));actions.appendChild(button('Return to Pending — not delivered',true,function(){var note=window.prompt('Record why delivery was confirmed not to have occurred.');if(!note)return;api('adminResolveNewsletterRow',{rowNumber:item.rowNumber,queueId:item.queueId,decision:'Pending',reviewNote:note}).then(function(r){message($('queueMessage'),r.message||'Row returned to Pending.');loadQueue();}).catch(function(e){message($('queueMessage'),e.message,true);});}));}if(item.html){var details=document.createElement('details');var summary=document.createElement('summary');summary.textContent='Preview message';details.appendChild(summary);text(details,'div',item.text||'','details');box.appendChild(details);}box.appendChild(actions);root.appendChild(box);});}
+
+  function renderNotifications(items){var root=$('notificationList');root.textContent='';if(!items.length){text(root,'p','No personal email notifications yet. Use the shared submission inbox for all records.','muted');return;}items.forEach(function(n){var box=document.createElement('div');box.className='item';text(box,'strong',n.Category||n.Type||'Notification');text(box,'p',(n.Item_Reference?'Reference: '+n.Item_Reference+' · ':'')+(n.Timestamp||''),'muted');text(box,'p',n.Message||'Open the portal to review.','details');var row=document.createElement('div');row.className='actions';var isTaskNotice=String(n.Category||'').toLowerCase()==='task'||String(n.Item_Reference||'').indexOf('TASK-')===0;var open=button(isTaskNotice?'Open task':'Open submission',false,function(){if(isTaskNotice)openTask(n.Item_Reference);else openEntry(n.Category,n.Item_Reference);});open.disabled=!n.Item_Reference||n.Item_Reference==='Reference pending';row.appendChild(open);var read=button(n.Read_At?'Read':'Mark read',true,function(){api('adminMarkNotificationRead',{notificationId:n.Notification_ID}).then(loadDashboard).catch(function(e){message($('appMessage'),e.message,true);});});read.disabled=!!n.Read_At;row.appendChild(read);box.appendChild(row);if(dashboard&&dashboard.isChief&&n.Status==='Failed')box.appendChild(button('Retry failed email',true,function(){api('adminRetryNotification',{notificationId:n.Notification_ID}).then(function(r){message($('appMessage'),r.message,r.ok===false);loadDashboard();}).catch(function(e){message($('appMessage'),e.message,true);});}));root.appendChild(box);});}
+  function renderAdmins(items){var picker=$('adminPicker'),assignee=$('taskAssignee');var oldPick=picker.value,oldAssign=assignee.value;picker.textContent='';var blank=document.createElement('option');blank.value='';blank.textContent='Add a new administrator';picker.appendChild(blank);assignee.textContent='';items.filter(function(a){return a.Access_Status==='Active';}).forEach(function(a){var opt=document.createElement('option');opt.value=String(a.Email||'').toLowerCase();opt.textContent=(a.Full_Name||a.Email)+' — '+(a.Role||'Administrator');picker.appendChild(opt.cloneNode(true));assignee.appendChild(opt);});picker.value=oldPick;assignee.value=oldAssign;
+    var team=$('teamList');team.textContent='';items.forEach(function(a){var box=document.createElement('div');box.className='item';text(box,'strong',a.Full_Name||a.Email);text(box,'p',(a.Role||'Administrator')+' · '+(a.Access_Status||'')+' · '+(a.Availability_Status||''),'muted');text(box,'p','Last sign-in: '+(a.Last_Login_At||'Not yet')+' | Last portal activity: '+(a.Last_Activity_At||'Not yet'),'small');if(a.Responsibilities)text(box,'p',a.Responsibilities,'details');var days=a.Last_Activity_At?Math.floor((Date.now()-new Date(a.Last_Activity_At).getTime())/86400000):null;if(a.Access_Status==='Active'&&(days===null||days>=14))text(box,'p','Needs check-in: no recent portal activity (14-day review threshold).','notice error');team.appendChild(box);});
+  }
+  if(token)enterApp();else enterLogin();
 })();
 </script>
-
 </body>
 </html>
