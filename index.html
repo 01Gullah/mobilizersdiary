@@ -700,20 +700,37 @@ window.giveGo=function(){
   if(!amt||amt<pay.min||amt>pay.max){errEl.textContent='Please enter an amount between '+fmt(pay.min)+' and '+fmt(pay.max)+' naira.';return}
   var email=$('g-email').value.replace(/^\s+|\s+$/g,'');
   if(!mail(email)){errEl.textContent='Please enter a valid email address for your receipt.';return}
+  
   btn.disabled=true;btn.textContent='Preparing secure payment...';
+  
   api('donate',{amount:amt,name:$('g-name').value,email:email,anonymous:$('g-anon').checked,updates:false,consent:true,hp:$('g-hp').value}).then(function(r){
-    var url=(r&&r.url)?String(r.url):'';
-    if(url.indexOf('https://')!==0){btn.disabled=false;btn.textContent='Give Securely';errEl.textContent='We could not start the payment. Please try again.';return}
-    lsSet('md_donor',JSON.stringify({n:$('g-name').value,e:email,t:Date.now()}));
-    btn.style.display='none';
-    okEl.textContent='Your secure payment page is ready. Reference: '+r.ref+'.';okEl.style.display='block';
-    var go=$('g-go');go.href=url;go.style.display='block';
-    window.location.href=url;
+    if(!r || !r.ref) {
+      throw new Error('Could not initialize payment reference.');
+    }
+    
+    // Open Paystack Popup directly on the page using Paystack Inline JS SDK
+    var handler = PaystackPop.setup({
+      key: 'pk_live_a85e64433ff98ba0301b6b52037640226328741e', // Your Paystack Public Key
+      email: email,
+      amount: amt * 100, // Convert Naira to Kobo
+      ref: r.ref,
+      currency: 'NGN',
+      callback: function(response){
+        // Verification endpoint handler after payment success
+        window.location.href = '?reference=' + response.reference;
+      },
+      onClose: function(){
+        btn.disabled = false;
+        btn.textContent = 'Give Securely';
+      }
+    });
+    handler.openIframe();
   },function(e){
     btn.disabled=false;btn.textContent='Give Securely';
     errEl.textContent=(e&&e.message)?e.message:'Something went wrong. Please try again.';
   });
 };
+
 
 /* updates page: opens automatically after a confirmed gift, or from the bank transfer button */
 window.openUpdates=function(ref,post){
