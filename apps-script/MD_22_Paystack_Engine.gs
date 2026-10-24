@@ -95,9 +95,8 @@ function donStart(d) {
 function donVerify_(reference) {
   reference = String(reference || '').trim();
 
-  if (!/^DON-\\d{4}-\\d{4}$/.test(reference)) {
-    return { status: 'unknown' };
-  }
+if (!/^DON-\d{4}-\d{4}$/.test(reference)) {
+
 
   var props = PropertiesService.getScriptProperties();
   var secretKey = String(props.getProperty('PAYSTACK_SECRET_KEY') || '').trim();
