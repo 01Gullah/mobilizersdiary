@@ -25,7 +25,7 @@ function donStart(d) {
     throw new Error('Enter a valid donation amount of at least ₦100.');
   }
 
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new Error('Enter a valid email address.');
   }
 
@@ -53,7 +53,7 @@ function donStart(d) {
       var refs = sheet.getRange(2, 2, lastRow - 1, 1).getDisplayValues();
       refs.forEach(function (row) {
         var match = String(row[0]).match(
-          new RegExp('^DON-' + year + '-(\\\\d{4})$')
+          new RegExp('^DON-' + year + '-(\\d{4})$')
         );
         if (match) counter = Math.max(counter, Number(match[1]));
       });
@@ -85,6 +85,7 @@ function donStart(d) {
 
   return { ref: reference };
 }
+
 
 
 /**
