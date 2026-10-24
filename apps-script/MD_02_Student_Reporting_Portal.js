@@ -182,24 +182,67 @@ function hubGet() {
   const ss = portalSs_();
   const all = hubSettingsMap_(ss);
   const pub = {};
-  Object.keys(all).forEach(function (k) { if (/^(ABOUT_|CONTACT_|DONATE_|AD_)/.test(k)) pub[k] = all[k]; });
+
+  Object.keys(all).forEach(function (k) {
+    if (/^(ABOUT_|CONTACT_|DONATE_|AD_)/.test(k)) {
+      pub[k] = all[k];
+    }
+  });
+
   pub.DONATE_LINK = portalUrl_(pub.DONATE_LINK);
 
   let partners = [];
   const sh = ss.getSheetByName('Partners');
+
   if (sh && sh.getLastRow() > 1) {
     const v = sh.getDataRange().getValues();
     const h = v[0];
-    partners = v.slice(1).map(function (r) { const o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; })
-      .filter(function (o) { return String(o.Status).toLowerCase() === 'active' && o.Name; })
-      .sort(function (a, b) { return (Number(a.Display_Order) || 999) - (Number(b.Display_Order) || 999); })
+
+    partners = v.slice(1)
+      .map(function (r) {
+        const o = {};
+        h.forEach(function (k, i) {
+          o[k] = r[i];
+        });
+        return o;
+      })
+      .filter(function (o) {
+        return String(o.Status).toLowerCase() === 'active' && o.Name;
+      })
+      .sort(function (a, b) {
+        return (Number(a.Display_Order) || 999) -
+          (Number(b.Display_Order) || 999);
+      })
       .slice(0, 24)
       .map(function (o) {
-        return { name: String(o.Name), role: String(o.Role_Title || ''), category: String(o.Category || 'Partner'),
-          bio: String(o.Bio || ''), link: portalUrl_(o.Link_URL), image: hubImage_(o.Image_URL) };
+        return {
+          name: String(o.Name),
+          role: String(o.Role_Title || ''),
+          category: String(o.Category || 'Partner'),
+          bio: String(o.Bio || ''),
+          link: portalUrl_(o.Link_URL),
+          image: hubImage_(o.Image_URL)
+        };
       });
   }
-  return { s: pub, p: partners };
+
+  const secretKey = String(
+    PropertiesService.getScriptProperties()
+      .getProperty('PAYSTACK_SECRET_KEY') || ''
+  ).trim();
+
+  const pay = {
+    ready: !!secretKey,
+    min: 100,
+    max: 1000000,
+    presets: [500, 1000, 2000, 5000, 10000]
+  };
+
+  return {
+    s: pub,
+    p: partners,
+    pay: pay
+  };
 }
 
 /* ---------- Advertise, sponsor, donor-update and general enquiries ---------- */
@@ -289,4 +332,3 @@ function authorizePortal() {
   CacheService.getScriptCache().put('md_test', '1', 60);
   Logger.log(portalImage_(PORTAL.FLYER_URL, 300) ? 'Flyer OK' : 'Flyer NOT FOUND');
 }
-
