@@ -1,4 +1,3 @@
-
 /**
  * THE MOBILIZER'S DIARY — PAYSTACK DONATION ENGINE
  *
@@ -95,8 +94,9 @@ function donStart(d) {
 function donVerify_(reference) {
   reference = String(reference || '').trim();
 
-if (!/^DON-\d{4}-\d{4}$/.test(reference)) {
-
+  if (!/^DON-\d{4}-\d{4}$/.test(reference)) {
+    return { status: 'unknown' };
+  }
 
   var props = PropertiesService.getScriptProperties();
   var secretKey = String(props.getProperty('PAYSTACK_SECRET_KEY') || '').trim();
