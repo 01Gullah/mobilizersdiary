@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daily site report | The Mobilizer's Diary</title>
+<meta name="description" content="Fill a short daily report on site, preview it, save it and share it by WhatsApp.">
+<meta name="theme-color" content="#123F3B">
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--green:#123F3B;--gold:#C59B35;--bg:#F7F4EE;--card:#fff;--text:#163D39;--muted:#5B7370;--line:#DDD5C2;--input:#fff;--head:#123F3B;--btn:#123F3B;--alert:#B3261E;--soft:#F2E8C8}
+@media(prefers-color-scheme:dark){:root{--bg:#0D1E1C;--card:#14302D;--text:#ECE8DD;--muted:#9FB5B0;--line:#2B4A46;--input:#0F2623;--head:#E0BB62;--btn:#1E6A61;--alert:#FF8A80;--soft:#2B3A2A}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 'Source Serif 4',Georgia,serif;-webkit-text-size-adjust:100%}
+.brand{background:#123F3B;border-bottom:5px solid var(--gold);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px}
+.brand small{display:block;color:#E0BB62;font:800 11px Montserrat,Arial,sans-serif;letter-spacing:.14em}
+.brand h1{margin:2px 0 0;font:700 24px/1.2 'Playfair Display',Georgia,serif;color:#fff}
+main{max-width:640px;margin:0 auto;padding:6px 14px calc(96px + env(safe-area-inset-bottom))}
+.view{display:none}.view.on{display:block}
+h2{font:700 21px/1.25 'Playfair Display',Georgia,serif;color:var(--head);margin:18px 0 6px}
+.muted{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:6px;padding:14px;margin:12px 0}
+label{display:block;font:700 14px Montserrat,Arial,sans-serif;color:var(--head);margin:14px 0 5px}
+label .opt{font:400 13px 'Source Serif 4',Georgia,serif;color:var(--muted)}
+input,select,textarea{width:100%;min-height:48px;padding:12px;border:1.5px solid #B9B09A;border-radius:6px;background:var(--input);color:var(--text);font:16px 'Source Serif 4',Georgia,serif}
+textarea{min-height:96px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.err{color:var(--alert);font:600 14px Arial,sans-serif;margin:5px 0 0;min-height:0}
+.btn{display:block;width:100%;min-height:50px;margin-top:12px;padding:13px;border:0;border-bottom:4px solid var(--gold);border-radius:6px;background:var(--btn);color:#fff;font:800 14px Montserrat,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:center;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--head);border:1.5px solid var(--head);border-bottom-width:1.5px}
+.btn.small{display:inline-block;width:auto;min-height:44px;margin:8px 8px 0 0;padding:10px 14px;font-size:12px}
+.btn.danger{background:transparent;color:var(--alert);border:1.5px solid var(--alert)}
+.btn:disabled{opacity:.5}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.actions .wide{grid-column:1/-1}
+details.mgr{margin-top:8px}
+details.mgr summary{min-height:44px;padding:10px 0;color:var(--head);font:700 14px Montserrat,Arial,sans-serif;cursor:pointer}
+.addrow{display:grid;grid-template-columns:1fr auto;gap:8px}
+.addrow .btn{margin:0;width:auto;padding:0 18px}
+.chips{list-style:none;margin:10px 0 0;padding:0}
+.chips li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--alert);border-radius:6px;background:transparent;color:var(--alert);font:700 13px Arial,sans-serif}
+.photo{display:grid;grid-template-columns:84px 1fr auto;gap:10px;align-items:start;margin:10px 0}
+.photo img{width:84px;height:84px;object-fit:cover;border-radius:6px;border:2px solid var(--gold)}
+.photo input{min-height:44px}
+.photo button{min-height:44px;padding:0 12px;border:1.5px solid var(--alert);border-radius:6px;background:transparent;color:var(--alert);font:700 13px Arial,sans-serif}
+.item{display:flex;flex-direction:column;gap:2px}
+.item strong{font:700 18px 'Playfair Display',Georgia,serif;color:var(--head)}
+.empty{text-align:center;padding:28px 12px;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+table{border-collapse:collapse;font:13px/1.45 Arial,sans-serif;min-width:100%}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;min-width:92px}
+th{position:sticky;top:0;background:var(--soft);color:var(--head);white-space:nowrap}
+td.long{min-width:210px;max-width:260px;white-space:pre-wrap}
+.paper{background:#fff;color:#111;border:1px solid #D9D1BD;border-top:6px solid #C59B35;padding:18px 16px;font:16px/1.6 'Source Serif 4',Georgia,serif;margin-top:12px}
+.paper h2{font:700 25px/1.2 'Playfair Display',Georgia,serif;color:#123F3B;margin:0}
+.paper .date{color:#333;margin:2px 0 12px}
+.paper dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0 0 6px}
+.paper dt{font-weight:600;color:#123F3B}.paper dd{margin:0}
+.paper h3{font:700 14px Montserrat,Arial,sans-serif;color:#123F3B;margin:14px 0 2px}
+.paper p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+.pgrid figure{margin:0;break-inside:avoid}
+.pgrid img{display:block;width:100%;height:auto;border:1px solid #ccc}
+.pgrid figcaption{font-size:13px;color:#333;margin-top:3px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,1fr);background:#123F3B;border-top:4px solid var(--gold);padding-bottom:env(safe-area-inset-bottom)}
+nav button{min-height:56px;border:0;border-top:4px solid transparent;margin-top:-4px;background:transparent;color:#DCE7E4;font:700 13px Montserrat,Arial,sans-serif}
+nav button[aria-current=page]{color:#fff;border-top-color:#fff;background:rgba(255,255,255,.08)}
+#toast{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:30;max-width:616px;margin:0 auto;padding:12px 14px;border-radius:6px;background:#123F3B;color:#fff;border-left:5px solid var(--gold);font:600 14px Arial,sans-serif;display:none}
+#toast.err{background:#7A1F1A;border-left-color:#FF8A80;color:#fff}
+#toast.on{display:block}
+.note{border-left:5px solid var(--gold);background:var(--card);padding:10px 14px;font-size:14px;margin:12px 0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  @page{margin:14mm}
+  body{background:#fff}
+  .brand,nav,.noprint,#toast,.view:not(#view-preview){display:none!important}
+  main{padding:0;max-width:none}
+  .paper{border:0;padding:0;margin:0}
+}
+</style>
+</head>
+<body>
+<header class="brand"><small>THE MOBILIZER'S DIARY</small><h1>Daily site report</h1></header>
+<main>
+
+<section class="view on" id="view-new" aria-labelledby="h-new">
+  <h2 id="h-new">New report</h2>
+  <p class="muted" id="edit-note">Fill what applies today. Empty fields are left out of the report.</p>
+  <div class="note hidden" id="storage-note" role="status" hidden></div>
+  <form id="form" novalidate autocomplete="off">
+    <div class="card">
+      <label for="f-name">Intern name</label><input id="f-name" autocomplete="name">
+      <label for="f-company">Company</label><input id="f-company">
+      <label for="f-project">Project or site</label><input id="f-project">
+      <label for="f-date">Date <span class="opt">(required)</span></label><input id="f-date" type="date" required>
+      <p class="err" id="err-date" role="alert"></p>
+      <label for="f-sup">Engineer or supervisor</label>
+      <select id="f-sup"></select>
+      <details class="mgr"><summary>Manage my engineer list</summary>
+        <div class="addrow"><input id="eng-new" placeholder="Add a name" aria-label="New engineer name"><button class="btn" id="eng-add" type="button">Add</button></div>
+        <p class="err" id="err-eng" role="alert"></p>
+        <ul class="chips" id="eng-list"></ul>
+        <p class="muted">This list is private to this phone.</p>
+      </details>
+      <div class="two">
+        <div><label for="f-tin">Time in</label><input id="f-tin" type="time"></div>
+        <div><label for="f-tout">Time out</label><input id="f-tout" type="time"></div>
+      </div>
+      <div class="two">
+        <div><label for="f-weather">Weather</label>
+          <select id="f-weather"><option>Not recorded</option><option>Sunny</option><option>Cloudy</option><option>Rainy</option><option>Windy</option><option>Very hot</option><option>Changing through the day</option></select></div>
+        <div><label for="f-workers">Workers on site</label><input id="f-workers" inputmode="numeric" placeholder="e.g. 14"></div>
+      </div>
+    </div>
+    <div class="card">
+      <label for="f-equip">Equipment in use</label><textarea id="f-equip"></textarea>
+      <label for="f-work">Work done <span class="opt">(required)</span></label><textarea id="f-work"></textarea>
+      <p class="err" id="err-work" role="alert"></p>
+      <label for="f-mats">Materials</label><textarea id="f-mats"></textarea>
+      <label for="f-safety">Safety observations</label><textarea id="f-safety"></textarea>
+      <label for="f-issues">Delays and issues</label><textarea id="f-issues"></textarea>
+      <label for="f-learn">What I learned</label><textarea id="f-learn"></textarea>
+      <label for="f-next">Plan for tomorrow</label><textarea id="f-next"></textarea>
+    </div>
+    <div class="card">
+      <label for="photo-in">Photos <span class="opt" id="photo-count">(0 of 6)</span></label>
+      <input id="photo-in" type="file" accept="image/*" multiple hidden>
+      <button class="btn ghost" id="photo-add" type="button">Add photos</button>
+      <div id="photo-list"></div>
+      <p class="muted">Photos are shrunk to fit before saving.</p>
+    </div>
+    <p class="err" id="form-msg" role="alert"></p>
+    <div class="actions">
+      <button class="btn ghost" id="b-preview" type="button">Preview</button>
+      <button class="btn" id="b-save" type="button">Save report</button>
+      <button class="btn ghost" id="b-sample" type="button">Fill with a sample</button>
+      <button class="btn ghost" id="b-clear" type="button">Clear</button>
+    </div>
+  </form>
+  <p class="muted">Reports stay on this phone. Nothing is shared unless you tap a share button.</p>
+</section>
+
+<section class="view" id="view-saved" aria-labelledby="h-saved">
+  <h2 id="h-saved">Saved reports</h2>
+  <div id="saved-list"></div>
+</section>
+
+<section class="view" id="view-log" aria-labelledby="h-log">
+  <h2 id="h-log">Log</h2>
+  <p class="muted" id="log-meta"></p>
+  <div class="actions noprint">
+    <button class="btn" id="b-copy-sheet" type="button">Copy for spreadsheet</button>
+    <button class="btn ghost" id="b-csv" type="button">Download CSV</button>
+  </div>
+  <div class="tw" id="log-wrap"><table id="log-table"></table></div>
+</section>
+
+<section class="view" id="view-preview" aria-labelledby="h-prev">
+  <h2 id="h-prev" class="noprint">Report preview</h2>
+  <div class="actions noprint">
+    <button class="btn" id="b-print" type="button">Print or save as PDF</button>
+    <button class="btn ghost" id="b-copy" type="button">Copy as text</button>
+    <button class="btn" id="b-wa" type="button">Share on WhatsApp</button>
+    <button class="btn ghost" id="b-back" type="button">Back to edit</button>
+  </div>
+  <article class="paper" id="paper"></article>
+</section>
+
+</main>
+<nav aria-label="Sections">
+  <button type="button" data-tab="new" aria-current="page">New report</button>
+  <button type="button" data-tab="saved">Saved</button>
+  <button type="button" data-tab="log">Log</button>
+</nav>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="reports-sheet.js"></script>
+<script>
+(function () {
+  'use strict';
+  var RS = window.ReportsSheet;
+  var $ = function (id) { return document.getElementById(id); };
+  var F = ['name', 'company', 'project', 'date', 'sup', 'tin', 'tout', 'weather', 'workers', 'equip', 'work', 'mats', 'safety', 'issues', 'learn', 'next'];
+  var KEY = { name: 'name', company: 'company', project: 'project', date: 'date', sup: 'supervisor', tin: 'tin', tout: 'tout', weather: 'weather', workers: 'workers', equip: 'equip', work: 'work', mats: 'mats', safety: 'safety', issues: 'issues', learn: 'learn', next: 'next' };
+  var state = { editId: null, photos: [], preview: null, previewFrom: 'new', view: 'new' };
+  var toastTimer = null;
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function toast(msg, isErr) {
+    var t = $('toast'); t.textContent = msg; t.className = (isErr ? 'err ' : '') + 'on';
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.className = ''; }, isErr ? 7000 : 3000);
+  }
+  function setView(name) {
+    state.view = name;
+    ['new', 'saved', 'log', 'preview'].forEach(function (v) { $('view-' + v).classList.toggle('on', v === name); });
+    var tab = name === 'preview' ? state.previewFrom : name;
+    Array.prototype.forEach.call(document.querySelectorAll('nav button'), function (b) {
+      if (b.dataset.tab === tab) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- form ---------- */
+  function collect() {
+    var r = { id: state.editId || '', photos: state.photos.map(function (p) { return { src: p.src, cap: p.cap }; }) };
+    F.forEach(function (f) { r[KEY[f]] = $('f-' + f).value; });
+    return r;
+  }
+  function clearErrors() { ['date', 'work'].forEach(function (k) { $('err-' + k).textContent = ''; }); $('form-msg').textContent = ''; }
+  function fillForm(r) {
+    F.forEach(function (f) { $('f-' + f).value = r[KEY[f]] || ''; });
+    if (!$('f-weather').value) $('f-weather').value = RS.NOT_RECORDED;
+    state.photos = (r.photos || []).map(function (p) { return { src: p.src, cap: p.cap || '' }; });
+    state.editId = r.id || null;
+    renderPhotos(); clearErrors();
+    $('edit-note').textContent = state.editId ? 'You are editing a saved report. Save to update it.' : 'Fill what applies today. Empty fields are left out of the report.';
+  }
+  function freshForm() {
+    var p = RS.getProfile();
+    fillForm({ date: today(), weather: RS.NOT_RECORDED, name: p.name, company: p.company, project: p.project, supervisor: p.supervisor });
+    state.editId = null;
+    renderEngineers(p.supervisor);
+    $('f-sup').value = p.supervisor || '';
+    $('edit-note').textContent = 'Fill what applies today. Empty fields are left out of the report.';
+  }
+  function hasContent() {
+    var r = collect();
+    return !!(r.work || r.equip || r.mats || r.safety || r.issues || r.learn || r.next || r.workers || r.photos.length);
+  }
+
+  /* ---------- engineers ---------- */
+  function renderEngineers(selected) {
+    var sel = $('f-sup'), keep = selected != null ? selected : sel.value, names = RS.listEngineers();
+    sel.textContent = '';
+    var first = el('option', '', names.length ? 'Choose an engineer' : 'Add an engineer below'); first.value = ''; sel.appendChild(first);
+    names.forEach(function (n) { var o = el('option', '', n); o.value = n; sel.appendChild(o); });
+    sel.value = names.indexOf(keep) >= 0 ? keep : '';
+    var ul = $('eng-list'); ul.textContent = '';
+    names.forEach(function (n) {
+      var li = el('li'); li.appendChild(el('span', '', n));
+      var b = el('button', '', 'Remove'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + n + ' from my list');
+      b.addEventListener('click', function () {
+        RS.removeEngineer(n).then(function (res) { if (!res.ok) { $('err-eng').textContent = res.error; return; } $('err-eng').textContent = ''; renderEngineers(); });
+      });
+      li.appendChild(b); ul.appendChild(li);
+    });
+  }
+  $('eng-add').addEventListener('click', function () {
+    RS.addEngineer($('eng-new').value).then(function (res) {
+      $('err-eng').textContent = res.ok ? '' : res.error;
+      if (res.ok) { $('eng-new').value = ''; renderEngineers(res.name); }
+    });
+  });
+
+  /* ---------- photos ---------- */
+  function renderPhotos() {
+    var box = $('photo-list'); box.textContent = '';
+    state.photos.forEach(function (p, i) {
+      var row = el('div', 'photo'); var img = el('img'); img.src = p.src; img.alt = p.cap || 'Photo ' + (i + 1);
+      var cap = el('input'); cap.placeholder = 'Caption (optional)'; cap.value = p.cap; cap.maxLength = 200; cap.setAttribute('aria-label', 'Caption for photo ' + (i + 1));
+      cap.addEventListener('input', function () { p.cap = cap.value; });
+      var rm = el('button', '', 'Remove'); rm.type = 'button'; rm.setAttribute('aria-label', 'Remove photo ' + (i + 1));
+      rm.addEventListener('click', function () { state.photos.splice(i, 1); renderPhotos(); });
+      row.appendChild(img); row.appendChild(cap); row.appendChild(rm); box.appendChild(row);
+    });
+    $('photo-count').textContent = '(' + state.photos.length + ' of ' + RS.MAX_PHOTOS + ')';
+    $('photo-add').disabled = state.photos.length >= RS.MAX_PHOTOS;
+  }
+  $('photo-add').addEventListener('click', function () { $('photo-in').click(); });
+  $('photo-in').addEventListener('change', function () {
+    var files = Array.prototype.slice.call(this.files || []), input = this;
+    var room = RS.MAX_PHOTOS - state.photos.length;
+    if (files.length > room) { toast('Only ' + RS.MAX_PHOTOS + ' photos fit in one report. Added the first ' + room + '.', true); files = files.slice(0, room); }
+    files.reduce(function (chain, f) {
+      return chain.then(function () {
+        return RS.resizeImage(f, 900, 0.7).then(function (src) { state.photos.push({ src: src, cap: '' }); renderPhotos(); })
+          .catch(function (e) { toast(e.message, true); });
+      });
+    }, Promise.resolve()).then(function () { input.value = ''; });
+  });
+
+  /* ---------- actions ---------- */
+  $('b-save').addEventListener('click', function () {
+    clearErrors();
+    var r = collect(), check = RS.validate(r);
+    if (!check.ok) {
+      check.errors.forEach(function (e) { $('err-' + e.field).textContent = e.message; });
+      $('f-' + check.errors[0].field).focus(); return;
+    }
+    var b = this; b.disabled = true;
+    RS.save(r).then(function (res) {
+      b.disabled = false;
+      if (!res.ok) { $('form-msg').textContent = res.error; toast(res.error, true); return; }
+      state.editId = res.report.id;
+      $('edit-note').textContent = 'You are editing a saved report. Save to update it.';
+      RS.saveProfile({ name: r.name, company: r.company, project: r.project, supervisor: r.supervisor });
+      renderSaved(); renderLog();
+      toast(res.synced === false ? 'Saved on this phone. Online save failed: ' + res.syncError : 'Report saved.', res.synced === false);
+    });
+  });
+  $('b-preview').addEventListener('click', function () { openPreview(collect(), 'new'); });
+  $('b-sample').addEventListener('click', function () {
+    if (hasContent() && !window.confirm('Replace what you have typed with a sample report?')) return;
+    var p = RS.getProfile();
+    fillForm({
+      date: today(), name: p.name || 'Sample Intern', company: p.company || 'Sample Construction Ltd',
+      project: p.project || 'Block B student hostel, 3 storeys', supervisor: $('f-sup').value || p.supervisor,
+      tin: '07:30', tout: '16:30', weather: 'Sunny', workers: '18',
+      equip: 'Concrete mixer, poker vibrator, scaffolding',
+      work: 'Poured and compacted the first-floor slab between grid lines C and F. Checked reinforcement cover with the engineer before the pour.',
+      mats: 'Ready-mix concrete (22 m3), spacers, curing sheets',
+      safety: 'All workers wore helmets and boots. A missing edge guard was fixed before work started.',
+      issues: 'The mixer truck arrived 40 minutes late, so the pour finished at 14:00.',
+      learn: 'Why a slump test is taken before every pour and what the result tells us.',
+      next: 'Cure the slab and strike the formwork on the ground-floor columns.'
+    });
+    state.editId = null; $('f-sup').value = $('f-sup').value;
+    toast('Sample filled in. Edit it or tap Clear.');
+  });
+  $('b-clear').addEventListener('click', function () {
+    if (hasContent() && !window.confirm('Clear this report? Your name, company, project and engineer stay filled in.')) return;
+    freshForm(); toast('Form cleared.');
+  });
+
+  /* ---------- preview ---------- */
+  function openPreview(report, from) {
+    state.preview = report; state.previewFrom = from;
+    var s = RS.sections(report), paper = $('paper'); paper.textContent = '';
+    paper.appendChild(el('h2', '', s.title)); paper.appendChild(el('p', 'date', s.date));
+    if (s.details.length) {
+      var dl = el('dl'); s.details.forEach(function (d) { dl.appendChild(el('dt', '', d.label)); dl.appendChild(el('dd', '', d.value)); }); paper.appendChild(dl);
+    }
+    s.items.forEach(function (i) { paper.appendChild(el('h3', '', i.label)); paper.appendChild(el('p', '', i.value)); });
+    if (s.photos.length) {
+      paper.appendChild(el('h3', '', 'Photos'));
+      var g = el('div', 'pgrid');
+      s.photos.forEach(function (p, i) {
+        var fig = el('figure'), img = el('img'); img.src = p.src; img.alt = p.cap || 'Site photo ' + (i + 1); fig.appendChild(img);
+        if (p.cap) fig.appendChild(el('figcaption', '', p.cap)); g.appendChild(fig);
+      });
+      paper.appendChild(g);
+    }
+    setView('preview');
+  }
+  $('b-print').addEventListener('click', function () { window.print(); });
+  $('b-copy').addEventListener('click', function () { copyText(RS.toText(state.preview), 'Report copied as text.'); });
+  $('b-wa').addEventListener('click', function () {
+    var w = window.open(RS.whatsappUrl(state.preview), '_blank', 'noopener');
+    if (!w) window.location.href = RS.whatsappUrl(state.preview);
+  });
+  $('b-back').addEventListener('click', function () {
+    if (state.previewFrom === 'saved' && state.preview && state.preview.id) { fillForm(state.preview); }
+    setView('new');
+  });
+  function copyText(text, okMsg) {
+    function fallback() {
+      var ta = el('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+      toast(ok ? okMsg : 'Copy failed. Select the text and copy it by hand.', !ok);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(okMsg); }, fallback); else fallback();
+  }
+
+  /* ---------- saved list ---------- */
+  function renderSaved() {
+    var box = $('saved-list'), reports = RS.list(); box.textContent = '';
+    if (!reports.length) { box.appendChild(el('p', 'empty', 'No saved reports yet. Fill in a report and tap Save report.')); return; }
+    reports.forEach(function (r) {
+      var card = el('article', 'card item');
+      card.appendChild(el('strong', '', RS.formatDate(r.date) || 'Date not set'));
+      card.appendChild(el('span', '', r.project || 'No project named'));
+      if (r.supervisor) card.appendChild(el('span', 'muted', 'Engineer: ' + r.supervisor));
+      var row = el('div');
+      [['View', function () { openPreview(r, 'saved'); }, ''], ['Edit', function () { fillForm(r); setView('new'); }, ''],
+       ['Delete', function () {
+         if (!window.confirm('Delete the report for ' + (RS.formatDate(r.date) || 'this date') + '? This cannot be undone.')) return;
+         RS.remove(r.id).then(function (res) {
+           if (!res.ok) { toast(res.error, true); return; }
+           if (state.editId === r.id) freshForm();
+           renderSaved(); renderLog(); toast('Report deleted.');
+         });
+       }, ' danger']].forEach(function (a) {
+        var b = el('button', 'btn small ghost' + a[2], a[0]); b.type = 'button'; b.addEventListener('click', a[1]); row.appendChild(b);
+      });
+      card.appendChild(row); box.appendChild(card);
+    });
+  }
+
+  /* ---------- log ---------- */
+  var LONG = { 'Work done': 1, Equipment: 1, Materials: 1, Safety: 1, Issues: 1, Learned: 1, 'Plan for tomorrow': 1 };
+  function renderLog() {
+    var reports = RS.list(), table = $('log-table'), heads = RS.headers();
+    table.textContent = '';
+    $('log-meta').textContent = reports.length ? reports.length + (reports.length === 1 ? ' report, newest first.' : ' reports, newest first.') : 'No reports in the log yet.';
+    $('b-copy-sheet').disabled = $('b-csv').disabled = !reports.length;
+    $('log-wrap').style.display = reports.length ? '' : 'none';
+    if (!reports.length) return;
+    var thead = el('thead'), hr = el('tr');
+    heads.forEach(function (h) { var th = el('th', '', h); th.scope = 'col'; hr.appendChild(th); });
+    thead.appendChild(hr); table.appendChild(thead);
+    var tb = el('tbody');
+    RS.rows(reports).forEach(function (row) {
+      var tr = el('tr'); row.forEach(function (c, i) { tr.appendChild(el('td', LONG[heads[i]] ? 'long' : '', c)); }); tb.appendChild(tr);
+    });
+    table.appendChild(tb);
+  }
+  $('b-copy-sheet').addEventListener('click', function () { copyText(RS.toTSV(RS.list()), 'Copied. Paste it into your spreadsheet.'); });
+  $('b-csv').addEventListener('click', function () {
+    var blob = new Blob(['\ufeff' + RS.toCSV(RS.list())], { type: 'text/csv;charset=utf-8' }), a = el('a');
+    a.href = URL.createObjectURL(blob); a.download = 'site-reports-' + today() + '.csv'; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 500);
+  });
+
+  /* ---------- tabs and start ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('nav button'), function (b) {
+    b.addEventListener('click', function () { var t = b.dataset.tab; if (t === 'saved') renderSaved(); if (t === 'log') renderLog(); setView(t); });
+  });
+  RS.init().then(function (info) {
+    if (!info.persistent) {
+      var n = $('storage-note'); n.hidden = false; n.classList.remove('hidden');
+      n.textContent = 'This browser is blocking storage, so reports will be lost when you close this page. Copy or share each report before you leave.';
+    }
+    freshForm(); renderSaved(); renderLog();
+  }).catch(function () { toast('Could not start storage. Reports will not be kept.', true); freshForm(); });
+})();
+</script>
+</body>
+</html>
