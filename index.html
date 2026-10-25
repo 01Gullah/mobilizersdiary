@@ -134,6 +134,14 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 @media(max-width:380px){.md-wel-card{padding:20px 16px 18px 20px}.md-wel-card h2{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.md-wel-card,.md-wel-cover,.md-wel-spark,.md-diary-btn{animation:none!important}#md-diary-label{transition:none!important}}
 
+.md-footer-links button.md-founder-link{color:var(--green);background:linear-gradient(135deg,#F7EBC6,#FFF8E1);border:1.5px solid var(--gold);border-radius:22px;padding:9px 18px;text-decoration:none;font-weight:800;cursor:pointer;animation:mdFounderGlow 2.6s ease-in-out infinite}
+.md-footer-links button.md-founder-link:hover,.md-footer-links button.md-founder-link:focus-visible{background:var(--gold);color:#fff;outline:3px solid rgba(197,155,53,.45);outline-offset:2px}
+@keyframes mdFounderGlow{0%,100%{box-shadow:0 0 0 0 rgba(197,155,53,.55);transform:translateY(0)}50%{box-shadow:0 0 0 9px rgba(197,155,53,0);transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.md-footer-links button.md-founder-link{animation:none!important}}
+.fmotto{margin:18px 0 6px;padding:10px 14px;background:#fff;border-left:5px solid var(--gold);font:italic 700 18px/1.4 'Playfair Display',Georgia,serif;color:var(--green)}
+.fphoto{display:block;width:100%;max-width:280px;height:auto;margin:0 auto 16px;border:3px solid var(--gold);border-radius:8px;background:#fff}
+.frole{font:600 14px Arial,sans-serif;color:var(--neutral);margin:0 0 14px}
+.fstory p{margin:0 0 14px;font-size:17px;line-height:1.7}
 </style>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
@@ -403,10 +411,20 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
   <button class="btn" id="u-home" onclick="payHome()" style="display:none">Back to Home</button>
 </div>
 
+<!-- 14 FOUNDER -->
+<div class="step" id="s14">
+  <p class="kick">Founder</p><h2 id="fo-name">Comr. (Engr.) Lukman Aminu Gullah</h2><div class="rule"></div>
+  <img class="fphoto" id="fo-img" alt="Founder of The Mobilizer's Diary" style="display:none">
+  <p class="frole" id="fo-role">Founder, The Mobilizer's Diary</p>
+  <div class="fstory" id="fo-body"><p class="muted">Loading...</p></div>
+  <button class="btn" type="button" onclick="show(2)">Share Your Story</button>
+  <button class="btn ghost" onclick="show(1)">Back to Home</button>
+</div>
+
 <footer class="foot">
   <div>THE MOBILIZER'S DIARY. Amplifying student voices, preserving institutional memory, promoting accountability.</div>
   <nav class="md-footer-links" aria-label="Project links">
-    <button type="button" onclick="hubOpen('support')">Support Our Work</button>
+    <button type="button" class="md-founder-link" onclick="hubOpen('founder')">Founder</button>
     <a href="https://mobilizersdiary.com.ng/" target="_blank" rel="noopener">Visit The Mobilizer's Diary</a>
   </nav>
   <p class="md-sponsor-ack">Sponsored placements will be clearly labelled. Sponsor acknowledgements appear only for approved partners.</p>
@@ -456,7 +474,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(197,155,53,.45);b
 <script>
 var subType='';
 var NOM='Campus Spotlight Nomination';
-var prog={1:0,2:1,3:2,4:3,5:3,6:4,7:5,8:0,9:0,10:0,11:0,12:0,13:0};
+var prog={1:0,2:1,3:2,4:3,5:3,6:4,7:5,8:0,9:0,10:0,11:0,12:0,13:0,14:0};
 function $(i){return document.getElementById(i)}
 function v(i){return $(i).value.replace(/^\s+|\s+$/g,'')}
 function mail(e) {
@@ -639,7 +657,7 @@ function load(cb){
     data=d;loading=false;var q=queue;queue=[];q.forEach(function(f){f()});
   },function(){
     loading=false;queue=[];
-    ['ab-body','su-body','ad-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
+    ['ab-body','su-body','ad-body','fo-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
   });
 }
 
@@ -726,6 +744,38 @@ function renderAd(){
   if(s.AD_POLICY){b.appendChild(mk('h3','hh','Our Editorial Independence'));b.appendChild(noteBox(s.AD_POLICY))}
 }
 
+var FOUNDER_STORY=[
+'I studied Civil Engineering (B.Eng.) at the Federal University of Technology, Minna, and spent my student years in leadership. I served as Chief of Staff to the Faculty President of Engineering (2023/2024), Chief of Staff to the Senate President of the Student Representative Assembly of the Student Union Government (2024/2025), and Special Adviser to the Student Union President on Political Affairs and External Engagements (2025/2026).',
+'In my final years, my fellow students and I faced two heavy burdens: insecurity off campus and a rising cost of living. We were told that off-campus security was not primarily the school\u2019s responsibility, until students protested. Only then did management take responsibility, and even then the problems continued. Around that time, I began to lose hope in unionism. Many students no longer felt fully represented, and they did not know where to take their grievances.',
+'The Mobilizer\u2019s Diary was born from that experience: a place where students speak directly, and where their voices are reviewed, verified and amplified.',
+'Campaigning taught me how to organise. I co-championed the campaigns that delivered the Faculty Presidency in 2023/2024 and again in 2024/2025, and I took an active, leading part in the campaigns for the Senate Presidency (2024/2025) and the Student Union Presidency (2025/2026).',
+'I love to execute. When I see a problem, I move to solve it, because the problems we solve shape who we become and fuel the long journey ahead.'
+];
+var FOUNDER_MOTTO='Solve the problem. Let it shape and enrich you.';
+function renderFounder(){
+  var s=data.s,b=$('fo-body');b.innerHTML='';
+  var f=null;
+  (data.p||[]).forEach(function(p){if(!f&&p.category==='Founder')f=p});
+  $('fo-name').textContent='Comr. (Engr.) Lukman Aminu Gullah';
+  $('fo-role').textContent='Founder, The Mobilizer\u2019s Diary';
+  var img=$('fo-img'),tries=['Founder.JPG','Founder.jpg','Founder.jpeg','Founder.png','founder.jpg','founder.jpeg','founder.png'],ti=0;
+  img.onload=function(){img.style.display='block'};
+  img.onerror=function(){
+    ti++;
+    if(ti<tries.length){img.src=tries[ti];return}
+    img.onerror=null;
+    if(f&&f.image){img.onload=function(){img.style.display='block'};img.src=f.image}else{img.style.display='none'}
+  };
+  img.src=tries[0];
+  var custom=lines(s.ABOUT_FOUNDER_STORY);
+  if(custom.length){custom.forEach(function(l){b.appendChild(mk('p',null,l))})}
+  else{
+    FOUNDER_STORY.forEach(function(l){b.appendChild(mk('p',null,l))});
+    b.appendChild(mk('p','fmotto',FOUNDER_MOTTO));
+  }
+  if(f&&f.link){var a=mk('a',null,'Visit website');a.href=f.link;a.target='_blank';a.rel='noopener';var pp=mk('p');pp.appendChild(a);b.appendChild(pp)}
+}
+
 /* consent page: shown every time before the giving page */
 function gateOpen(toGive){
   pendingGive=!!toGive;giveConsent=false;
@@ -753,6 +803,7 @@ $('gate-c').onchange=function(){
 
 window.hubOpen=function(which,toGive){
   if(which==='support'){gateOpen(toGive);return}
+  if(which==='founder'){show(14);load(renderFounder);return}
   show(which==='about'?8:10);
   load(function(){if(which==='about')renderAbout();else renderAd()});
 };
