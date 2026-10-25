@@ -657,7 +657,7 @@ function load(cb){
     data=d;loading=false;var q=queue;queue=[];q.forEach(function(f){f()});
   },function(){
     loading=false;queue=[];
-    ['ab-body','su-body','ad-body','fo-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
+    ['ab-body','su-body','ad-body'].forEach(function(id){$(id).innerHTML='';$(id).appendChild(mk('p','muted','Could not load this page. Please go back and try again.'))});
   });
 }
 
@@ -753,12 +753,12 @@ var FOUNDER_STORY=[
 ];
 var FOUNDER_MOTTO='Solve the problem. Let it shape and enrich you.';
 function renderFounder(){
-  var s=data.s,b=$('fo-body');b.innerHTML='';
+  var s=(data&&data.s)||{},b=$('fo-body');b.innerHTML='';
   var f=null;
-  (data.p||[]).forEach(function(p){if(!f&&p.category==='Founder')f=p});
+  ((data&&data.p)||[]).forEach(function(p){if(!f&&p.category==='Founder')f=p});
   $('fo-name').textContent='Comr. (Engr.) Lukman Aminu Gullah';
   $('fo-role').textContent='Founder, The Mobilizer\u2019s Diary';
-  var img=$('fo-img'),tries=['Founder.JPG','Founder.jpg','Founder.jpeg','Founder.png','founder.jpg','founder.jpeg','founder.png'],ti=0;
+  var img=$('fo-img'),tries=['Founder.JPG','https://raw.githubusercontent.com/01Gullah/mobilizersdiary/main/Founder.JPG','Founder.jpg','Founder.jpeg','Founder.png','founder.jpg','founder.jpeg','founder.png'],ti=0;
   img.onload=function(){img.style.display='block'};
   img.onerror=function(){
     ti++;
@@ -803,7 +803,11 @@ $('gate-c').onchange=function(){
 
 window.hubOpen=function(which,toGive){
   if(which==='support'){gateOpen(toGive);return}
-  if(which==='founder'){show(14);load(renderFounder);return}
+  if(which==='founder'){
+    show(14);renderFounder();
+    load(function(){if(data&&data.s&&(data.s.ABOUT_FOUNDER_STORY||(data.p||[]).some(function(p){return p.category==='Founder'}))){renderFounder()}});
+    return;
+  }
   show(which==='about'?8:10);
   load(function(){if(which==='about')renderAbout();else renderAd()});
 };
