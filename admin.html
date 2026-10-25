@@ -10,7 +10,24 @@
 :root{--green:#123F3B;--gold:#C59B35;--ivory:#F7F4EE;--ink:#183B37;--muted:#657873;--line:#DED8C7;--white:#fff;--red:#9d2e27;--soft:#e9efe9}
 *{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:16px/1.5 Arial,Helvetica,sans-serif}.wrap{max-width:980px;margin:auto;padding:12px 10px 36px}.brand{padding:19px 17px;background:var(--green);border-bottom:5px solid var(--gold);color:#fff;border-radius:8px 8px 0 0}.brand b{font-size:18px;letter-spacing:.07em}.brand span{color:#e2bf63}.brand p{margin:5px 0 0;color:#e2bf63;font-size:11px;letter-spacing:.12em}main{background:#fff;padding:16px;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px}.eyebrow{margin:0 0 6px;color:#8b6919;font-size:11px;font-weight:bold;letter-spacing:.13em;text-transform:uppercase}h1,h2,h3{margin:0 0 9px;color:var(--green);line-height:1.25}h1{font-size:25px}h2{font-size:20px}h3{font-size:17px}.muted{color:var(--muted);font-size:13px}.card{padding:15px;margin:13px 0;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:7px;background:#fff}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px;margin:8px 0}.field label{font-size:13px;font-weight:bold}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #aab7b1;border-radius:5px;background:#fff;font:inherit;color:var(--ink)}.field textarea{min-height:84px;resize:vertical}.btn{appearance:none;border:0;border-bottom:3px solid #9e7921;border-radius:5px;background:var(--green);color:#fff;padding:11px 14px;font-weight:bold;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}.btn.secondary{background:#eef1ed;color:var(--green);border:1px solid #bac8c0}.btn.danger{background:#fff2f1;color:var(--red);border:1px solid #d6aaa5}.btn:disabled{opacity:.55;cursor:wait}.notice{padding:11px;border-radius:5px;background:var(--soft);color:var(--green);font-size:14px}.error{background:#fff1f0;color:var(--red)}.hidden{display:none!important}.item{padding:13px 0;border-top:1px solid var(--line)}.item:first-child{border-top:0}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#f1ead8;color:#5e4a18;font-size:11px;font-weight:bold}.details{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}.divider{height:1px;background:var(--line);margin:14px 0}.small{font-size:12px}.sticky{position:sticky;top:0;background:var(--ivory);padding:6px 0;z-index:2}.list{max-height:650px;overflow:auto}.footer{text-align:center;color:var(--muted);font-size:12px;padding:13px}.submission-summary{margin:6px 0;padding:9px 11px;background:#f7f4ee;border-left:3px solid var(--gold);border-radius:3px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.team-label{font-size:12px;color:var(--muted)}a.work-link{color:var(--green);font-weight:bold;overflow-wrap:anywhere}.filter-grid{display:grid;grid-template-columns:1fr 1.5fr auto;gap:8px;align-items:end}.page-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0}.deliverable{margin:8px 0;padding:10px;background:#f7f8f5;border:1px solid var(--line);border-radius:5px}.deliverable strong{color:var(--green)}
 @media(max-width:620px){.wrap{padding:7px 7px 25px}.brand{padding:16px 14px}main{padding:12px}.grid,.filter-grid{grid-template-columns:1fr}h1{font-size:23px}.btn{min-height:44px}.card{padding:12px}.page-controls .btn{flex:1}.sticky{align-items:flex-start}}
-.help{padding:10px 12px;margin:10px 0;background:#eef7f3;border-left:3px solid var(--gold);font-size:12px;line-height:1.55;color:var(--ink)}.composer-row{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.composer-row label{flex:1;font-size:12px}.composer-row input[type=number]{width:80px;padding:7px;border:1px solid #aab7b1;border-radius:4px}.footer-options{padding:10px 0}.footer-options summary{font-weight:bold;color:var(--green);cursor:pointer}.attention-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}.attention-metric{padding:10px;background:#f7f4ee;border:1px solid var(--line);border-radius:5px}.attention-metric strong{display:block;font-size:23px;color:var(--green)}.attention-metric span{font-size:12px}pre.details{max-height:500px;overflow:auto;background:#f7f8f5;padding:10px}
+.help{padding:10px 12px;margin:10px 0;background:#eef7f3;border-left:3px solid var(--gold);font-size:12px;line-height:1.55;color:var(--ink)}.composer-row{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.composer-row label{flex:1;font-size:12px}.composer-row input[type=number]{width:80px;padding:7px;border:1px solid #aab7b1;border-radius:4px}.footer-options{padding:10px 0}.footer-options summary{font-weight:bold;color:var(--green);cursor:pointer}pre.details{max-height:500px;overflow:auto;background:#f7f8f5;padding:10px}
+.attention-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.attention-metric{display:block;width:100%;min-height:44px;padding:10px;background:#f7f4ee;border:1px solid var(--line);border-radius:5px;font:inherit;color:var(--ink);text-align:left;cursor:pointer;position:relative;transition:transform .15s ease,box-shadow .15s ease}
+.attention-metric:hover,.attention-metric:focus-visible{transform:translateY(-2px);box-shadow:0 4px 12px rgba(18,63,59,.15);outline:3px solid rgba(197,155,53,.45);outline-offset:1px}
+.attention-metric strong{display:block;font-size:23px;color:var(--green)}
+.attention-metric span{font-size:12px}
+.attention-metric .attn-go{display:block;margin-top:4px;font:italic bold 11px Arial,Helvetica,sans-serif;color:var(--muted)}
+.attention-metric.attn-on{background:#fff8e6;border:2px solid var(--gold);animation:mdAttn 1.8s ease-in-out infinite}
+.attention-metric.attn-on::after{content:"";position:absolute;top:8px;right:8px;width:10px;height:10px;border-radius:50%;background:var(--gold);animation:mdAttnDot 1.2s ease-in-out infinite}
+.attention-metric.attn-on .attn-go{color:var(--green)}
+.attention-metric.attn-urgent{background:#fff1f0;border-color:var(--red);animation-name:mdAttnRed}
+.attention-metric.attn-urgent strong{color:var(--red)}
+.attention-metric.attn-urgent::after{background:var(--red)}
+.md-flash{outline:3px solid var(--gold);outline-offset:4px;border-radius:7px}
+@keyframes mdAttn{0%,100%{box-shadow:0 0 0 0 rgba(197,155,53,.6)}50%{box-shadow:0 0 0 10px rgba(197,155,53,0)}}
+@keyframes mdAttnRed{0%,100%{box-shadow:0 0 0 0 rgba(157,46,39,.55)}50%{box-shadow:0 0 0 10px rgba(157,46,39,0)}}
+@keyframes mdAttnDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+@media(prefers-reduced-motion:reduce){.attention-metric,.attention-metric.attn-on,.attention-metric.attn-on::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -30,7 +47,7 @@
   <div class="sticky row space"><div><p class="eyebrow">Admin dashboard</p><h1 id="welcome">Welcome</h1></div><button id="logoutBtn" class="btn secondary" type="button">Sign out</button></div>
   <div id="appMessage" class="notice hidden" role="status"></div>
 
-  <section class="card" id="attentionPanel"><p class="eyebrow">At a glance</p><h2>Needs attention</h2><div class="help">A live summary of existing team tasks, your notices, editorial approvals and newsletter delivery. Review the corresponding lists below; this is not a new external monitoring integration.</div><div id="attentionSummary" class="attention-grid"></div></section>
+  <section class="card" id="attentionPanel"><p class="eyebrow">At a glance</p><h2>Needs attention</h2><div class="help">A live summary of existing team tasks, your notices, editorial approvals and newsletter delivery. Cards that glow have something waiting. Tap any card to jump straight to the matching list.</div><div id="attentionSummary" class="attention-grid"></div></section>
   <section class="card">
     <div class="row space"><div><h2>Your availability</h2><p class="muted">Set this when you are away. The Chief Administrator can see your return date.</p></div><span id="rolePill" class="pill"></span></div>
     <div class="grid"><div class="field"><label for="availability">Status</label><select id="availability"><option>Available</option><option>Temporarily unavailable</option></select></div><div class="field"><label for="awayUntil">Expected return date (optional)</label><input id="awayUntil" type="date"></div></div>
@@ -44,9 +61,9 @@
     <div class="page-controls"><button id="inboxPrev" class="btn secondary" type="button">Previous</button><span id="inboxPageText" class="muted small">Page 1</span><button id="inboxNext" class="btn secondary" type="button">Next</button></div>
   </section>
 
-  <section class="card"><div class="row space"><div><p class="eyebrow">Shared accountability</p><h2>Team task board</h2><p class="muted">Every active administrator can see assignments and submitted work. Only the assigned administrator or Chief can update a task.</p></div><button id="refreshBtn" class="btn secondary" type="button">Refresh board</button></div><div id="taskList" class="list"></div></section>
+  <section class="card" id="taskBoard"><div class="row space"><div><p class="eyebrow">Shared accountability</p><h2>Team task board</h2><p class="muted">Every active administrator can see assignments and submitted work. Only the assigned administrator or Chief can update a task.</p></div><button id="refreshBtn" class="btn secondary" type="button">Refresh board</button></div><div id="taskList" class="list"></div></section>
 
-  <section class="card"><div class="row space"><div><h2>Your notifications</h2><p class="muted">Email alerts link you to new records; the shared inbox above is the full list.</p></div></div><div id="notificationList" class="list"></div></section>
+  <section class="card" id="notificationsCard"><div class="row space"><div><h2>Your notifications</h2><p class="muted">Email alerts link you to new records; the shared inbox above is the full list.</p></div></div><div id="notificationList" class="list"></div></section>
 
 
 
@@ -240,7 +257,53 @@
     }).catch(function(e){message($('studioMessage'),e.message,true);});
   }
   function renderStudioItems(){var root=$('studioItems');root.textContent='';if(!studioItemsData.length){text(root,'p','No active editorial items. Archived items are in the separate archive.','muted');return;}studioItemsData.forEach(function(item){var box=document.createElement('article');box.className='item';text(box,'strong',item.Section+' · '+item.Title);text(box,'p',item.Status+' · '+item.Item_ID+' · revision '+(item.Revision||1)+' · default order '+(item.Display_Order==null||item.Display_Order===''?'section default':item.Display_Order),'muted');if(item.Image_URL&&/^https?:\/\//i.test(item.Image_URL)){var image=document.createElement('img');image.src=item.Image_URL;image.alt=item.Title;image.loading='lazy';image.style.maxWidth='140px';image.style.maxHeight='140px';image.style.objectFit='contain';box.appendChild(image);}var actions=document.createElement('div');actions.className='actions';actions.appendChild(button('Edit item',true,function(){editStudioItem(item.Item_ID);}));if(item.Status!=='Approved'){actions.appendChild(button('Request item approval',true,function(){api('adminRequestNewsletterItemApproval',{itemId:item.Item_ID}).then(function(r){message($('studioMessage'),r.message+' Approval: '+r.approvalId);return loadStudioItems();}).catch(function(e){message($('studioMessage'),e.message,true);});}));if(item.Approval_ID){text(box,'p','Current approval: '+item.Approval_ID,'small');actions.appendChild(button('Approve current revision',true,function(){api('adminApproveNewsletterItem',{itemId:item.Item_ID,approvalId:item.Approval_ID,note:'Approved from Newsletter Studio'}).then(function(r){message($('studioMessage'),r.message);return loadStudioItems();}).catch(function(e){message($('studioMessage'),e.message,true);});}));}}actions.appendChild(button('Archive item',true,function(){archiveRecord('Item',item.Item_ID).catch(function(e){message($('studioMessage'),e.message,true);});}));box.appendChild(actions);root.appendChild(box);});}
-  function renderAttention(a){var root=$('attentionSummary');root.textContent='';if(!a){text(root,'p','Refresh the dashboard for the available task and delivery summary.','muted');return;}var metrics=[['Open team tasks',a.openTasks],['Overdue tasks',a.overdueTasks],['Unacknowledged ≥48h',a.unacknowledged48h],['Your unread notices',a.unreadNotifications],['Pending editorial approvals',a.pendingEditorialApprovals],['Newsletter delivery review',a.newsletterDeliveryReview],['Pending newsletter messages',a.pendingNewsletterMessages]];metrics.forEach(function(m){var x=document.createElement('div');x.className='attention-metric';text(x,'strong',m[1]||0);text(x,'span',m[0]);root.appendChild(x);});}
+
+  /* ---------- Needs attention: tappable cards that jump to the matching list ---------- */
+  function flash(el){el.classList.add('md-flash');setTimeout(function(){el.classList.remove('md-flash');},2200);}
+  function jumpTo(el){
+    if(!el)return;
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','-1');
+    try{el.focus({preventScroll:true});}catch(e){}
+    flash(el);
+  }
+  function taskNode(id){return id?document.getElementById('task-'+id):null;}
+  function startOfToday(){var d=new Date();d.setHours(0,0,0,0);return d;}
+  function goTasks(){jumpTo($('taskBoard'));}
+  function goOverdue(){
+    var start=startOfToday();
+    var hit=((dashboard&&dashboard.tasks)||[]).filter(function(t){var d=t.Due_At?new Date(t.Due_At):null;return d&&!isNaN(d.getTime())&&d<start&&t.Status!=='Completed'&&t.Status!=='Cancelled';})[0];
+    jumpTo((hit&&taskNode(hit.Task_ID))||$('taskBoard'));
+  }
+  function goUnacknowledged(){
+    var limit=Date.now()-48*3600000;
+    var hit=((dashboard&&dashboard.tasks)||[]).filter(function(t){var c=t.Created_At?new Date(t.Created_At).getTime():NaN;return t.Status==='Assigned'&&!isNaN(c)&&c<limit;})[0];
+    jumpTo((hit&&taskNode(hit.Task_ID))||$('taskBoard'));
+  }
+  function goNotices(){jumpTo($('notificationsCard'));}
+  function goEditorial(){var list=$('studioItems');jumpTo((list&&list.previousElementSibling)||list);}
+  function goQueue(status){var f=$('queueFilter');if(f){f.value=status;}loadQueue();jumpTo($('newsletterSection'));}
+  function renderAttention(a){
+    var root=$('attentionSummary');root.textContent='';
+    if(!a){text(root,'p','Refresh the dashboard for the available task and delivery summary.','muted');return;}
+    var metrics=[
+      {label:'Open team tasks',n:a.openTasks,go:goTasks},
+      {label:'Overdue tasks',n:a.overdueTasks,urgent:true,go:goOverdue},
+      {label:'Unacknowledged ≥48h',n:a.unacknowledged48h,urgent:true,go:goUnacknowledged},
+      {label:'Your unread notices',n:a.unreadNotifications,go:goNotices},
+      {label:'Pending editorial approvals',n:a.pendingEditorialApprovals,go:goEditorial},
+      {label:'Newsletter delivery review',n:a.newsletterDeliveryReview,urgent:true,go:function(){goQueue('Needs Review');}},
+      {label:'Pending newsletter messages',n:a.pendingNewsletterMessages,go:function(){goQueue('Pending');}}
+    ];
+    metrics.forEach(function(m){
+      var count=Number(m.n)||0;
+      var b=document.createElement('button');b.type='button';
+      b.className='attention-metric'+(count>0?' attn-on'+(m.urgent?' attn-urgent':''):'');
+      b.setAttribute('aria-label',m.label+': '+count+(count>0?'. Needs attention. Tap to view.':'. Tap to open this section.'));
+      text(b,'strong',count);text(b,'span',m.label);text(b,'em',count>0?'View now →':'Open section →','attn-go');
+      b.addEventListener('click',m.go);root.appendChild(b);
+    });
+  }
 
   $('queueRefresh').addEventListener('click',loadQueue);
   $('queueFilter').addEventListener('change',loadQueue);
