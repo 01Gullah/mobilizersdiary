@@ -119,6 +119,29 @@
     <div class="divider"></div><h3>Active editorial items</h3><div id="studioItems" class="list"></div>
   </section>
 
+  <section class="card" id="oppStudioPanel">
+    <div class="row space"><div><p class="eyebrow">Opportunity Studio</p><h2>Review, edit and publish opportunities</h2></div><button id="oppRefresh" class="btn secondary" type="button">Refresh</button></div>
+    <div class="help"><strong>Path:</strong> open a recommendation (boxes auto-fill) → edit → choose a template → save and shortlist → Chief publishes. Editing a shortlisted item returns it to Draft. Originals are never changed.</div>
+    <div class="field"><label for="oppFilter">Show</label><select id="oppFilter"><option value="open">Awaiting action</option><option value="shortlisted">Shortlisted</option><option value="published">Published</option><option value="all">All</option></select></div>
+    <div id="oppMessage" class="notice hidden" role="status"></div>
+    <div id="oppList" class="list"></div>
+    <div id="oppEditor" class="hidden">
+      <div class="divider"></div><h3 id="oppEditorHeading"></h3><p id="oppOriginal" class="muted small"></p>
+      <div class="grid"><div>
+        <div class="field"><label for="oppTitle">Title</label><input id="oppTitle" maxlength="180"></div>
+        <div class="field"><label for="oppOrg">Organisation</label><input id="oppOrg" maxlength="180"></div>
+        <div class="field"><label for="oppCategory">Category</label><input id="oppCategory" maxlength="100"></div>
+        <div class="field"><label for="oppDeadline">Deadline</label><input id="oppDeadline" maxlength="100"></div>
+        <div class="field"><label for="oppUrl">Official link</label><input id="oppUrl" type="url" maxlength="500"></div>
+        <div class="field"><label for="oppEligibility">Eligibility</label><textarea id="oppEligibility" maxlength="2500"></textarea></div>
+        <div class="field"><label for="oppSummary">Summary (shown by Featured and Classic templates)</label><textarea id="oppSummary" maxlength="1500"></textarea></div>
+        <div class="field"><label for="oppTemplate">Template</label><select id="oppTemplate"></select></div>
+        <div class="actions"><button id="oppSave" class="btn secondary" type="button">Save draft</button><button id="oppShortlist" class="btn" type="button">Save and shortlist</button><button id="oppPublish" class="btn hidden" type="button">Publish</button><button id="oppUnpublish" class="btn danger hidden" type="button">Unpublish</button><button id="oppClose" class="btn secondary" type="button">Close</button></div>
+      </div>
+      <div><h3>Live preview</h3><div id="oppPreview"></div></div></div>
+    </div>
+  </section>
+
   <section class="card" id="newsletterArchiveSection">
     <div class="row space"><div><p class="eyebrow">History, not active work</p><h2>Newsletter archive</h2></div><button id="archiveRefresh" class="btn secondary" type="button">Refresh archive</button></div>
     <div class="help"><strong>Archive is read-only.</strong> Records leave active lists, but snapshots and original delivery rows remain. Sent rows are never deleted or made Pending. Finish or resolve a campaign’s delivery before archiving the whole issue.</div>
@@ -160,6 +183,8 @@
 <p class="footer">The Mobilizer's Diary · Individual actions are logged for accountability.</p>
 </div>
 <script src="config.js"></script>
+<script src="opportunity-templates.js"></script>
+<script src="opportunity-studio.js"></script>
 <script>
 (function(){
   'use strict';
