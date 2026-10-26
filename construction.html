@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F3829">
+<title>The Mobilizers' Construction Management Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#122118;--green:#1F3829;--accent:#2C523B;--bg:#F9F8F6;--card:#fff;--text:#1C2420;--muted:#606C64;--line:#E2E8E4;--amber:#D97706;--red:#DC2626;--ok:#16A34A;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:16px/1.5 'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.nav{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;text-align:left;color:inherit}
+.badgeM{background:var(--green);color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:400 20px 'DM Serif Display',Georgia,serif}
+.brand b{display:block;font-size:.95rem}.brand small{display:block;font-size:.68rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.nb{background:none;border:0;padding:8px 10px;font:600 .82rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;border-radius:8px;text-decoration:none}
+.nb:hover{color:var(--green)}
+.main{max-width:1000px;margin:0 auto;padding:20px 16px 8px}
+.view{display:none}.view.on{display:block}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#FCFBF8 0%,#EFE9DE 100%);border:1px solid var(--line);border-radius:16px;padding:44px 22px}
+.hero:after{content:"MD";position:absolute;right:-14px;bottom:-34px;font:400 11rem/1 'DM Serif Display',Georgia,serif;color:rgba(31,56,41,.06);pointer-events:none}
+.eyebrow{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#8A6D2B;font-weight:700;display:block;margin-bottom:12px}
+.hero h1{font:400 2.6rem/1.05 'DM Serif Display',Georgia,serif;color:var(--dark)}
+.hero h1 span{display:block;color:var(--accent)}
+.hero p{max-width:520px;color:var(--muted);margin:16px 0 24px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:1px solid transparent;font:600 .9rem 'DM Sans',sans-serif;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.5}
+.btn-primary{background:var(--green);color:#fff}
+.btn-outline{background:#fff;border-color:var(--line);color:var(--text)}
+.btn-danger{background:#fff;border-color:#F3C4C4;color:var(--red)}
+.btn-sm{padding:7px 14px;font-size:.8rem}
+h2{font:400 1.7rem/1.15 'DM Serif Display',Georgia,serif;color:var(--dark)}
+h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.muted{color:var(--muted)}.small{font-size:.8rem}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi .l{font-size:.75rem;color:var(--muted);font-weight:500}
+.kpi .v{font-size:1.45rem;font-weight:700;margin:4px 0 2px;overflow-wrap:anywhere}
+.kpi .s{font-size:.72rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.hidden{display:none}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.pc h3{font-size:1.02rem;margin-bottom:2px}
+.meta{font-size:.82rem;color:var(--muted);margin-bottom:10px}
+.bar{height:7px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--green)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:700}
+.b-green{background:#DCFCE7;color:#166534}.b-amber{background:#FEF3C7;color:#92400E}.b-red{background:#FEE2E2;color:#991B1B}.b-gray{background:#F3F4F6;color:#374151}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);margin:14px 0;padding-bottom:6px}
+.tab{background:none;border:0;padding:8px 14px;font:500 .84rem 'DM Sans',sans-serif;color:var(--muted);border-radius:8px;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--green);color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;font-size:.88rem}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.fg label{font-size:.8rem;font-weight:600}
+.fc{padding:11px;border:1px solid var(--line);border-radius:8px;font:1rem 'DM Sans',sans-serif;background:#fff;width:100%}
+.fc:focus{outline:none;border-color:var(--green)}
+.err{color:var(--red);font-size:.85rem;min-height:18px;margin:4px 0}
+.warn{background:#FEF3C7;border:1px solid #FDE68A;color:#92400E;border-radius:8px;padding:10px 14px;font-size:.88rem;margin:10px 0}
+.login{max-width:420px;margin:30px auto}
+.sumrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+footer{border-top:1px solid var(--line);background:#fff;padding:22px 16px;margin-top:30px;text-align:center;font-size:.75rem;color:var(--muted)}
+@media (max-width:640px){.hero h1{font-size:2.15rem}.grid2{grid-template-columns:1fr}.hero:after{font-size:8rem}}
+@media (min-width:760px){.kpis{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <button class="brand" type="button" id="b-home"><span class="badgeM">M</span><span><b>The Mobilizers</b><small>Construction Suite</small></span></button>
+  <nav class="links">
+    <button class="nb" type="button" id="nav-dash" style="display:none">Dashboard</button>
+    <a class="nb" href="./">Founders Archive</a>
+    <button class="nb" type="button" id="nav-out" style="display:none">Sign out</button>
+  </nav>
+</div></header>
+
+<main class="main">
+
+<section id="v-home" class="view on">
+  <div class="hero">
+    <span class="eyebrow">The Mobilizers' Diary</span>
+    <h1>Stories kept. <span>Work made visible.</span></h1>
+    <p>A home for the stories we preserve and the practical work we're building next, one thoughtful step at a time.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="./">Explore Founders Archive</a>
+      <button class="btn btn-outline" type="button" id="b-open">Open Construction Management Tools &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<section id="v-login" class="view">
+  <div class="card login">
+    <h2>Sign in</h2>
+    <p class="muted small" style="margin:6px 0 16px">Use the email and access code you were given. Projects and budgets are shown only after sign-in.</p>
+    <div class="fg"><label for="lg-email">Email</label><input class="fc" id="lg-email" type="email" autocomplete="username" autocapitalize="off"></div>
+    <div class="fg"><label for="lg-code">Access code</label><input class="fc" id="lg-code" type="password" autocomplete="current-password" autocapitalize="characters" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX"></div>
+    <p class="err" id="lg-err"></p>
+    <button class="btn btn-primary" type="button" id="lg-go" style="width:100%">Sign in</button>
+  </div>
+</section>
+
+<section id="v-dash" class="view">
+  <div class="head">
+    <div><h2>Construction Dashboard</h2><div class="muted small" id="who"></div></div>
+    <div class="row" style="margin:0"><button class="btn btn-primary btn-sm hidden" type="button" id="b-new">+ Create Project</button><button class="btn btn-outline btn-sm" type="button" id="b-refresh">Refresh</button></div>
+  </div>
+  <div id="dash-body"></div>
+</section>
+
+<section id="v-new" class="view">
+  <div class="head"><h2>New Project</h2><button class="btn btn-outline btn-sm" type="button" id="n-back">Back</button></div>
+  <div class="card">
+    <div class="fg"><label for="n-name">Project name *</label><input class="fc" id="n-name" type="text" maxlength="120"></div>
+    <div class="fg"><label for="n-client">Client or organisation</label><input class="fc" id="n-client" type="text" maxlength="120"></div>
+    <div class="fg"><label for="n-loc">Location *</label><input class="fc" id="n-loc" type="text" maxlength="120"></div>
+    <div class="fg"><label for="n-type">Type</label><select class="fc" id="n-type"><option>Residential</option><option>Commercial</option><option>Institutional</option><option>Infrastructure</option><option>Renovation</option><option>Other</option></select></div>
+    <div class="fg"><label for="n-mgr">Project manager *</label><input class="fc" id="n-mgr" type="text" maxlength="100"></div>
+    <div class="fg"><label for="n-start">Start date</label><input class="fc" id="n-start" type="date"></div>
+    <div class="fg"><label for="n-target">Target completion</label><input class="fc" id="n-target" type="date"></div>
+    <p class="err" id="n-err"></p>
+    <button class="btn btn-primary" type="button" id="n-save">Create Project</button>
+  </div>
+</section>
+
+<section id="v-proj" class="view">
+  <div class="head">
+    <div><span class="muted small" id="p-ref"></span><h2 id="p-name"></h2></div>
+    <button class="btn btn-outline btn-sm" type="button" id="p-back">&larr; Dashboard</button>
+  </div>
+  <div class="tabs" id="p-tabs"></div>
+  <div id="p-body"></div>
+</section>
+
+</main>
+
+<footer>
+  <p>The Mobilizers' Construction Management Suite, an engineering extension of The Mobilizers' Diary.</p>
+  <p style="margin-top:4px">Project data is kept in the organisation's private spreadsheet and shown only after sign-in.</p>
+</footer>
+
+<script src="construction-config.js?v=1"></script>
+<script>
+var TOKEN='',CAN=false,PROJ=null,TAB='ov',EDIT='';
+try{TOKEN=sessionStorage.getItem('cm_token')||''}catch(e){}
+function $(i){return document.getElementById(i)}
+function mk(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function clr(e){while(e.firstChild){e.removeChild(e.firstChild)}}
+function ngn(n){return '\u20A6'+Math.round(Number(n)||0).toLocaleString('en-NG')}
+function pc(n){return (Math.round((Number(n)||0)*10)/10)+'%'}
+function num(s){var n=parseFloat(String(s).replace(/[^\d.]/g,''));return isFinite(n)?n:NaN}
+function badge(l,t){return mk('span','badge b-'+l,t)}
+function setTok(t){TOKEN=t;try{if(t){sessionStorage.setItem('cm_token',t)}else{sessionStorage.removeItem('cm_token')}}catch(e){}}
+
+function show(v){
+  var vs=['home','login','dash','new','proj'];
+  for(var i=0;i<vs.length;i++){$('v-'+vs[i]).className='view'+(vs[i]===v?' on':'')}
+  $('nav-dash').style.display=TOKEN?'':'none';$('nav-out').style.display=TOKEN?'':'none';
+  window.scrollTo(0,0);
+}
+
+/* connection to the Apps Script back end */
+function call(action,data){
+  return new Promise(function(resolve,reject){
+    var url=(typeof CM_API_URL==='string')?CM_API_URL:'';
+    if(url.indexOf('https://script.google.com/')!==0){reject(new Error('The suite is not connected yet.'));return}
+    var ctl=('AbortController' in window)?new AbortController():null;
+    var t=setTimeout(function(){if(ctl){ctl.abort()}},60000);
+    fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,token:TOKEN,data:data||{}}),redirect:'follow',signal:ctl?ctl.signal:undefined})
+    .then(function(r){return r.text()})
+    .then(function(x){
+      clearTimeout(t);
+      var j;try{j=JSON.parse(x)}catch(e){throw new Error('The server did not respond correctly.')}
+      if(!j.ok){throw new Error(j.error||'Something went wrong.')}
+      resolve(j.result);
+    })
+    .catch(function(e){clearTimeout(t);reject(new Error(e&&e.name==='AbortError'?'The connection timed out.':(e&&e.message?e.message:'Something went wrong.')))});
+  });
+}
+function api(a,d){
+  return call(a,d).catch(function(e){
+    if(e&&e.message==='Please sign in again.'){setTok('');show('login');$('lg-err').textContent='Your session ended. Please sign in again.'}
+    throw e;
+  });
+}
+
+/* sign in and out */
+function start(){if(!TOKEN){show('login');return}loadDash()}
+function doLogin(){
+  var em=$('lg-email').value.replace(/^\s+|\s+$/g,''),cd=$('lg-code').value.replace(/^\s+|\s+$/g,''),er=$('lg-err'),b=$('lg-go');
+  er.textContent='';
+  if(!em||!cd){er.textContent='Enter your email and access code.';return}
+  b.disabled=true;b.textContent='Signing in...';
+  call('login',{email:em,code:cd}).then(function(r){
+    setTok(r.token);$('lg-code').value='';b.disabled=false;b.textContent='Sign in';loadDash();
+  },function(e){b.disabled=false;b.textContent='Sign in';er.textContent=e.message});
+}
+function signOut(){
+  var t=TOKEN;
+  if(t){call('logout',{}).catch(function(){})}
+  setTok('');PROJ=null;show('home');
+}
+
+/* dashboard */
+function loadDash(){
+  show('dash');
+  var b=$('dash-body');clr(b);b.appendChild(mk('p','muted','Loading...'));
+  api('dashboard',{}).then(renderDash,function(e){clr(b);b.appendChild(mk('div','warn',e.message||'Could not load.'))});
+}
+function kpi(l,v,s){var c=mk('div','kpi');c.appendChild(mk('div','l',l));c.appendChild(mk('div','v',v));c.appendChild(mk('div','s',s));return c}
+function projCard(p){
+  var c=mk('div','pc');
+  c.appendChild(mk('h3',null,p.name));
+  c.appendChild(mk('div','meta',[p.id,p.location,p.manager].filter(function(x){return x}).join(' \u00B7 ')));
+  c.appendChild(mk('div','small','Physical progress '+pc(p.prog)));
+  var bar=mk('div','bar'),i=mk('i');i.style.width=Math.min(100,Math.max(0,p.prog))+'%';bar.appendChild(i);c.appendChild(bar);
+  var r=mk('div','row');
+  r.appendChild(badge(p.v.level,p.alloc>0?('Spend '+pc(p.spendPct)+': '+p.v.label):p.v.label));
+  r.appendChild(badge(p.status==='Active'?'green':'gray',p.status));
+  c.appendChild(r);
+  var r2=mk('div','row');
+  var o=mk('button','btn btn-primary btn-sm','Open Workspace');o.type='button';o.onclick=function(){loadProject(p.id,'ov')};r2.appendChild(o);
+  c.appendChild(r2);
+  return c;
+}
+function renderDash(d){
+  CAN=d.me.canWrite;
+  $('who').textContent=d.me.name+' ('+d.me.role+')';
+  $('b-new').className='btn btn-primary btn-sm'+(CAN?'':' hidden');
+  var b=$('dash-body');clr(b);
+  var k=mk('div','kpis');
+  k.appendChild(kpi('Active projects',String(d.kpi.active),'Under construction'));
+  k.appendChild(kpi('Total estimated cost',ngn(d.kpi.alloc),'From budget lines'));
+  k.appendChild(kpi('Total spent',ngn(d.kpi.spent),d.kpi.alloc>0?pc(d.kpi.spent/d.kpi.alloc*100)+' of estimate':'No budget yet'));
+  k.appendChild(kpi('Variance alerts',String(d.kpi.red),d.kpi.amber+' on caution'));
+  b.appendChild(k);
+  b.appendChild(mk('h3',null,'Project register'));
+  if(!d.projects.length){
+    var e=mk('div','card');
+    e.appendChild(mk('p','muted',d.note||'No projects yet.'+(CAN?' Create your first project to start tracking cost against progress.':'')));
+    b.appendChild(e);
+  }else{d.projects.forEach(function(p){b.appendChild(projCard(p))})}
+}
+
+/* new project */
+function openNew(){
+  ['n-name','n-client','n-loc','n-mgr','n-start','n-target'].forEach(function(i){$(i).value=''});
+  $('n-err').textContent='';$('n-save').disabled=false;$('n-save').textContent='Create Project';show('new');
+}
+function saveNew(){
+  var er=$('n-err'),b=$('n-save');er.textContent='';
+  var d={name:$('n-name').value,client:$('n-client').value,location:$('n-loc').value,type:$('n-type').value,manager:$('n-mgr').value,start:$('n-start').value,target:$('n-target').value};
+  if(d.name.replace(/\s/g,'').length<3){er.textContent='Enter the project name.';return}
+  if(d.location.replace(/\s/g,'').length<2){er.textContent='Enter the location.';return}
+  if(d.manager.replace(/\s/g,'').length<2){er.textContent='Enter the project manager.';return}
+  b.disabled=true;b.textContent='Creating...';
+  api('createProject',d).then(function(r){loadProject(r.id,'bv')},function(e){b.disabled=false;b.textContent='Create Project';er.textContent=e.message});
+}
+
+/* project workspace */
+var TABS=[['ov','Overview',1],['bv','Budget & Variance',1],['inv','5-Tier Invitations',0],['team','Team Directory',0],['sch','Work Schedule',0],['rep','Daily Reports',0],['calc','Quantity Calculators',0]];
+function loadProject(id,tab){
+  show('proj');clr($('p-body'));$('p-body').appendChild(mk('p','muted','Loading...'));
+  api('project',{id:id}).then(function(p){PROJ=p;CAN=p.me.canWrite;TAB=tab||'ov';EDIT='';drawProject()},function(e){clr($('p-body'));$('p-body').appendChild(mk('div','warn',e.message||'Could not load.'))});
+}
+function drawProject(){
+  var p=PROJ.project;
+  $('p-ref').textContent=p.id;$('p-name').textContent=p.name;
+  var t=$('p-tabs');clr(t);
+  TABS.forEach(function(x){
+    var b=mk('button','tab'+(x[0]===TAB?' on':''),x[1]);b.type='button';
+    b.onclick=function(){TAB=x[0];EDIT='';drawProject()};t.appendChild(b);
+  });
+  var c=$('p-body');clr(c);
+  if(TAB==='ov'){drawOverview(c)}else if(TAB==='bv'){drawBudget(c)}else{
+    var n=mk('div','card');n.appendChild(mk('h3',null,'Coming in the next stage'));
+    n.appendChild(mk('p','muted','This part of the workspace is being built next. Nothing here is placeholder data.'));c.appendChild(n);
+  }
+}
+function pair(l,v){var d=mk('div');var b=mk('strong',null,l+': ');d.appendChild(b);d.appendChild(document.createTextNode(v||'-'));return d}
+function drawOverview(c){
+  var p=PROJ.project;
+  var a=mk('div','card');a.appendChild(mk('h3',null,'Project particulars'));
+  var g=mk('div','grid2');
+  g.appendChild(pair('Location',p.location));g.appendChild(pair('Type',p.type));g.appendChild(pair('Project manager',p.manager));
+  g.appendChild(pair('Client',p.client));g.appendChild(pair('Start date',p.start));g.appendChild(pair('Target completion',p.target));
+  g.appendChild(pair('Status',p.status));
+  a.appendChild(g);c.appendChild(a);
+  var f=mk('div','kpis');
+  f.appendChild(kpi('Estimated cost',ngn(p.alloc),p.lines+' budget line'+(p.lines===1?'':'s')));
+  f.appendChild(kpi('Spent',ngn(p.spent),p.alloc>0?pc(p.spendPct)+' of estimate':'No budget yet'));
+  f.appendChild(kpi('Physical progress',pc(p.prog),'Weighted by budget'));
+  var v=mk('div','kpi');v.appendChild(mk('div','l','Variance status'));var w=mk('div','v');w.appendChild(badge(p.v.level,p.v.label));v.appendChild(w);v.appendChild(mk('div','s',p.red+' alert, '+p.amber+' caution'));
+  f.appendChild(v);c.appendChild(f);
+}
+function lineCard(l){
+  var c=mk('div','pc');
+  c.appendChild(mk('h3',null,l.item));
+  c.appendChild(mk('div','meta','Allocated '+ngn(l.alloc)+' \u00B7 Spent '+ngn(l.spent)+' ('+pc(l.spendPct)+')'));
+  c.appendChild(mk('div','small','Progress '+pc(l.prog)));
+  var bar=mk('div','bar'),i=mk('i');i.style.width=Math.min(100,Math.max(0,l.prog))+'%';bar.appendChild(i);c.appendChild(bar);
+  var r=mk('div','row');r.appendChild(badge(l.v.level,l.v.label));c.appendChild(r);
+  if(CAN){var r2=mk('div','row');var e=mk('button','btn btn-outline btn-sm','Edit');e.type='button';e.onclick=function(){openLineForm(l)};r2.appendChild(e);c.appendChild(r2)}
+  return c;
+}
+function field(label,id,ph,mode,val){
+  var g=mk('div','fg');var l=mk('label',null,label);l.setAttribute('for',id);g.appendChild(l);
+  var i=mk('input','fc');i.id=id;i.type='text';i.autocomplete='off';if(ph)i.placeholder=ph;if(mode)i.inputMode=mode;if(val!=null)i.value=val;g.appendChild(i);return g;
+}
+function drawBudget(c){
+  var p=PROJ.project,S=PROJ.settings;
+  var s=mk('div','card');s.appendChild(mk('h3',null,'Cost-to-progress variance'));
+  var r=mk('div','sumrow');r.appendChild(badge(p.v.level,p.v.label));r.appendChild(mk('span','muted small','Spend '+pc(p.spendPct)+' of plan, progress '+pc(p.prog)));s.appendChild(r);
+  s.appendChild(mk('p','muted small','Each line compares the share of its budget spent with the share of work completed. Caution shows when spending runs '+S.amber+' or more points ahead of progress, and Alert at '+S.red+' points. A line over budget always shows Alert. The thresholds can be changed in the CM_Settings tab of the spreadsheet.'));
+  c.appendChild(s);
+  if(CAN){var a=mk('button','btn btn-primary btn-sm','+ Add budget line');a.type='button';a.onclick=function(){openLineForm(null)};c.appendChild(a);c.appendChild(mk('div',null,'\u00A0'))}
+  var f=mk('div','card hidden');f.id='lineForm';c.appendChild(f);
+  if(!PROJ.lines.length){c.appendChild(mk('div','card muted','No budget lines yet.'+(CAN?' Add the first line to start tracking cost against progress.':'')))}
+  PROJ.lines.forEach(function(l){c.appendChild(lineCard(l))});
+}
+function openLineForm(l){
+  EDIT=l?l.id:'';
+  var f=$('lineForm');clr(f);f.className='card';
+  f.appendChild(mk('h3',null,l?'Edit budget line':'New budget line'));
+  f.appendChild(field('Item *','f-item','e.g. Blockwork and walling','',l?l.item:''));
+  f.appendChild(field('Allocated budget (\u20A6) *','f-alloc','0','numeric',l?l.alloc:''));
+  f.appendChild(field('Spent so far (\u20A6)','f-spent','0','numeric',l?l.spent:''));
+  f.appendChild(field('Physical progress (%) *','f-prog','0 to 100','decimal',l?l.prog:''));
+  var er=mk('p','err');er.id='f-err';f.appendChild(er);
+  var r=mk('div','row');
+  var sv=mk('button','btn btn-primary btn-sm','Save');sv.type='button';sv.id='f-save';sv.onclick=saveLine;r.appendChild(sv);
+  var cn=mk('button','btn btn-outline btn-sm','Cancel');cn.type='button';cn.onclick=function(){EDIT='';f.className='card hidden'};r.appendChild(cn);
+  if(l){var dl=mk('button','btn btn-danger btn-sm','Delete');dl.type='button';dl.onclick=delLine;r.appendChild(dl)}
+  f.appendChild(r);
+  f.scrollIntoView();
+}
+function saveLine(){
+  var er=$('f-err'),item=$('f-item').value.replace(/^\s+|\s+$/g,''),a=num($('f-alloc').value),sRaw=$('f-spent').value.replace(/^\s+|\s+$/g,''),s=sRaw===''?0:num(sRaw),g=num($('f-prog').value);
+  er.textContent='';
+  if(item.length<2){er.textContent='Enter the item name.';return}
+  if(!(a>=0)){er.textContent='Enter the allocated budget.';return}
+  if(!(s>=0)){er.textContent='Enter a valid amount spent.';return}
+  if(!(g>=0&&g<=100)){er.textContent='Progress must be between 0 and 100.';return}
+  var b=$('f-save');b.disabled=true;b.textContent='Saving...';
+  api('saveLine',{project:PROJ.project.id,line:EDIT,item:item,allocated:a,spent:s,progress:g}).then(function(){loadProject(PROJ.project.id,'bv')},function(e){b.disabled=false;b.textContent='Save';er.textContent=e.message});
+}
+function delLine(){
+  if(!window.confirm('Delete this budget line? This cannot be undone.'))return;
+  api('deleteLine',{project:PROJ.project.id,line:EDIT}).then(function(){loadProject(PROJ.project.id,'bv')},function(e){$('f-err').textContent=e.message});
+}
+
+/* wiring */
+$('b-home').onclick=function(){show('home')};
+$('b-open').onclick=start;
+$('nav-dash').onclick=function(){if(TOKEN){loadDash()}else{show('login')}};
+$('nav-out').onclick=signOut;
+$('lg-go').onclick=doLogin;
+$('lg-code').addEventListener('keydown',function(e){if(e.key==='Enter'){doLogin()}});
+$('b-new').onclick=openNew;
+$('b-refresh').onclick=loadDash;
+$('n-back').onclick=function(){loadDash()};
+$('n-save').onclick=saveNew;
+$('p-back').onclick=function(){loadDash()};
+show('home');
+</script>
+</body>
+</html>
