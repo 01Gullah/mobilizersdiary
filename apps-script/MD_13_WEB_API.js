@@ -52,7 +52,8 @@ function apiRoute_(action, d) {
     case 'recommendOpportunity':
       return MD19_afterPublicIntake_('Opportunity recommendation', function () { return MD17_recommendOpportunity_(d); });
     case 'publicOpportunities':
-      return MD17_getPublicOpportunities_();
+      // Opportunity Studio: returns approved listings plus templateId and summary.
+      return MD23_getPublicCards_();
     case 'volunteerApplication':
       return MD19_afterPublicIntake_('Volunteer application', function () { return MD18_submitVolunteerApplication_(d); });
     default:
@@ -169,7 +170,4 @@ function testSponsoredBanner() {
   var banner = getSponsoredBannerForWeb_();
   if (banner === null) Logger.log('Connection OK. No active banner row yet.');
   else Logger.log('Connection OK. Banner data returned: ' + JSON.stringify(banner));
-  case 'publicOpportunities':
-  return MD23_getPublicCards_();
-
 }
