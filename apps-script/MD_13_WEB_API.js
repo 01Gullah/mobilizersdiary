@@ -169,4 +169,7 @@ function testSponsoredBanner() {
   var banner = getSponsoredBannerForWeb_();
   if (banner === null) Logger.log('Connection OK. No active banner row yet.');
   else Logger.log('Connection OK. Banner data returned: ' + JSON.stringify(banner));
+  case 'publicOpportunities':
+  return MD23_getPublicCards_();
+
 }
