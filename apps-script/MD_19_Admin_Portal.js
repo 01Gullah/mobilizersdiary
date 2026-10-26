@@ -2,7 +2,7 @@
  * THE MOBILIZER'S DIARY — ADMIN PORTAL BACKEND
  *
  * COMPLETE REPLACEMENT for MD_19_Admin_Portal.gs; keep its existing active name.
- * Install with MD_21_Newsletter_Studio.gs, MD_Launch_Edition_Email.html and admin.html.
+ * Install with MD_21_Newsletter_Studio.gs, MD_23_Opportunity_Studio.gs, MD_Launch_Edition_Email.html and admin.html.
  * Keep MD16 and MD20 unchanged. Run MD21_setupNewsletterStudio() once and redeploy.
  * Run MD19_setupAdminPortal() once while signed in as the Chief Administrator.
  * The function automatically creates the administration tabs in the existing CMS_ID workbook.
@@ -139,6 +139,14 @@ function MD19_route_(action, data) {
       if (editorialRecord && editorialRecord.itemType === 'Newsletter') throw new Error('Use Newsletter Studio to approve a specific current revision.');
       return MD20_approve_(user, data);
     case 'adminPublishOpportunity': return MD20_publishOpportunity_(user, data);
+    // Opportunity Studio (MD_23)
+    case 'adminStudioList':
+    case 'adminStudioLoad':
+    case 'adminStudioSave':
+    case 'adminStudioShortlist':
+    case 'adminStudioPublish':
+    case 'adminStudioUnpublish':
+      return MD23_route_(action, user, data);
     case 'adminListNewsletterQueue': return MD21_listQueue_(user, data);
     case 'adminRetryFailedNewsletterRow': MD21_requireQueueActive_(data); return MD16_retryFailedQueueRow(data.rowNumber, data.reviewNote, user.email);
     case 'adminResolveNewsletterRow': MD21_requireQueueActive_(data); return MD16_resolveNeedsReviewQueueRow(data.rowNumber, data.decision, data.reviewNote, user.email);
@@ -155,7 +163,7 @@ function MD19_route_(action, data) {
     case 'adminUpdateNewsletterItem': return MD21_updateEditorialItem_(user, data);
         // Paystack Financial Engine Integration
     case 'adminVerifyPaystackPayment':
-      return MD22_verifyPaystackPayment_(d);
+      return MD22_verifyPaystackPayment_(data);
 
     case 'adminListNewsletterIssues': return MD21_listIssues_(user);
     case 'adminUpdateNewsletterIssue': return MD21_updateIssue_(user, data);
@@ -577,7 +585,7 @@ function MD19_collectSubmissions_() {
   var ss=MD19_getSpreadsheet_();
   var excluded={
     'Issue_Settings':true,'Student_Voices':true,'History_Corner':true,'Podcast':true,
-    'Opportunities':true,'NewsletterQueue':true,'Newsletter_Campaigns':true,'SponsoredBanners':true
+    'Opportunities':true,'Opportunity_Studio':true,'NewsletterQueue':true,'Newsletter_Campaigns':true,'SponsoredBanners':true
   };
   var sheets=ss.getSheets().filter(function(sh){
     var name=sh.getName();
@@ -657,7 +665,7 @@ function MD19_getEntry_(user, categoryInput, refInput) {
   if (category.indexOf('report')>=0 || category.indexOf('support')>=0 || category.indexOf('donat')>=0 || candidates.length===0) {
     ss.getSheets().forEach(function(sh){
       var name=sh.getName();
-      if (name.indexOf('Admin_')===0 || (name.indexOf('Newsletter_')===0 && name!=='Newsletter_Subscribers') || name==='NewsletterQueue' || name==='SponsoredBanners' || name==='Newsletter_Campaigns') return;
+      if (name.indexOf('Admin_')===0 || (name.indexOf('Newsletter_')===0 && name!=='Newsletter_Subscribers') || name==='NewsletterQueue' || name==='SponsoredBanners' || name==='Newsletter_Campaigns' || name==='Opportunity_Studio') return;
       if (candidates.indexOf(name)<0) candidates.push(name);
     });
   }
