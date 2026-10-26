@@ -64,43 +64,21 @@
     </footer>
   </div>
   <script src="config.js"></script>
+  <script src="opportunity-templates.js"></script>
   <script>
     (function () {
       var list = document.getElementById('opportunityList');
       var empty = document.getElementById('emptyState');
       var status = document.getElementById('listStatus');
-      function safeApplyUrl(value) {
-        try { var u = new URL(String(value || '')); return (u.protocol === 'https:' || u.protocol === 'http:') ? u.href : ''; }
-        catch (e) { return ''; }
-      }
-      function text(parent, tag, className, value) {
-        var el = document.createElement(tag);
-        if (className) el.className = className;
-        el.textContent = String(value || '');
-        parent.appendChild(el);
-        return el;
-      }
       function render(items) {
         list.textContent = '';
         if (!Array.isArray(items)) items = [];
         items.forEach(function (item) {
           if (!item || !item.title || !item.organisation) return;
-          var card = document.createElement('article');
-          card.className = 'card';
-          text(card, 'h2', '', item.title);
-          var details = [item.organisation, item.category, item.deadline ? 'Deadline: ' + item.deadline : ''].filter(Boolean).join(' · ');
-          text(card, 'p', 'meta', details);
-          if (item.eligibility) text(card, 'p', 'eligibility', 'Eligibility: ' + item.eligibility);
-          var applyUrl = safeApplyUrl(item.applyUrl || item.url);
-          if (applyUrl) {
-            var link = document.createElement('a');
-            link.className = 'apply'; link.href = applyUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
-            link.textContent = 'View Official Opportunity'; card.appendChild(link);
-          }
-          list.appendChild(card);
+          list.appendChild(MD_renderOpportunity(item, item.templateId));
         });
         empty.hidden = list.children.length > 0;
-        status.textContent = list.children.length ? '' : '';
+        status.textContent = '';
       }
       if (typeof API_URL !== 'string' || API_URL.indexOf('https://script.google.com/') !== 0) {
         empty.hidden = false; status.textContent = 'The listings service is not configured yet.'; return;
