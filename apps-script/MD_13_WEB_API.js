@@ -3,6 +3,7 @@
  *
  * Complete replacement for MD_13_WEB_API.gs.
  * Preserves public API actions and forwards all admin actions to MD19_route_.
+ * Print access actions (print*, adminPrint*) are forwarded to MD_25.
  */
 function doPost(e) {
   var out;
@@ -57,6 +58,9 @@ function apiRoute_(action, d) {
     case 'volunteerApplication':
       return MD19_afterPublicIntake_('Volunteer application', function () { return MD18_submitVolunteerApplication_(d); });
     default:
+      // iBuild print access (MD_25): admin price/order actions first, then public ones.
+      if (String(action).indexOf('adminPrint') === 0) return MD25_adminRoute_(action, d);
+      if (String(action).indexOf('print') === 0) return MD25_route_(action, d);
       // This forwards adminRequestCode, adminVerifyCode, adminDashboard,
       // newsletter actions, queue actions, and future admin actions.
       if (String(action).indexOf('admin') === 0) return MD19_route_(action, d);
