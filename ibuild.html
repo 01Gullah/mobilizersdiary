@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iBuild | Engineering and digital services by The Mobilizer’s Diary</title>
+<meta name="description" content="iBuild brings civil engineering, cost management and digital technology together. Explore iBuild Infra and iBuild Craft.">
+<style>
+:root{
+  --green:#123F3B; --green-dk:#163D39; --gold:#C59B35; --gold-lt:#E3C06E; --ivory:#F7F4EE;
+  --ink:#17302d; --muted:#5a6b68; --line:#ddd6c6; --card:#ffffff;
+  --serif:Georgia,"Times New Roman",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:var(--green-dk);color:var(--ivory);
+  border-bottom:2px solid var(--gold);padding-top:env(safe-area-inset-top,0px)}
+.top-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font-family:var(--serif);font-size:2rem;font-weight:800;letter-spacing:-.02em;color:var(--gold-lt);line-height:1}
+.brand span{font-size:.95rem;font-weight:400;color:#cfdad7;min-width:3.2em;transition:opacity .25s}
+.brand span:empty{opacity:0}
+.home{font-size:.9rem;color:#cfdad7;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.home:hover{color:#fff;border-color:var(--gold)}
+
+/* Switcher: a bottom tab bar on phones, a header pill on larger screens */
+.switch{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:6px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));
+  background:var(--green-dk);border-top:2px solid var(--gold)}
+.switch button{flex:1;font:inherit;font-weight:600;font-size:.95rem;color:#cfdad7;background:transparent;border:0;border-radius:10px;padding:12px 6px;cursor:pointer;
+  transition:background .25s,color .25s}
+.switch button[aria-selected="true"]{background:var(--gold);color:#1c1a12}
+.switch button:not([aria-selected="true"]):hover{background:rgba(255,255,255,.1);color:#fff}
+@media(min-width:720px){
+  body{padding-bottom:0}
+  .switch{position:static;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px;background:rgba(0,0,0,.18);width:auto}
+  .switch button{flex:none;padding:8px 22px;border-radius:999px}
+  .top-in{display:grid;grid-template-columns:1fr auto 1fr}
+  .home{justify-self:end}
+}
+
+/* Layout */
+main{max-width:1080px;margin:0 auto;padding:0 20px 48px}
+.view[hidden]{display:none}
+.hero{background:var(--green);color:var(--ivory);margin:0 -20px;padding:48px 24px 44px;border-bottom:4px solid var(--gold)}
+@media(min-width:1120px){.hero{margin:0;border-radius:0 0 18px 18px}}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,6vw,3.4rem);line-height:1.1;margin:0 0 14px;max-width:18ch;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--gold-lt)}
+.hero p{margin:0;max-width:54ch;color:#d4dfdc;font-size:1.05rem}
+h2{font-family:var(--serif);font-size:1.5rem;margin:40px 0 14px;color:var(--green)}
+.lede{color:var(--muted);max-width:62ch;margin:0 0 18px}
+
+.grid{display:grid;gap:16px}
+@media(min-width:720px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-family:var(--serif);margin:0 0 6px;font-size:1.2rem;color:var(--green)}
+.card p{margin:0;color:var(--muted)}
+.entry{border-top:4px solid var(--gold);display:flex;flex-direction:column;gap:14px}
+.entry .name{font-family:var(--serif);font-size:1.7rem;color:var(--green);line-height:1.1}
+.entry .name b{font-weight:800}
+.entry .name small{font-size:1.05rem;font-weight:400;color:var(--gold);margin-left:6px}
+
+.metric{padding:18px 20px}
+.metric .n{font-family:var(--serif);font-size:2.1rem;font-weight:700;color:var(--green);line-height:1.1}
+.metric .l{color:var(--muted);font-size:.92rem}
+.note{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+
+.tool{display:flex;flex-direction:column;gap:6px}
+.tool h3{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex:none}
+
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-block;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;border-radius:10px;padding:13px 22px;
+  border:2px solid var(--gold);color:var(--green);background:var(--ivory);transition:background .25s,color .25s,transform .25s}
+.btn:hover{background:var(--green);color:var(--gold-lt);transform:translateY(-2px)}
+.btn.solid{background:var(--gold);color:#1c1a12}
+.btn.solid:hover{background:var(--green);color:var(--gold-lt)}
+.hero .btn{background:transparent;color:var(--gold-lt)}
+.hero .btn:hover{background:var(--gold);color:#1c1a12}
+
+footer{max-width:1080px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:.9rem}
+
+/* Concrete estimator */
+.est-grid{display:grid;gap:16px;align-items:start}
+@media(min-width:900px){.est-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
+.est-form fieldset{border:0;padding:0;margin:0 0 22px}
+.est-form legend{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--green);padding:0;margin-bottom:10px}
+.est-form label{display:block;font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.est-form input,.est-form select{display:block;width:100%;margin-top:4px;font:inherit;font-size:1rem;color:var(--ink);background:#fff;
+  border:1.5px solid var(--line);border-radius:10px;padding:11px 12px}
+.est-form input:focus,.est-form select:focus{border-color:var(--gold)}
+.seg{display:flex;gap:6px;background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:14px}
+.seg button{flex:1;font:inherit;font-weight:600;border:0;border-radius:9px;padding:10px;cursor:pointer;background:transparent;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--gold-lt)}
+.drow{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:8px;align-items:end;margin-bottom:8px}
+.drow label{margin:0;font-size:.78rem}
+.drow .x{font:inherit;border:0;background:transparent;color:var(--muted);font-size:1.4rem;cursor:pointer;padding:8px 6px;line-height:1}
+.link{font:inherit;font-weight:600;color:var(--green);background:none;border:0;border-bottom:1px solid var(--gold);padding:2px 0;cursor:pointer}
+.custom{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.adv summary{cursor:pointer;font-weight:600;color:var(--green)}
+.adv .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;margin-top:12px}
+.tot{font-size:.92rem;color:var(--muted);margin:6px 0 0}
+.est-out h3{margin-bottom:10px}
+.est-empty{color:var(--muted);margin:0}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0}
+.tbl th,.tbl td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:.95rem;vertical-align:top}
+.tbl th{color:var(--muted);font-weight:600;font-size:.85rem}
+.tbl td.r,.tbl th.r{text-align:right;white-space:nowrap}
+.tbl tfoot td{border-bottom:0;border-top:2px solid var(--gold);font-weight:700;color:var(--green);font-size:1.05rem}
+.tbl small{display:block;color:var(--muted);font-weight:400}
+.tblwrap{overflow-x:auto}
+.err{color:#9b2c1f;font-size:.9rem;margin:0}
+
+/* Print access */
+.stack{display:grid;gap:16px}
+dialog{border:0;border-radius:16px;padding:0;width:min(460px,92vw);color:var(--ink);background:var(--ivory);box-shadow:0 20px 60px rgba(10,30,28,.45)}
+dialog::backdrop{background:rgba(10,30,28,.6)}
+.dlg-in{padding:26px 22px 20px;position:relative}
+.dlg-in h3{font-family:var(--serif);color:var(--green);margin:0 0 12px;font-size:1.3rem}
+.dlg-x{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:1.7rem;line-height:1;cursor:pointer;color:var(--muted);padding:6px 10px}
+.plan{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.plan b{font-family:var(--serif);color:var(--green)}
+.plan .btn{padding:8px 16px;margin-left:10px}
+.dlg-in .actions{margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#hub" data-view="hub" aria-label="iBuild home"><b>iBuild</b><span id="tag"></span></a>
+    <nav class="switch" role="tablist" aria-label="iBuild workspaces">
+      <button role="tab" id="tab-hub" data-view="hub" aria-controls="view-hub" aria-selected="true">Hub</button>
+      <button role="tab" id="tab-infra" data-view="infra" aria-controls="view-infra" aria-selected="false">Infra</button>
+      <button role="tab" id="tab-craft" data-view="craft" aria-controls="view-craft" aria-selected="false">Craft</button>
+    </nav>
+    <a class="home" href="https://mobilizersdiary.com.ng">The Mobilizer’s Diary</a>
+  </div>
+</header>
+
+<main>
+  <!-- HUB -->
+  <section class="view" id="view-hub" role="tabpanel" aria-labelledby="tab-hub">
+    <div class="hero">
+      <h1>Build the site. Build the system that runs it.</h1>
+      <p>iBuild joins civil engineering, cost management and digital technology under one roof, so your project is managed on site and on screen.</p>
+      <div class="actions">
+        <button class="btn" data-view="infra">Explore Infra</button>
+        <button class="btn" data-view="craft">Explore Craft</button>
+      </div>
+    </div>
+    <h2>Two workspaces, one platform</h2>
+    <div class="grid two">
+      <article class="card entry">
+        <div class="name"><b>iBuild</b><small>Infra</small></div>
+        <p>Site execution, quantity estimates, cost engineering and budget-to-progress tracking for construction projects.</p>
+        <div><button class="btn solid" data-view="infra">Open Infra workspace</button></div>
+      </article>
+      <article class="card entry">
+        <div class="name"><b>iBuild</b><small>Craft</small></div>
+        <p>Mobile-first web apps, custom management suites and automated workflows built on Google Sheets and Apps Script.</p>
+        <div><button class="btn solid" data-view="craft">Open Craft workspace</button></div>
+      </article>
+    </div>
+    <h2>Why they sit together</h2>
+    <p class="lede">A site report is only useful when it reaches the budget the same day. Infra produces the engineering data. Craft builds the tools that carry it to the people who decide.</p>
+  </section>
+
+  <!-- INFRA -->
+  <section class="view" id="view-infra" role="tabpanel" aria-labelledby="tab-infra" hidden>
+    <div class="hero">
+      <h1>iBuild <em>Infra</em>: know what the site costs while you build it.</h1>
+      <p>Civil and cost engineering for contractors, developers and project owners who need clear numbers at every stage.</p>
+      <div class="actions"><button class="btn solid" data-scroll="estimator">Estimate concrete</button><a class="btn" data-contact="Infra" href="#">Request an Infra consultation</a></div>
+    </div>
+
+    <section id="estimator" aria-labelledby="est-h">
+      <h2 id="est-h">Concrete estimator</h2>
+      <p class="lede">Enter what you are casting and the mix you want. Dry volume, bags of cement and tons of sand and gravel are worked out for you.</p>
+      <div class="est-grid">
+        <form class="card est-form" id="estForm" novalidate onsubmit="return false">
+          <fieldset>
+            <legend>1. What are you casting?</legend>
+            <div class="seg">
+              <button type="button" id="mVol" aria-pressed="true">I know the volume</button>
+              <button type="button" id="mDim" aria-pressed="false">Enter dimensions</button>
+            </div>
+            <div id="boxVol">
+              <label>Wet concrete volume (m³)<input id="vol" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 4.5"></label>
+            </div>
+            <div id="boxDim" hidden>
+              <div id="rows"></div>
+              <button type="button" class="link" id="addRow">Add another element</button>
+              <p class="tot" id="dimTot"></p>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>2. Mix ratio</legend>
+            <label>Cement : sand : gravel
+              <select id="mix">
+                <option value="1,1.5,3">M20 (1 : 1.5 : 3)</option>
+                <option value="1,1,2">M25 (1 : 1 : 2)</option>
+                <option value="1,2,4">M15 (1 : 2 : 4)</option>
+                <option value="1,3,6">M10 (1 : 3 : 6)</option>
+                <option value="custom">Custom ratio</option>
+              </select>
+            </label>
+            <div class="custom" id="custom" hidden>
+              <label>Cement<input id="rc" type="number" inputmode="decimal" min="0" step="any" value="1"></label>
+              <label>Sand<input id="rs" type="number" inputmode="decimal" min="0" step="any" value="2"></label>
+              <label>Gravel<input id="rg" type="number" inputmode="decimal" min="0" step="any" value="4"></label>
+            </div>
+          </fieldset>
+          <details class="adv">
+            <summary>Advanced settings</summary>
+            <div class="adv-grid">
+              <label>Dry volume factor<input id="aDry" type="number" step="any" value="1.54"></label>
+              <label>Bag volume (m³)<input id="aBag" type="number" step="any" value="0.035"></label>
+              <label>Sand density (t/m³)<input id="aSand" type="number" step="any" value="1.6"></label>
+              <label>Gravel density (t/m³)<input id="aGrav" type="number" step="any" value="1.5"></label>
+              <label>Cement price (₦ per 50 kg bag)<input id="pC" type="number" step="any" value="10000"></label>
+              <label>Sand price (₦ per ton)<input id="pS" type="number" step="any" value="15000"></label>
+              <label>Gravel price (₦ per ton)<input id="pG" type="number" step="any" value="30000"></label>
+            </div>
+            <button type="button" class="link" id="advReset">Reset to defaults</button>
+          </details>
+        </form>
+        <div class="stack"><div class="card est-out" id="estOut" aria-live="polite"></div><div class="card est-form" id="printBox"></div></div>
+      </div>
+    </section>
+
+    <h2>Workspace snapshot</h2>
+    <div class="grid three">
+      <div class="card metric"><div class="n">12</div><div class="l">Projects tracked</div></div>
+      <div class="card metric"><div class="n">28</div><div class="l">Site reports this month</div></div>
+      <div class="card metric"><div class="n">−3.2%</div><div class="l">Average budget variance</div></div>
+    </div>
+    <p class="note">Sample figures. They will update once this workspace is connected to your sheet.</p>
+    <h2>Tools and services</h2>
+    <div class="grid three">
+      <div class="card tool"><h3><i class="dot"></i>Quantities and estimates</h3><p>Bills of quantities and cost estimates prepared from drawings and site data.</p></div>
+      <div class="card tool"><h3><i class="dot"></i>Site reports</h3><p>Daily and weekly progress reports with photos, labour and materials in one record.</p></div>
+      <div class="card tool"><h3><i class="dot"></i>Budget against progress</h3><p>See where spending is ahead of or behind the work done, before it becomes a problem.</p></div>
+    </div>
+  </section>
+
+  <!-- CRAFT -->
+  <section class="view" id="view-craft" role="tabpanel" aria-labelledby="tab-craft" hidden>
+    <div class="hero">
+      <h1>iBuild <em>Craft</em>: digital tools made to fit how you work.</h1>
+      <p>A digital studio for mobile-first web apps and management systems that run on tools your team already uses.</p>
+      <div class="actions"><a class="btn" data-contact="Craft" href="#">Request a Craft consultation</a></div>
+    </div>
+    <h2>Workspace snapshot</h2>
+    <div class="grid three">
+      <div class="card metric"><div class="n">9</div><div class="l">Web apps delivered</div></div>
+      <div class="card metric"><div class="n">14</div><div class="l">Automations running</div></div>
+      <div class="card metric"><div class="n">3</div><div class="l">Builds in progress</div></div>
+    </div>
+    <p class="note">Sample figures. They will update once this workspace is connected to your sheet.</p>
+    <h2>Tools and services</h2>
+    <div class="grid three">
+      <div class="card tool"><h3><i class="dot"></i>Mobile-first web apps</h3><p>Fast, clear apps that work well on a phone and need no installation.</p></div>
+      <div class="card tool"><h3><i class="dot"></i>Management suites</h3><p>Admin portals for approvals, records and reports, with roles for each team member.</p></div>
+      <div class="card tool"><h3><i class="dot"></i>Workflow automation</h3><p>Google Apps Script backends that handle forms, emails and spreadsheets without manual work.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>iBuild is a service of The Mobilizer’s Diary.</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-in est-form">
+    <button type="button" class="dlg-x" id="dlgX" aria-label="Close">×</button>
+    <h3 id="dlgTitle"></h3>
+    <div id="dlgBody"></div>
+  </div>
+</dialog>
+<script src="config.js"></script>
+
+
+<script>
+(function () {
+  var CONTACT_EMAIL = ''; /* Add your enquiry email here, for example 'hello@mobilizersdiary.com.ng' */
+  var VIEWS = ['hub', 'infra', 'craft'];
+  var TAGS = { hub: '', infra: 'Infra', craft: 'Craft' };
+  var TITLES = { hub: 'iBuild', infra: 'iBuild Infra', craft: 'iBuild Craft' };
+
+  function show(view, updateHash) {
+    if (VIEWS.indexOf(view) < 0) view = 'hub';
+    VIEWS.forEach(function (v) {
+      document.getElementById('view-' + v).hidden = v !== view;
+      document.getElementById('tab-' + v).setAttribute('aria-selected', v === view ? 'true' : 'false');
+    });
+    document.getElementById('tag').textContent = TAGS[view];
+    document.title = TITLES[view] + ' | The Mobilizer’s Diary';
+    if (updateHash && location.hash !== '#' + view) history.pushState(null, '', '#' + view);
+    window.scrollTo({ top: 0 });
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-view]');
+    if (t) { e.preventDefault(); show(t.getAttribute('data-view'), true); return; }
+    var sc = e.target.closest('[data-scroll]');
+    if (sc) { e.preventDefault(); document.getElementById(sc.getAttribute('data-scroll')).scrollIntoView({ behavior: 'smooth' }); return; }
+    var c = e.target.closest('[data-contact]');
+    if (c) {
+      e.preventDefault();
+      var subject = encodeURIComponent('iBuild ' + c.getAttribute('data-contact') + ' enquiry');
+      location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject;
+    }
+  });
+  window.addEventListener('popstate', function () { show(location.hash.slice(1), false); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var DEF = { aDry: 1.54, aBag: 0.035, aSand: 1.6, aGrav: 1.5, pC: 10000, pS: 15000, pG: 30000 };
+  var mode = 'vol';
+
+  function num(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
+  function setting(id, allowZero) { var v = num(id); return (isFinite(v) && (allowZero ? v >= 0 : v > 0)) ? v : DEF[id]; }
+  function fmt(n, d) { return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function naira(n) { return '₦' + fmt(Math.round(n), 0); }
+
+  function addRow() {
+    var d = document.createElement('div');
+    d.className = 'drow';
+    d.innerHTML = '<label>Length (m)<input type="number" inputmode="decimal" min="0" step="any" data-k="l"></label>' +
+      '<label>Width (m)<input type="number" inputmode="decimal" min="0" step="any" data-k="w"></label>' +
+      '<label>Height (m)<input type="number" inputmode="decimal" min="0" step="any" data-k="h"></label>' +
+      '<label>How many<input type="number" inputmode="numeric" min="1" step="1" value="1" data-k="n"></label>' +
+      '<button type="button" class="x" aria-label="Remove this element">×</button>';
+    d.querySelector('.x').onclick = function () {
+      if ($('rows').children.length > 1) { d.remove(); run(); }
+    };
+    $('rows').appendChild(d);
+  }
+
+  function wetVolume() {
+    if (mode === 'vol') return num('vol');
+    var total = 0, any = false;
+    Array.prototype.forEach.call($('rows').children, function (r) {
+      var g = function (k) { return parseFloat(r.querySelector('[data-k="' + k + '"]').value); };
+      var l = g('l'), w = g('w'), h = g('h'), n = g('n');
+      if (!isFinite(n) || n < 1) n = 1;
+      if (l > 0 && w > 0 && h > 0) { total += l * w * h * n; any = true; }
+    });
+    $('dimTot').textContent = any ? 'Total wet volume: ' + fmt(total, 3) + ' m³' : '';
+    return any ? total : NaN;
+  }
+
+  function ratio() {
+    var m = $('mix').value;
+    if (m === 'custom') return [num('rc'), num('rs'), num('rg')];
+    return m.split(',').map(Number);
+  }
+
+  function run() {
+    var out = $('estOut'), V = wetVolume(), r = ratio();
+    $('custom').hidden = $('mix').value !== 'custom';
+    if (!(V > 0)) {
+      out.innerHTML = '<h3>Your estimate</h3><p class="est-empty">Enter a volume or the dimensions to see your material quantities and costs.</p>';
+      return;
+    }
+    if (!(r[0] > 0) || !(r[1] >= 0) || !(r[2] >= 0)) {
+      out.innerHTML = '<h3>Your estimate</h3><p class="err">Enter a mix ratio with cement above zero. For example 1, 2 and 4.</p>';
+      return;
+    }
+    var dry = V * setting('aDry'), parts = r[0] + r[1] + r[2];
+    var cementM3 = dry * r[0] / parts, bagsExact = cementM3 / setting('aBag'), bags = Math.ceil(bagsExact - 1e-9);
+    var sandT = dry * r[1] / parts * setting('aSand'), gravT = dry * r[2] / parts * setting('aGrav');
+    var pC = setting('pC', true), pS = setting('pS', true), pG = setting('pG', true);
+    var cC = bags * pC, cS = sandT * pS, cG = gravT * pG, total = cC + cS + cG;
+    var ratioTxt = r.map(function (x) { return fmt(x, x % 1 ? 1 : 0); }).join(' : ');
+
+    out.innerHTML = '<h3>Your estimate</h3>' +
+      '<p class="est-empty">Wet volume ' + fmt(V, 2) + ' m³ becomes ' + fmt(dry, 2) + ' m³ dry. Mix ' + ratioTxt + '.</p>' +
+      '<div class="tblwrap"><table class="tbl"><thead><tr><th>Material</th><th class="r">Quantity</th><th class="r">Rate</th><th class="r">Cost</th></tr></thead><tbody>' +
+      '<tr><td>Cement<small>50 kg bags (' + fmt(bagsExact, 1) + ' worked out, rounded up)</small></td><td class="r">' + fmt(bags, 0) + ' bags</td><td class="r">' + naira(pC) + '</td><td class="r">' + naira(cC) + '</td></tr>' +
+      '<tr><td>Sand</td><td class="r">' + fmt(sandT, 2) + ' tons</td><td class="r">' + naira(pS) + '</td><td class="r">' + naira(cS) + '</td></tr>' +
+      '<tr><td>Gravel</td><td class="r">' + fmt(gravT, 2) + ' tons</td><td class="r">' + naira(pG) + '</td><td class="r">' + naira(cG) + '</td></tr>' +
+      '</tbody><tfoot><tr><td colspan="3">Estimated total</td><td class="r">' + naira(total) + '</td></tr></tfoot></table></div>' +
+      '<p class="note">Rates are sample figures. Enter your local prices under Advanced settings. Add an allowance for waste when ordering.</p>' +
+      '<div class="actions" style="margin-top:14px"><button type="button" class="btn" id="copyEst">Copy summary</button></div>';
+
+    $('copyEst').onclick = function () {
+      var txt = 'iBuild Infra concrete estimate\nWet volume: ' + fmt(V, 2) + ' m³ (dry ' + fmt(dry, 2) + ' m³), mix ' + ratioTxt +
+        '\nCement: ' + bags + ' bags (' + naira(cC) + ')\nSand: ' + fmt(sandT, 2) + ' tons (' + naira(cS) + ')\nGravel: ' + fmt(gravT, 2) +
+        ' tons (' + naira(cG) + ')\nEstimated total: ' + naira(total);
+      var b = $('copyEst');
+      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { b.textContent = 'Copied'; },
+        function () { b.textContent = 'Copy not available'; });
+      setTimeout(function () { b.textContent = 'Copy summary'; }, 1800);
+    };
+  }
+
+  function setMode(m) {
+    mode = m;
+    $('mVol').setAttribute('aria-pressed', m === 'vol');
+    $('mDim').setAttribute('aria-pressed', m === 'dim');
+    $('boxVol').hidden = m !== 'vol';
+    $('boxDim').hidden = m !== 'dim';
+    run();
+  }
+
+  window.ibEstimateInput = function () {
+    var inp = { mode: mode, mix: $('mix').value, custom: [num('rc'), num('rs'), num('rg')],
+      adv: { dry: num('aDry'), bag: num('aBag'), sand: num('aSand'), grav: num('aGrav'), pC: num('pC'), pS: num('pS'), pG: num('pG') } };
+    if (mode === 'vol') inp.volume = num('vol');
+    else {
+      inp.elements = [];
+      Array.prototype.forEach.call($('rows').children, function (r) {
+        var g = function (k) { return parseFloat(r.querySelector('[data-k="' + k + '"]').value); };
+        inp.elements.push({ l: g('l'), w: g('w'), h: g('h'), n: g('n') });
+      });
+    }
+    return inp;
+  };
+  $('mVol').onclick = function () { setMode('vol'); };
+  $('mDim').onclick = function () { setMode('dim'); };
+  $('addRow').onclick = function () { addRow(); };
+  $('advReset').onclick = function () { Object.keys(DEF).forEach(function (k) { $(k).value = DEF[k]; }); run(); };
+  $('estForm').addEventListener('input', run);
+  $('estForm').addEventListener('change', run);
+  addRow();
+  run();
+})();
+</script>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = 'ib_print_session_v1', session = null, status = null, pname = '', busy = false, dlg = $('dlg');
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function load() { try { session = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { session = null; } }
+  function save() { try { if (session) localStorage.setItem(KEY, JSON.stringify(session)); else localStorage.removeItem(KEY); } catch (e) {} }
+  function api(action, data) {
+    if (typeof API_URL !== 'string' || API_URL.indexOf('https://script.google.com/') !== 0) return Promise.reject(new Error('Printing is not configured yet. Please try again later.'));
+    return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: action, data: data || {} }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) throw new Error(j.error || 'Something went wrong.'); return j.result; });
+  }
+  function authFail(err) {
+    if (!/sign in again|session has expired/i.test(err.message || '')) return false;
+    session = null; status = null; save(); renderBox('Your session ended. Please sign in again.', true); return true;
+  }
+  function bind(id, fn) { var el = $(id); if (el) el.onclick = fn; }
+  function dErr(t) { var e = $('dErr'); if (e) e.textContent = t || ''; }
+  function openDlg(title, html) {
+    $('dlgTitle').textContent = title; $('dlgBody').innerHTML = html;
+    if (!dlg.open) dlg.showModal();
+  }
+  function closeDlg() { if (dlg.open) dlg.close(); }
+  function run(btn, work) {
+    if (busy) return; busy = true; var old = btn.textContent; btn.disabled = true; btn.textContent = 'Please wait…';
+    work().then(function () { busy = false; btn.disabled = false; btn.textContent = old; },
+      function () { busy = false; btn.disabled = false; btn.textContent = old; });
+  }
+
+  function statusLine() {
+    if (!status) return '';
+    if (status.tier === 'paid') {
+      var until = status.expiresAt ? ', valid until ' + new Date(status.expiresAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : ', lifetime';
+      return esc(status.planLabel) + until + '. No watermark.';
+    }
+    return 'Free plan: ' + status.freeRemaining + ' of ' + status.freeLimit + ' prints left, with an iBuild watermark.';
+  }
+
+  function renderBox(text, bad) {
+    var el = $('pname'); if (el) pname = el.value;
+    var h = '<h3>Print a professional copy</h3><label>Project name (optional)<input id="pname" maxlength="80" placeholder="e.g. Block B columns" value="' + esc(pname) + '"></label>';
+    if (!session) {
+      h += '<p class="note" style="margin:0 0 12px">Free accounts get 5 prints with an iBuild watermark. A plan prints without it.</p>' +
+        '<div class="actions" style="margin-top:0"><button type="button" class="btn solid" id="bSign">Sign in to print</button><button type="button" class="btn" id="bPlans">See plans</button></div>';
+    } else {
+      h += '<p class="note" style="margin:0 0 12px">Signed in as ' + esc(session.email) + '. ' + statusLine() + '</p>' +
+        '<div class="actions" style="margin-top:0"><button type="button" class="btn solid" id="bPrint">Print</button>' +
+        '<button type="button" class="btn" id="bPlans">' + (status && status.tier === 'paid' ? 'Plans' : 'Remove watermark') + '</button>' +
+        '<button type="button" class="link" id="bOut">Sign out</button></div>';
+    }
+    h += '<p class="note" id="pmsg" role="status" style="margin-top:10px"></p>';
+    $('printBox').innerHTML = h;
+    var m = $('pmsg'); m.textContent = text || ''; m.style.color = bad ? '#9b2c1f' : '';
+    bind('bSign', function () { panelEmail('print'); });
+    bind('bPlans', openPlans);
+    bind('bPrint', doPrint);
+    bind('bOut', function () { session = null; status = null; save(); renderBox('Signed out.'); });
+  }
+
+  function panelEmail(intent, note) {
+    openDlg('Sign in', (note ? '<p class="note">' + esc(note) + '</p>' : '') +
+      '<label>Email address<input id="dEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></label>' +
+      '<div class="actions"><button type="button" class="btn solid" id="dGo">Email me a code</button></div>' +
+      '<p class="note"><button type="button" class="link" id="dAcc">I have an access code</button> &nbsp; <button type="button" class="link" id="dRec">Lost my access code?</button></p>' +
+      '<p class="err" id="dErr"></p>');
+    bind('dGo', function () {
+      var email = $('dEmail').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return dErr('Enter a valid email address.');
+      dErr(''); run($('dGo'), function () { return api('printRequestCode', { email: email }).then(function () { panelOtp(email, intent); }, function (e) { dErr(e.message); }); });
+    });
+    bind('dAcc', function () { panelAccess(intent); });
+    bind('dRec', panelRecover);
+  }
+  function panelOtp(email, intent) {
+    openDlg('Enter your code', '<p class="note">We sent a 6-digit code to ' + esc(email) + '. It expires in 10 minutes and works once.</p>' +
+      '<label>Code<input id="dCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456"></label>' +
+      '<div class="actions"><button type="button" class="btn solid" id="dGo">Sign in</button></div>' +
+      '<p class="note"><button type="button" class="link" id="dBack">Use a different email</button></p><p class="err" id="dErr"></p>');
+    bind('dGo', function () {
+      dErr(''); run($('dGo'), function () { return api('printVerifyCode', { email: email, code: $('dCode').value.trim() }).then(function (r) { signedIn(r, email, intent); }, function (e) { dErr(e.message); }); });
+    });
+    bind('dBack', function () { panelEmail(intent); });
+  }
+  function panelAccess(intent) {
+    openDlg('Sign in with access code', '<label>Email used to pay<input id="dEmail" type="email" inputmode="email" autocomplete="email"></label>' +
+      '<label>Access code<input id="dCode" autocapitalize="characters" placeholder="IB-XXXX-XXXX-XXXX"></label>' +
+      '<div class="actions"><button type="button" class="btn solid" id="dGo">Sign in</button></div>' +
+      '<p class="note"><button type="button" class="link" id="dBack">Back</button></p><p class="err" id="dErr"></p>');
+    bind('dGo', function () {
+      var email = $('dEmail').value.trim(); dErr('');
+      run($('dGo'), function () { return api('printAccessLogin', { email: email, code: $('dCode').value }).then(function (r) { signedIn(r, email.toLowerCase(), intent); }, function (e) { dErr(e.message); }); });
+    });
+    bind('dBack', function () { panelEmail(intent); });
+  }
+  function panelRecover() {
+    openDlg('Find my access code', '<p class="note">Enter the email you paid with and the payment reference from your receipt (it starts with IBP). A new code is emailed to you, and the old one stops working.</p>' +
+      '<label>Email used to pay<input id="dEmail" type="email" inputmode="email" autocomplete="email"></label>' +
+      '<label>Payment reference<input id="dRef" autocapitalize="characters" placeholder="IBP-2026-0001"></label>' +
+      '<div class="actions"><button type="button" class="btn solid" id="dGo">Send my code</button></div>' +
+      '<p class="note"><button type="button" class="link" id="dBack">Back</button></p><p class="err" id="dErr"></p>');
+    bind('dGo', function () {
+      dErr(''); run($('dGo'), function () {
+        return api('printRecover', { email: $('dEmail').value.trim(), reference: $('dRef').value.trim().toUpperCase() })
+          .then(function (r) { $('dErr').style.color = 'inherit'; dErr(r.message); }, function (e) { dErr(e.message); });
+      });
+    });
+    bind('dBack', function () { panelEmail(); });
+  }
+
+  function signedIn(res, email, intent) {
+    session = { token: res.token, email: email }; status = res.status; save(); closeDlg();
+    if (intent === 'plans') { renderBox('Signed in.'); openPlans(); } else renderBox('Signed in. Tap Print when you are ready.');
+  }
+
+  function openPlans() {
+    if (!session) return panelEmail('plans', 'Sign in first so your plan is linked to your email.');
+    openDlg('Choose a plan', '<p class="note">Loading plans…</p>');
+    api('printPlans').then(function (r) {
+      if (!r.plans.length) { $('dlgBody').innerHTML = '<p class="note">Plans are not on sale yet. Please check back soon.</p>'; return; }
+      var h = '<p class="note">Paid plans print without the watermark for the whole period.</p>';
+      r.plans.forEach(function (p) {
+        h += '<div class="plan"><div><b>' + esc(p.label) + '</b></div><div>&#8358;' + Number(p.price).toLocaleString('en-US') +
+          '<button type="button" class="btn" data-plan="' + esc(p.id) + '">Choose</button></div></div>';
+      });
+      $('dlgBody').innerHTML = h + '<p class="err" id="dErr"></p>';
+      Array.prototype.forEach.call($('dlgBody').querySelectorAll('[data-plan]'), function (b) {
+        b.onclick = function () {
+          run(b, function () {
+            return api('printCheckout', { token: session.token, planId: b.getAttribute('data-plan') })
+              .then(function (c) { location.href = c.url; }, function (e) { closeDlg(); if (!authFail(e)) renderBox(e.message, true); });
+          });
+        };
+      });
+    }).catch(function (e) { $('dlgBody').innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  function doPrint() {
+    if (!session) return panelEmail('print');
+    var el = $('pname'); if (el) pname = el.value;
+    var input = window.ibEstimateInput ? window.ibEstimateInput() : null;
+    var ok = input && ((input.mode === 'vol' && input.volume > 0) ||
+      (input.mode === 'dim' && input.elements.some(function (e) { return e.l > 0 && e.w > 0 && e.h > 0; })));
+    if (!ok) return renderBox('Enter a volume or dimensions above first.', true);
+    var w = window.open('', '_blank');
+    if (!w) return renderBox('Your browser blocked the print window. Allow pop-ups for this site and try again.', true);
+    w.document.write('<p style="font-family:sans-serif;padding:24px">Preparing your document…</p>');
+    renderBox('Preparing your document…');
+    api('printDocument', { token: session.token, input: input, project: pname }).then(function (res) {
+      status = res.status;
+      w.document.open(); w.document.write(res.html); w.document.close(); w.focus();
+      setTimeout(function () { try { w.print(); } catch (e) {} }, 600);
+      renderBox('Document ' + res.docNo + ' opened in a new tab. Use print or save as PDF there.');
+    }).catch(function (err) {
+      try { w.close(); } catch (e) {}
+      if (authFail(err)) return;
+      renderBox(err.message, true);
+      if (/free prints have been used/i.test(err.message)) openPlans();
+    });
+  }
+
+  function paymentReturn() {
+    var q = new URLSearchParams(location.search), ref = q.get('reference') || q.get('trxref') || '';
+    if (!/^IBP-\d{4}-\d{4}$/.test(ref)) return;
+    history.replaceState(null, '', location.pathname);
+    location.hash = 'infra';
+    renderBox('Confirming your payment…');
+    api('printVerifyOrder', { reference: ref }).then(function (r) {
+      if (r.status === 'success') {
+        renderBox('Payment confirmed. Your receipt and access code have been emailed to you.');
+        if (session) api('printStatus', { token: session.token }).then(function (s) { status = s.status; renderBox('Payment confirmed. Your receipt and access code have been emailed to you.'); }, function () {});
+      } else if (r.status === 'pending') renderBox('Your payment is still being confirmed. Reload in a minute, or use “Lost my access code?” with reference ' + ref + '.', true);
+      else renderBox('The payment was not completed, so no plan was added.', true);
+    }).catch(function (e) { renderBox(e.message + ' Reference: ' + ref, true); });
+  }
+
+  $('dlgX').onclick = closeDlg;
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
+  load(); renderBox();
+  if (session) api('printStatus', { token: session.token }).then(function (r) { status = r.status; renderBox(); }, function (e) { if (!authFail(e)) renderBox(); });
+  paymentReturn();
+})();
+</script>
+</body>
+</html>
