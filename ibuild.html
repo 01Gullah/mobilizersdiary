@@ -13,7 +13,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;
+body{margin:0;overflow-x:clip;font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;
   padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
@@ -86,7 +86,8 @@ h2{font-family:var(--serif);font-size:1.5rem;margin:40px 0 14px;color:var(--gree
 footer{max-width:1080px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:.9rem}
 
 /* Concrete estimator */
-.est-grid{display:grid;gap:16px;align-items:start}
+.est-grid{display:grid;gap:16px;align-items:start;grid-template-columns:minmax(0,1fr)}
+.est-grid>*,.stack>*,.grid>*{min-width:0}
 @media(min-width:900px){.est-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
 .est-form fieldset{border:0;padding:0;margin:0 0 22px}
 .est-form legend{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--green);padding:0;margin-bottom:10px}
@@ -98,7 +99,8 @@ footer{max-width:1080px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 .seg button{flex:1;font:inherit;font-weight:600;border:0;border-radius:9px;padding:10px;cursor:pointer;background:transparent;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--green);color:var(--gold-lt)}
 .drow{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:8px;align-items:end;margin-bottom:8px}
-.drow label{margin:0;font-size:.78rem}
+.drow label{margin:0;font-size:.78rem;min-width:0}
+.drow input{min-width:0}
 .drow .x{font:inherit;border:0;background:transparent;color:var(--muted);font-size:1.4rem;cursor:pointer;padding:8px 6px;line-height:1}
 .link{font:inherit;font-weight:600;color:var(--green);background:none;border:0;border-bottom:1px solid var(--gold);padding:2px 0;cursor:pointer}
 .custom{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
@@ -113,7 +115,7 @@ footer{max-width:1080px;margin:0 auto;padding:0 20px 28px;color:var(--muted);fon
 .tbl td.r,.tbl th.r{text-align:right;white-space:nowrap}
 .tbl tfoot td{border-bottom:0;border-top:2px solid var(--gold);font-weight:700;color:var(--green);font-size:1.05rem}
 .tbl small{display:block;color:var(--muted);font-weight:400}
-.tblwrap{overflow-x:auto}
+.tblwrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .err{color:#9b2c1f;font-size:.9rem;margin:0}
 
 /* Print access */
@@ -127,6 +129,28 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
 .plan b{font-family:var(--serif);color:var(--green)}
 .plan .btn{padding:8px 16px;margin-left:10px}
 .dlg-in .actions{margin-top:10px}
+
+@media(max-width:520px){.tbl th,.tbl td{padding:8px 6px;font-size:.88rem}.hero{padding:40px 20px 36px}}
+.est-form textarea{display:block;width:100%;margin-top:4px;font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;resize:vertical}
+.est-form input[type=color]{height:46px;padding:4px;cursor:pointer}
+.logo-row{display:flex;gap:14px;align-items:center;margin:10px 0 14px}
+.logo-box{width:120px;height:64px;flex:none;border:1.5px dashed var(--line);border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;overflow:hidden}
+.logo-box img{max-width:100%;max-height:100%;object-fit:contain}
+.est-form .filebtn{display:inline-block;margin:0;padding:9px 16px;border:2px solid var(--gold);border-radius:10px;font-weight:700;color:var(--green);cursor:pointer;background:var(--ivory);font-size:.95rem}
+.est-form .filebtn input{display:none}
+.adv .custom-fields{margin-top:12px}
+
+.mixline{background:var(--ivory);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin:12px 0}
+.mixline span{display:block;color:var(--muted);font-size:.85rem}
+.mixline b{font-family:var(--serif);font-size:1.25rem;color:var(--green);font-weight:700}
+.tbl td small.v{display:block;color:var(--muted);font-weight:400}
+
+.guide{background:#fff8e7;border:1px solid #ecd9a4;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:.9rem}
+.guide b{font-family:var(--serif);color:var(--green)}
+.guide ul{margin:8px 0;padding-left:18px}.guide li{margin-bottom:4px}.guide li span{font-weight:600;color:var(--green)}
+.guide small{color:var(--muted)}
+.mixnow{margin:8px 0;font-weight:600}.mixnow.ok{color:#1f6b3a}.mixnow.warn{color:#8a5a00}.mixnow.bad{color:#9b2c1f}
+.seg3 button{font-size:.88rem;padding:10px 4px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.btn:hover{transform:none}}
 </style>
 </head>
@@ -182,7 +206,7 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
 
     <section id="estimator" aria-labelledby="est-h">
       <h2 id="est-h">Concrete estimator</h2>
-      <p class="lede">Enter what you are casting and the mix you want. Dry volume, bags of cement and tons of sand and gravel are worked out for you.</p>
+      <p class="lede">Enter what you are casting and the mix you want. We work out what to buy (bags and tons) and what to measure on site (paint buckets) from the same volume.</p>
       <div class="est-grid">
         <form class="card est-form" id="estForm" novalidate onsubmit="return false">
           <fieldset>
@@ -202,12 +226,23 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
           </fieldset>
           <fieldset>
             <legend>2. Mix ratio</legend>
+            <div class="guide" role="note">
+              <b>Which mix for which job?</b>
+              <ul>
+                <li><span>Blinding, mass concrete, oversite bedding:</span> 1:4:8 or 1:3:6. Lean and non-structural.</li>
+                <li><span>Bungalow ground beams, columns and slabs:</span> 1:2:4 at minimum. Standard structural grade.</li>
+                <li><span>Multi-storey and heavy structural elements:</span> 1:1.5:3 (M20) or richer. Use 1:2:4 only if the engineer’s design says so.</li>
+              </ul>
+              <p class="mixnow" id="mixNow"></p>
+              <small>Guidance only. The structural engineer’s drawings always govern.</small>
+            </div>
             <label>Cement : sand : gravel
               <select id="mix">
                 <option value="1,1.5,3">M20 (1 : 1.5 : 3)</option>
                 <option value="1,1,2">M25 (1 : 1 : 2)</option>
                 <option value="1,2,4">M15 (1 : 2 : 4)</option>
                 <option value="1,3,6">M10 (1 : 3 : 6)</option>
+                <option value="1,4,8">M7.5 (1 : 4 : 8)</option>
                 <option value="custom">Custom ratio</option>
               </select>
             </label>
@@ -222,6 +257,7 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
             <div class="adv-grid">
               <label>Dry volume factor<input id="aDry" type="number" step="any" value="1.54"></label>
               <label>Bag volume (m³)<input id="aBag" type="number" step="any" value="0.035"></label>
+              <label>Paint bucket size (litres)<input id="aBucket" type="number" step="any" value="20"></label>
               <label>Sand density (t/m³)<input id="aSand" type="number" step="any" value="1.6"></label>
               <label>Gravel density (t/m³)<input id="aGrav" type="number" step="any" value="1.5"></label>
               <label>Cement price (₦ per 50 kg bag)<input id="pC" type="number" step="any" value="10000"></label>
@@ -324,7 +360,7 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var DEF = { aDry: 1.54, aBag: 0.035, aSand: 1.6, aGrav: 1.5, pC: 10000, pS: 15000, pG: 30000 };
+  var DEF = { aDry: 1.54, aBag: 0.035, aBucket: 20, aSand: 1.6, aGrav: 1.5, pC: 10000, pS: 15000, pG: 30000 };
   var mode = 'vol';
 
   function num(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
@@ -365,38 +401,102 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
     return m.split(',').map(Number);
   }
 
+  var view = 'bags';
+  function tr(n, d) { var s = fmt(n, d); return s.indexOf('.') >= 0 ? s.replace(/\.?0+$/, '') : s; }
+
+  function mixClass(r) {
+    var share = r[0] / (r[0] + r[1] + r[2]);
+    if (share >= 0.17) return ['ok', 'Rich mix: suits multi-storey and heavy structural elements, subject to the engineer’s design.'];
+    if (share >= 0.14) return ['ok', 'Standard structural mix: suits bungalow ground beams, columns and slabs (1:2:4 is the minimum).'];
+    if (share >= 0.095) return ['warn', 'Lean mix: for blinding, mass concrete and oversite bedding only. Not for beams, columns or slabs.'];
+    if (share >= 0.07) return ['warn', 'Very lean mix: non-structural fill and blinding only.'];
+    return ['bad', 'Leaner than 1:4:8: not suitable for any structural use.'];
+  }
+  function updateGuide(r) {
+    var g = $('mixNow'); if (!g) return;
+    if (!(r[0] > 0) || !(r[1] >= 0) || !(r[2] >= 0)) { g.className = 'mixnow'; g.textContent = ''; return; }
+    var c = mixClass(r);
+    g.className = 'mixnow ' + c[0];
+    g.textContent = 'Your mix ' + r.map(function (x) { return tr(x, 2); }).join(' : ') + '. ' + c[1];
+  }
+
   function run() {
     var out = $('estOut'), V = wetVolume(), r = ratio();
     $('custom').hidden = $('mix').value !== 'custom';
+    updateGuide(r);
     if (!(V > 0)) {
-      out.innerHTML = '<h3>Your estimate</h3><p class="est-empty">Enter a volume or the dimensions to see your material quantities and costs.</p>';
+      out.innerHTML = '<h3>Your estimate</h3><p class="est-empty">Enter a volume or the dimensions to see your quantities.</p>';
       return;
     }
     if (!(r[0] > 0) || !(r[1] >= 0) || !(r[2] >= 0)) {
       out.innerHTML = '<h3>Your estimate</h3><p class="err">Enter a mix ratio with cement above zero. For example 1, 2 and 4.</p>';
       return;
     }
-    var dry = V * setting('aDry'), parts = r[0] + r[1] + r[2];
-    var cementM3 = dry * r[0] / parts, bagsExact = cementM3 / setting('aBag'), bags = Math.ceil(bagsExact - 1e-9);
-    var sandT = dry * r[1] / parts * setting('aSand'), gravT = dry * r[2] / parts * setting('aGrav');
+    var dryF = setting('aDry'), dry = V * dryF, parts = r[0] + r[1] + r[2], bagV = setting('aBag'), bucketV = setting('aBucket') / 1000;
+    var exC = dry * r[0] / parts, exS = dry * r[1] / parts, exG = dry * r[2] / parts;       // exact volumes (m3)
+    var bagsExact = exC / bagV, bags = Math.ceil(bagsExact - 1e-9);
+    var F = bags / bagsExact;                                                               // whole-bag scaling
+    var dS = setting('aSand'), dG = setting('aGrav');
     var pC = setting('pC', true), pS = setting('pS', true), pG = setting('pG', true);
-    var cC = bags * pC, cS = sandT * pS, cG = gravT * pG, total = cC + cS + cG;
     var ratioTxt = r.map(function (x) { return fmt(x, x % 1 ? 1 : 0); }).join(' : ');
+    var litres = tr(bucketV * 1000, 1), bagB = bagV / bucketV, rs = r[1] / r[0], rg = r[2] / r[0];
 
-    out.innerHTML = '<h3>Your estimate</h3>' +
-      '<p class="est-empty">Wet volume ' + fmt(V, 2) + ' m³ becomes ' + fmt(dry, 2) + ' m³ dry. Mix ' + ratioTxt + '.</p>' +
-      '<div class="tblwrap"><table class="tbl"><thead><tr><th>Material</th><th class="r">Quantity</th><th class="r">Rate</th><th class="r">Cost</th></tr></thead><tbody>' +
-      '<tr><td>Cement<small>50 kg bags (' + fmt(bagsExact, 1) + ' worked out, rounded up)</small></td><td class="r">' + fmt(bags, 0) + ' bags</td><td class="r">' + naira(pC) + '</td><td class="r">' + naira(cC) + '</td></tr>' +
-      '<tr><td>Sand</td><td class="r">' + fmt(sandT, 2) + ' tons</td><td class="r">' + naira(pS) + '</td><td class="r">' + naira(cS) + '</td></tr>' +
-      '<tr><td>Gravel</td><td class="r">' + fmt(gravT, 2) + ' tons</td><td class="r">' + naira(pG) + '</td><td class="r">' + naira(cG) + '</td></tr>' +
-      '</tbody><tfoot><tr><td colspan="3">Estimated total</td><td class="r">' + naira(total) + '</td></tr></tfoot></table></div>' +
-      '<p class="note">Rates are sample figures. Enter your local prices under Advanced settings. Add an allowance for waste when ordering.</p>' +
+    var toggle = '<div class="seg seg3" style="margin:10px 0 4px">' +
+      '<button type="button" id="vMet" aria-pressed="' + (view === 'metric') + '">Metric (m³)</button>' +
+      '<button type="button" id="vSite" aria-pressed="' + (view === 'site') + '">Site buckets</button>' +
+      '<button type="button" id="vBag" aria-pressed="' + (view === 'bags') + '">Whole bags</button></div>';
+    var hint = { metric: 'Exact technical volumes. Nothing is rounded.',
+      site: 'Hand-held units for the crew: the same volumes shown in paint buckets.',
+      bags: 'What to buy: cement in whole bags, with sand and gravel scaled to match.' }[view];
+    var summary = '<p class="est-empty">Wet volume ' + fmt(V, 2) + ' m³ becomes ' + fmt(dry, 2) + ' m³ dry. Mix ' + ratioTxt + '. ' + hint + '</p>';
+    var body, copyBody;
+
+    if (view === 'metric') {
+      body = '<div class="tblwrap"><table class="tbl"><thead><tr><th>Item</th><th class="r">Volume (m³)</th></tr></thead><tbody>' +
+        '<tr><td>Wet concrete<small>your input</small></td><td class="r">' + fmt(V, 3) + '</td></tr>' +
+        '<tr><td>Dry volume<small>wet × ' + tr(dryF, 3) + '</small></td><td class="r">' + fmt(dry, 3) + '</td></tr>' +
+        '<tr><td>Cement<small>' + tr(r[0], 2) + ' part · ' + fmt(bagsExact, 2) + ' bags exact</small></td><td class="r">' + fmt(exC, 3) + '</td></tr>' +
+        '<tr><td>Sand<small>' + tr(r[1], 2) + ' parts</small></td><td class="r">' + fmt(exS, 3) + '</td></tr>' +
+        '<tr><td>Gravel<small>' + tr(r[2], 2) + ' parts</small></td><td class="r">' + fmt(exG, 3) + '</td></tr>' +
+        '</tbody></table></div><p class="note">Exact figures from your measurements. Use the other two views to turn them into bags, tons and buckets.</p>';
+      copyBody = 'METRIC (exact volumes)\nWet ' + fmt(V, 3) + ' m³, dry ' + fmt(dry, 3) + ' m³\nCement ' + fmt(exC, 3) + ' m³, sand ' + fmt(exS, 3) + ' m³, gravel ' + fmt(exG, 3) + ' m³';
+    } else if (view === 'site') {
+      var bc = exC / bucketV, bs = exS / bucketV, bg = exG / bucketV;
+      body = '<div class="mixline"><span>Mix by paint bucket</span><b>1 cement : ' + tr(rs, 2) + ' sand : ' + tr(rg, 2) + ' gravel</b></div>' +
+        '<div class="tblwrap"><table class="tbl"><thead><tr><th>Material</th><th class="r">Per 1 bucket of cement</th><th class="r">Per 1 whole bag of cement</th><th class="r">Whole job</th></tr></thead><tbody>' +
+        '<tr><td>Cement</td><td class="r">1 bucket</td><td class="r">1 bag</td><td class="r">' + tr(bc, 1) + ' buckets<small class="v">' + tr(bagsExact, 1) + ' bags</small></td></tr>' +
+        '<tr><td>Sand</td><td class="r">' + tr(rs, 2) + ' buckets</td><td class="r">' + tr(rs * bagB, 1) + ' buckets</td><td class="r">' + tr(bs, 1) + ' buckets</td></tr>' +
+        '<tr><td>Gravel</td><td class="r">' + tr(rg, 2) + ' buckets</td><td class="r">' + tr(rg * bagB, 1) + ' buckets</td><td class="r">' + tr(bg, 1) + ' buckets</td></tr>' +
+        '</tbody></table></div>' +
+        '<p class="note">Using a ' + litres + '-litre paint bucket, filled level and not heaped. One 50 kg bag of cement fills about ' + tr(bagB, 2) +
+        ' buckets. Change the bucket size under Advanced settings if yours is different.</p>';
+      copyBody = 'SITE BATCHING (' + litres + '-litre paint bucket, level)\nMix: 1 cement : ' + tr(rs, 2) + ' sand : ' + tr(rg, 2) + ' gravel' +
+        '\nPer whole bag of cement: ' + tr(rs * bagB, 1) + ' buckets sand, ' + tr(rg * bagB, 1) + ' buckets gravel' +
+        '\nWhole job: ' + tr(bc, 1) + ' buckets cement, ' + tr(bs, 1) + ' sand, ' + tr(bg, 1) + ' gravel';
+    } else {
+      var sM3 = exS * F, gM3 = exG * F, sT = sM3 * dS, gT = gM3 * dG;
+      var cC = bags * pC, cS = sT * pS, cG = gT * pG, total = cC + cS + cG, extra = (F - 1) * 100, wetYield = dry * F / dryF;
+      body = '<div class="tblwrap"><table class="tbl"><thead><tr><th>Material</th><th class="r">Quantity</th><th class="r">Rate</th><th class="r">Cost</th></tr></thead><tbody>' +
+        '<tr><td>Cement<small>50 kg bags (' + fmt(bagsExact, 1) + ' worked out, rounded up)</small></td><td class="r">' + fmt(bags, 0) + ' bags</td><td class="r">' + naira(pC) + '</td><td class="r">' + naira(cC) + '</td></tr>' +
+        '<tr><td>Sand</td><td class="r">' + fmt(sT, 2) + ' tons<small class="v">about ' + fmt(sM3, 2) + ' m³</small></td><td class="r">' + naira(pS) + '</td><td class="r">' + naira(cS) + '</td></tr>' +
+        '<tr><td>Gravel</td><td class="r">' + fmt(gT, 2) + ' tons<small class="v">about ' + fmt(gM3, 2) + ' m³</small></td><td class="r">' + naira(pG) + '</td><td class="r">' + naira(cG) + '</td></tr>' +
+        '</tbody><tfoot><tr><td colspan="3">Estimated total</td><td class="r">' + naira(total) + '</td></tr></tfoot></table></div>' +
+        '<p class="note">Anchored on ' + fmt(bags, 0) + ' whole bags. Sand and gravel are scaled by ×' + fmt(F, 3) + ' to match, so the mix ratio stays exact. ' +
+        'This makes ' + fmt(wetYield, 2) + ' m³ of wet concrete' + (extra > 0.05 ? ', ' + fmt(extra, 1) + '% more than the ' + fmt(V, 2) + ' m³ you entered.' : '.') + '</p>' +
+        '<p class="note">To mix bag by bag on site: each bag takes ' + tr(rs * bagB, 1) + ' buckets of sand and ' + tr(rg * bagB, 1) + ' buckets of gravel (' + litres + '-litre bucket, level). ' +
+        'Rates are sample figures. Enter your local prices under Advanced settings, and add an allowance for waste.</p>';
+      copyBody = 'WHOLE BAGS (to buy)\nCement: ' + bags + ' bags (' + naira(cC) + ')\nSand: ' + fmt(sT, 2) + ' tons (' + naira(cS) + ')\nGravel: ' + fmt(gT, 2) +
+        ' tons (' + naira(cG) + ')\nEstimated total: ' + naira(total) + '\nMakes ' + fmt(wetYield, 2) + ' m³ wet concrete (×' + fmt(F, 3) + ' scaling)';
+    }
+    var guide = mixClass(r);
+    out.innerHTML = '<h3>Your estimate</h3>' + toggle + summary + body +
       '<div class="actions" style="margin-top:14px"><button type="button" class="btn" id="copyEst">Copy summary</button></div>';
 
+    $('vMet').onclick = function () { view = 'metric'; run(); };
+    $('vSite').onclick = function () { view = 'site'; run(); };
+    $('vBag').onclick = function () { view = 'bags'; run(); };
     $('copyEst').onclick = function () {
-      var txt = 'iBuild Infra concrete estimate\nWet volume: ' + fmt(V, 2) + ' m³ (dry ' + fmt(dry, 2) + ' m³), mix ' + ratioTxt +
-        '\nCement: ' + bags + ' bags (' + naira(cC) + ')\nSand: ' + fmt(sandT, 2) + ' tons (' + naira(cS) + ')\nGravel: ' + fmt(gravT, 2) +
-        ' tons (' + naira(cG) + ')\nEstimated total: ' + naira(total);
+      var txt = 'iBuild Infra concrete estimate\nWet volume ' + fmt(V, 2) + ' m³, mix ' + ratioTxt + '\n' + guide[1] + '\n\n' + copyBody;
       var b = $('copyEst');
       (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { b.textContent = 'Copied'; },
         function () { b.textContent = 'Copy not available'; });
@@ -414,8 +514,8 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
   }
 
   window.ibEstimateInput = function () {
-    var inp = { mode: mode, mix: $('mix').value, custom: [num('rc'), num('rs'), num('rg')],
-      adv: { dry: num('aDry'), bag: num('aBag'), sand: num('aSand'), grav: num('aGrav'), pC: num('pC'), pS: num('pS'), pG: num('pG') } };
+    var inp = { mode: mode, unit: view, mix: $('mix').value, custom: [num('rc'), num('rs'), num('rg')],
+      adv: { dry: num('aDry'), bag: num('aBag'), bucket: num('aBucket') / 1000, sand: num('aSand'), grav: num('aGrav'), pC: num('pC'), pS: num('pS'), pG: num('pG') } };
     if (mode === 'vol') inp.volume = num('vol');
     else {
       inp.elements = [];
@@ -477,16 +577,87 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
     return 'Free plan: ' + status.freeRemaining + ' of ' + status.freeLimit + ' prints left, with an iBuild watermark.';
   }
 
+  var DEF = { name: 'iBuild', tag: 'Infra', title: 'Bill of Quantities: Concrete Works', client: '', contact: '',
+    footer: 'Prepared with iBuild Infra, a service of The Mobilizer’s Diary · mobilizersdiary.com.ng',
+    sig1: 'Prepared by', sig2: 'Checked by', sig3: 'Date',
+    notes: 'Quantities cover concrete materials only. Formwork, reinforcement, labour, plant, transport and waste are not included.\nRates are those entered by the user and should be confirmed before ordering.',
+    color: '#123F3B', logo: '' };
+  var CKEY = 'ib_print_custom_v1', cOpen = false, cust = loadCust();
+  var CMAP = { name: 'cName', tag: 'cTag', title: 'cTitle', client: 'cClient', contact: 'cContact', footer: 'cFooter', sig1: 'cSig1', sig2: 'cSig2', sig3: 'cSig3', notes: 'cNotes', color: 'cColor' };
+
+  function loadCust() {
+    var c = null, o = {};
+    try { c = JSON.parse(localStorage.getItem('ib_print_custom_v1') || 'null'); } catch (e) {}
+    Object.keys(DEF).forEach(function (k) { o[k] = c && typeof c[k] === 'string' ? c[k] : DEF[k]; });
+    return o;
+  }
+  function saveCust() { try { localStorage.setItem(CKEY, JSON.stringify(cust)); } catch (e) {} }
+  function readCust() {
+    Object.keys(CMAP).forEach(function (k) { var el = $(CMAP[k]); if (el) cust[k] = el.value; });
+    saveCust(); return cust;
+  }
+
+  function customPanel() {
+    function f(id, label, val, ph, max) {
+      return '<label>' + label + '<input id="' + id + '" maxlength="' + max + '" value="' + esc(val) + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '></label>';
+    }
+    return '<details class="adv" id="cDet" style="margin:0 0 16px"' + (cOpen ? ' open' : '') + '><summary>Customise your document</summary>' +
+      '<p class="note">Everything starts as iBuild. Change or clear any field to make the document your own.</p>' +
+      '<div class="logo-row"><div class="logo-box">' + (cust.logo ? '<img src="' + cust.logo + '" alt="Your logo">' : '<span>No logo</span>') + '</div>' +
+      '<div><label class="filebtn">' + (cust.logo ? 'Change logo' : 'Upload logo') + '<input type="file" id="cLogo" accept="image/png,image/jpeg,image/webp"></label>' +
+      (cust.logo ? ' <button type="button" class="link" id="cLogoX">Remove</button>' : '') +
+      '<p class="note" id="cLogoMsg" style="margin:6px 0 0">PNG, JPG or WebP. It sits at the top left of the document.</p></div></div>' +
+      '<div class="custom-fields">' +
+      f('cName', 'Business or brand name', cust.name, '', 60) + f('cTag', 'Line beside the name', cust.tag, '', 40) +
+      f('cContact', 'Address or contact line', cust.contact, 'e.g. Lagos · 0800 000 0000', 120) +
+      f('cTitle', 'Document title', cust.title, '', 80) + f('cClient', 'Prepared for (client)', cust.client, '', 80) +
+      '<label>Brand colour<input id="cColor" type="color" value="' + esc(cust.color) + '"></label>' +
+      '<label>Notes, one per line<textarea id="cNotes" rows="4" maxlength="800">' + esc(cust.notes) + '</textarea></label>' +
+      '<div class="custom">' + f('cSig1', 'Signature 1', cust.sig1, '', 30) + f('cSig2', 'Signature 2', cust.sig2, '', 30) + f('cSig3', 'Signature 3', cust.sig3, '', 30) + '</div>' +
+      f('cFooter', 'Footer line', cust.footer, '', 200) +
+      '</div><button type="button" class="link" id="cReset">Reset to iBuild defaults</button></details>';
+  }
+
+  function handleLogo(file) {
+    var m = $('cLogoMsg');
+    if (!file) return;
+    if (!/^image\/(png|jpeg|webp)$/.test(file.type)) { m.textContent = 'Choose a PNG, JPG or WebP image.'; return; }
+    var fr = new FileReader();
+    fr.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var s = Math.min(1, 480 / img.width, 160 / img.height), w = Math.max(1, Math.round(img.width * s)), hh = Math.max(1, Math.round(img.height * s));
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = hh;
+        cv.getContext('2d').drawImage(img, 0, 0, w, hh);
+        var out = cv.toDataURL('image/png');
+        if (out.length > 300000) {
+          var c2 = document.createElement('canvas'); c2.width = w; c2.height = hh;
+          var x = c2.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, hh); x.drawImage(img, 0, 0, w, hh);
+          out = c2.toDataURL('image/jpeg', 0.85);
+        }
+        if (out.length > 300000) { m.textContent = 'That logo is too detailed. Try a simpler or smaller image.'; return; }
+        readCust(); cust.logo = out; saveCust(); cOpen = true; renderBox('Logo added.');
+      };
+      img.onerror = function () { m.textContent = 'That image could not be read.'; };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  }
+
   function renderBox(text, bad) {
     var el = $('pname'); if (el) pname = el.value;
+    if ($('cName')) readCust();
+    var paid = !!(session && status && status.tier === 'paid');
     var h = '<h3>Print a professional copy</h3><label>Project name (optional)<input id="pname" maxlength="80" placeholder="e.g. Block B columns" value="' + esc(pname) + '"></label>';
+    if (paid) h += customPanel();
     if (!session) {
-      h += '<p class="note" style="margin:0 0 12px">Free accounts get 5 prints with an iBuild watermark. A plan prints without it.</p>' +
+      h += '<p class="note" style="margin:0 0 12px">Free accounts get 5 prints with an iBuild watermark. A plan prints without it, with your own logo and wording.</p>' +
         '<div class="actions" style="margin-top:0"><button type="button" class="btn solid" id="bSign">Sign in to print</button><button type="button" class="btn" id="bPlans">See plans</button></div>';
     } else {
       h += '<p class="note" style="margin:0 0 12px">Signed in as ' + esc(session.email) + '. ' + statusLine() + '</p>' +
+        (paid ? '' : '<p class="note" style="margin:0 0 12px">A plan removes the watermark and lets you add your own logo, name and wording.</p>') +
         '<div class="actions" style="margin-top:0"><button type="button" class="btn solid" id="bPrint">Print</button>' +
-        '<button type="button" class="btn" id="bPlans">' + (status && status.tier === 'paid' ? 'Plans' : 'Remove watermark') + '</button>' +
+        '<button type="button" class="btn" id="bPlans">' + (paid ? 'Plans' : 'Remove watermark') + '</button>' +
         '<button type="button" class="link" id="bOut">Sign out</button></div>';
     }
     h += '<p class="note" id="pmsg" role="status" style="margin-top:10px"></p>';
@@ -496,6 +667,13 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
     bind('bPlans', openPlans);
     bind('bPrint', doPrint);
     bind('bOut', function () { session = null; status = null; save(); renderBox('Signed out.'); });
+    if (paid) {
+      var det = $('cDet'); det.ontoggle = function () { cOpen = det.open; };
+      $('cLogo').onchange = function () { handleLogo(this.files && this.files[0]); };
+      bind('cLogoX', function () { readCust(); cust.logo = ''; saveCust(); cOpen = true; renderBox('Logo removed.'); });
+      bind('cReset', function () { cust = JSON.parse(JSON.stringify(DEF)); saveCust(); cOpen = true; renderBox('Back to the iBuild defaults.'); });
+      $('printBox').oninput = function (e) { if (e.target && CMAP && /^c[A-Z]/.test(e.target.id || '')) readCust(); };
+    }
   }
 
   function panelEmail(intent, note) {
@@ -586,7 +764,7 @@ dialog::backdrop{background:rgba(10,30,28,.6)}
     if (!w) return renderBox('Your browser blocked the print window. Allow pop-ups for this site and try again.', true);
     w.document.write('<p style="font-family:sans-serif;padding:24px">Preparing your document…</p>');
     renderBox('Preparing your document…');
-    api('printDocument', { token: session.token, input: input, project: pname }).then(function (res) {
+    api('printDocument', { token: session.token, input: input, project: pname, custom: (status && status.tier === 'paid') ? readCust() : undefined }).then(function (res) {
       status = res.status;
       w.document.open(); w.document.write(res.html); w.document.close(); w.focus();
       setTimeout(function () { try { w.print(); } catch (e) {} }, 600);
